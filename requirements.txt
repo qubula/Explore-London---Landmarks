@@ -6,5 +6,4 @@ jinja2
 openai
 requests
 polyline
-geopy
 wikipedia-api

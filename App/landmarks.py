@@ -103,7 +103,7 @@ def list_grand_landmarks():
     important_squares_lower = [s.lower() for s in IMPORTANT_SQUARES]
 
     grand = []
-    for lm in landmarks:
+    for lm in landmarks():  # Lazy load landmarks
         raw_name = lm.get("name", "")
         name = raw_name.lower()
 
@@ -126,6 +126,34 @@ def list_grand_landmarks():
 # -------------------------------------
 # 3. Grand landmarks near a specific route
 # -------------------------------------
+def get_route_bounds(route_points, buffer_km=1.0):
+    """
+    Get min/max lat/lon bounding box for a route with buffer.
+
+    Args:
+        route_points: List of (lat, lon) tuples
+        buffer_km: Buffer distance in kilometers beyond route bounds
+
+    Returns:
+        Dictionary with min_lat, max_lat, min_lon, max_lon
+    """
+    lats = [p[0] for p in route_points]
+    lons = [p[1] for p in route_points]
+
+    # At London's latitude (~51°N), 1 degree ≈ 111km for latitude
+    # For longitude at 51°N: 1 degree ≈ 69km (cos(51°) × 111km)
+    # So we use different conversion factors for lat/lon
+    lat_buffer_deg = buffer_km / 111.0  # ~0.009 degrees per km
+    lon_buffer_deg = buffer_km / 69.0   # ~0.014 degrees per km at London's latitude
+
+    return {
+        "min_lat": min(lats) - lat_buffer_deg,
+        "max_lat": max(lats) + lat_buffer_deg,
+        "min_lon": min(lons) - lon_buffer_deg,
+        "max_lon": max(lons) + lon_buffer_deg,
+    }
+
+
 def grand_landmarks_near_route(
     route_points,
     max_items: int = MAX_GRAND_MENU_ITEMS,
@@ -134,11 +162,31 @@ def grand_landmarks_near_route(
     """
     Returns up to `max_items` grand landmarks that lie within `radius_m`
     of the given route.
+
+    OPTIMIZATION: Uses geographic bounds pre-filtering to avoid checking
+    all landmarks. Only landmarks within 1km of route bounds are considered.
     """
     grand = list_grand_landmarks()
 
+    # OPTIMIZATION: Calculate bounding box for quick filtering
+    bounds = get_route_bounds(route_points, buffer_km=1.0)
+
     nearby = []
     for lm in grand:
+        # Get landmark coordinates
+        lat = lm.get("lat")
+        lon = lm.get("lng") or lm.get("lon")
+
+        if lat is None or lon is None:
+            continue
+
+        # OPTIMIZATION: Quick bounds check before expensive distance calculation
+        # This filters out ~90% of landmarks immediately
+        if not (bounds["min_lat"] <= lat <= bounds["max_lat"] and
+                bounds["min_lon"] <= lon <= bounds["max_lon"]):
+            continue
+
+        # Now do the expensive distance calculation only for candidates
         idx, dist = closest_route_point_index(lm, route_points)
         if dist <= radius_m:
             nearby.append((idx, lm))

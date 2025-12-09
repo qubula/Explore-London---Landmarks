@@ -248,7 +248,7 @@ def extract_landmarks(route_points):
     """Return all visible landmarks for a given polyline route."""
     visible = []
 
-    for lm in landmarks:
+    for lm in landmarks():  # Lazy load landmarks
         radius = get_visibility_radius(lm)
         idx, dist = closest_route_point_index(lm, route_points)
         if dist <= radius:
