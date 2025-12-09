@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Alfie – Live Tour (debug)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            font-family: monospace;
+            background: #000;
+            color: #0f0;
+            padding: 12px;
+            max-width: 100%;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        pre {
+            margin: 6px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .landmark {
+            border-top: 1px dashed #0f0;
+            padding: 6px 0;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .near {
+            color: #ff0;
+        }
+
+        .triggered {
+            color: #0ff;
+        }
+
+        input[type=text] {
+            color: #000;
+        }
+
+        #sim {
+            background: #222;
+            padding: 8px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <pre>
+=======================================
+        ALFIE LIVE WALKING TOUR (debug)
+=======================================
+Route: {{ start }}  ->  {{ end }}
+Mode:  {{ mode }}
+(Use the simulator if you don't want to walk)
+---------------------------------------
+</pre>
+
+    <pre id="status">Waiting for GPS permission...</pre>
+    <pre id="current">Current position: (unknown)</pre>
+    <pre id="debugline">Landmarks loaded: (parsing…)</pre>
+
+    <div id="sim">
+        <strong>Simulator:</strong>
+        lat <input id="simlat" type="text" size="10" placeholder="51.5" />
+        lon <input id="simlon" type="text" size="11" placeholder="-0.12" />
+        <button id="applySim">Apply (simulate position)</button>
+        <button id="clearSim">Clear simulator</button>
+        <div style="font-size:12px; color:#aaa">Use this to simulate walking or to force triggers.</div>
+    </div>
+
+    <pre>
+=======================================
+      LANDMARKS (debug list - shows lat/lon & distance)
+=======================================
+</pre>
+
+    <div id="landmarks_debug"></div>
+
+    <pre>
+=======================================
+      TRIGGER LOG (newest on top)
+=======================================
+</pre>
+    <div id="log"></div>
+
+    <script>
+        // Landmarks from server (list of dicts)
+        const LANDMARKS = JSON.parse({{ landmarks_json| tojson | safe }});
+        console.log("LANDMARKS raw:", LANDMARKS);
+
+        // helpers
+        function toNum(v) { return v === null || v === undefined ? null : Number(v); }
+
+        // show landmarks on page for debugging (including lat/lon)
+        const lmDebugDiv = document.getElementById("landmarks_debug");
+        lmDebugDiv.innerHTML = "";
+        LANDMARKS.forEach((lm, idx) => {
+            const lat = toNum(lm.lat ?? lm.latitude ?? lm.lat_dd ?? lm["lat"]);
+            const lon = toNum(lm.lng ?? lm.lon ?? lm.longitude ?? lm.lon_dd ?? lm["lon"]);
+            const el = document.createElement("div");
+            el.className = "landmark";
+            el.id = "lm_" + idx;
+            el.innerHTML = `<strong>${idx + 1}. ${(lm.name || "NO NAME")}</strong>
+lat: ${lat}  lon: ${lon}
+side: ${lm.side ?? ""}   distance_m (route): ${lm.distance_m ?? "?"}
+`;
+            lmDebugDiv.appendChild(el);
+        });
+
+        const visited = new Array(LANDMARKS.length).fill(false);
+
+        // Haversine
+        function distanceMeters(lat1, lon1, lat2, lon2) {
+            if (lat1 == null || lon1 == null || lat2 == null || lon2 == null) return Infinity;
+            const R = 6371000;
+            const toRad = d => d * Math.PI / 180;
+            const dLat = toRad(lat2 - lat1);
+            const dLon = toRad(lon2 - lon1);
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        const statusEl = document.getElementById("status");
+        const currentEl = document.getElementById("current");
+        const debugEl = document.getElementById("debugline");
+        const logEl = document.getElementById("log");
+
+        function logMessage(text) {
+            const p = document.createElement("pre");
+            p.textContent = text;
+            logEl.prepend(p); // newest on top
+        }
+
+        // Default trigger distance for landmarks without radius_m specified
+        let DEFAULT_TRIGGER_DISTANCE = 120; // metres (fallback for older data)
+        debugEl.textContent = "Using dynamic trigger distances based on landmark size";
+
+        function updateLandmarkDisplay(idx, d) {
+            const el = document.getElementById("lm_" + idx);
+            if (!el) return;
+            const lm = LANDMARKS[idx];
+            const triggerRadius = lm.radius_m ?? DEFAULT_TRIGGER_DISTANCE;
+            el.innerHTML = `<strong>${idx + 1}. ${lm.name || "NO NAME"}</strong>
+lat: ${lm.lat ?? lm.latitude ?? lm.lat_dd ?? lm["lat"]}  lon: ${lm.lng ?? lm.lon ?? lm.longitude ?? lm.lon_dd ?? lm["lon"]}
+side: ${lm.side ?? ""}   route distance_m: ${lm.distance_m ?? "?"}   trigger radius: ${triggerRadius}m
+-> current distance: ${d === Infinity ? "n/a" : d.toFixed(1) + " m"}
+`;
+            if (d <= triggerRadius) {
+                el.classList.add("near");
+            } else {
+                el.classList.remove("near");
+            }
+            if (visited[idx]) el.classList.add("triggered");
+        }
+
+        function handlePosition(pos) {
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+            currentEl.textContent = `Current position: ${lat.toFixed(6)}, ${lon.toFixed(6)}  (accuracy: ${pos.coords.accuracy} m)`;
+            statusEl.textContent = "Tracking (simulator OFF)";
+
+            // compute distance to each landmark and update UI
+            LANDMARKS.forEach((lm, idx) => {
+                const lmLat = toNum(lm.lat ?? lm.latitude ?? lm.lat_dd ?? lm["lat"]);
+                const lmLon = toNum(lm.lng ?? lm.lon ?? lm.longitude ?? lm.lon_dd ?? lm["lon"]);
+                const d = distanceMeters(lat, lon, lmLat, lmLon);
+                updateLandmarkDisplay(idx, d);
+
+                // Use landmark-specific trigger radius instead of global constant
+                const triggerRadius = lm.radius_m ?? DEFAULT_TRIGGER_DISTANCE;
+                if (!visited[idx] && d <= triggerRadius) {
+                    visited[idx] = true;
+                    const snippet = lm.script ?? "(no script)";
+                    logMessage(`➡️  ${lm.name}  — ${d.toFixed(0)}m away (trigger radius: ${triggerRadius}m)\n\n${snippet}\n---------------------------------------`);
+                    console.log("Triggered landmark", idx + 1, lm.name, "distance", d, "trigger radius", triggerRadius);
+                }
+            });
+        }
+
+        function handleError(err) {
+            statusEl.textContent = "GPS error: " + err.message;
+            console.warn("GPS error:", err);
+        }
+
+        // Simulator UI
+        const simLatInput = document.getElementById("simlat");
+        const simLonInput = document.getElementById("simlon");
+        const applySimBtn = document.getElementById("applySim");
+        const clearSimBtn = document.getElementById("clearSim");
+        let simActive = false;
+        function applySim() {
+            const lat = parseFloat(simLatInput.value);
+            const lon = parseFloat(simLonInput.value);
+            if (!isFinite(lat) || !isFinite(lon)) {
+                alert("Enter numeric lat and lon");
+                return;
+            }
+            simActive = true;
+            statusEl.textContent = "Simulator active (not using device GPS)";
+            // emulate position object structure
+            handlePosition({ coords: { latitude: lat, longitude: lon, accuracy: 5 } });
+        }
+        function clearSim() {
+            simActive = false;
+            statusEl.textContent = "Simulator cleared — using device GPS (if allowed)";
+            simLatInput.value = "";
+            simLonInput.value = "";
+        }
+        applySimBtn.addEventListener("click", applySim);
+        clearSimBtn.addEventListener("click", clearSim);
+
+        // Start watching device location if available
+        if ("geolocation" in navigator) {
+            statusEl.textContent = "Requesting GPS permission...";
+            navigator.geolocation.getCurrentPosition(
+                function ok(p) {
+                    statusEl.textContent = "GPS permission granted — starting watch";
+                    // start a watch so we get repeated updates
+                    navigator.geolocation.watchPosition(handlePosition, handleError, { enableHighAccuracy: true, maximumAge: 3000, timeout: 20000 });
+                },
+                function nok(err) {
+                    handleError(err);
+                },
+                { enableHighAccuracy: true, maximumAge: 3000, timeout: 20000 }
+            );
+        } else {
+            statusEl.textContent = "This browser does not support geolocation.";
+        }
+
+        // Print summary in console for debugging
+        console.log("Debugging track.html loaded. Using dynamic trigger distances based on landmark size");
+        console.log("Default trigger distance (m):", DEFAULT_TRIGGER_DISTANCE);
+        console.log("landmarks count:", LANDMARKS.length);
+        if (LANDMARKS.length > 0) {
+            console.log("First landmark example:", LANDMARKS[0]);
+            // also update the first display immediately (unknown distance until we have coords)
+            updateLandmarkDisplay(0, Infinity);
+        }
+
+    </script>
+
+</body>
+
+</html>

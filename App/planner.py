@@ -1,0 +1,351 @@
+"""
+planner.py
+
+The core routing logic for the Alfie Tour Guide:
+- fastest route
+- scenic auto route
+- scenic select route
+- generating the final route summary
+
+This file provides one clean API function:
+
+    plan_route(start, end, mode, chosen_landmarks=None)
+
+so that the CLI, GUI, or web interface can all use
+the same internal logic.
+"""
+
+import requests
+import polyline
+
+def limit_landmarks_by_duration(
+    landmarks: list,
+    duration_min: float,
+    max_per_minute: float = 0.5,
+) -> list:
+    """
+    Thin down the list of landmarks so that we show at most
+    `max_per_minute` landmarks per minute of route.
+
+    Example: duration = 30 min, max_per_minute = 0.5  -> max 15 landmarks.
+
+    We keep the most important landmarks (using score_grand_landmark)
+    but preserve their order along the route.
+    """
+    if not landmarks or duration_min <= 0:
+        return landmarks
+
+    # Maximum number allowed
+    max_count = max(1, int(duration_min * max_per_minute))
+
+    # Already under the limit? Nothing to do.
+    if len(landmarks) <= max_count:
+        return landmarks
+
+    # Attach a score to each landmark (importance)
+    scored = []
+    for idx, lm in enumerate(landmarks):
+        try:
+            score = lm.get("score")
+        except AttributeError:
+            score = None
+
+        if score is None:
+            # Use our existing scoring logic from landmarks.py
+            score = score_grand_landmark(lm)
+
+        scored.append((score, idx, lm))
+
+    # Sort by score descending (most important first)
+    scored.sort(key=lambda x: x[0], reverse=True)
+
+    # Pick the top N by importance…
+    top = scored[:max_count]
+    # …but return them in route order (by original index)
+    top.sort(key=lambda x: x[1])
+
+    return [lm for _, _, lm in top]
+
+from App.route_landmark_finder import (
+    landmarks,
+    get_visibility_radius,
+    closest_route_point_index,
+    landmark_side_of_route,
+    cluster_landmarks,
+)
+
+from App.landmarks import (
+    score_grand_landmark,
+    list_grand_landmarks,
+    grand_landmarks_near_route,
+)
+
+from App.config import MAX_SCENIC_SELECT_CHOICES
+
+import os
+GOOGLE_API_KEY = os.getenv("GOOGLE_DIRECTIONS_KEY")
+
+
+# -----------------------------------------------------
+# 1. Basic Google route helpers
+# -----------------------------------------------------
+def get_route_and_duration(start: str, end: str):
+    """Return (list_of_points, duration_seconds) for fastest route."""
+    url = "https://maps.googleapis.com/maps/api/directions/json"
+    params = {
+        "origin": start,
+        "destination": end,
+        "mode": "driving",
+        "key": GOOGLE_API_KEY,
+    }
+
+    r = requests.get(url, params=params)
+    data = r.json()
+
+    if data.get("status") != "OK":
+        raise RuntimeError(f"Google Directions error: {data.get('status')}")
+
+    route = data["routes"][0]
+    poly = route["overview_polyline"]["points"]
+    points = polyline.decode(poly)
+    duration_sec = route["legs"][0]["duration"]["value"]
+
+    return points, duration_sec
+
+
+def get_fastest_route(start: str, end: str):
+    """Convenience wrapper returning ONLY the points."""
+    pts, _ = get_route_and_duration(start, end)
+    return pts
+
+
+# -----------------------------------------------------
+# 2. Scenic Auto – choose best alternative route
+# -----------------------------------------------------
+def scenic_auto_route(start: str, end: str):
+    """
+    Evaluate Google's alternative routes and pick the one
+    with the highest weighted grand-landmark visibility score.
+
+    Also respects a maximum detour factor so we don't pick
+    insanely long routes compared to the fastest option.
+
+    Returns: (best_points, fastest_sec, scenic_sec)
+    """
+    url = "https://maps.googleapis.com/maps/api/directions/json"
+    params = {
+        "origin": start,
+        "destination": end,
+        "mode": "driving",
+        "alternatives": "true",
+        "key": GOOGLE_API_KEY,
+    }
+
+    r = requests.get(url, params=params)
+    data = r.json()
+    if data.get("status") != "OK":
+        raise RuntimeError(f"Google Directions failed: {data.get('status')}")
+
+    routes = data.get("routes", [])
+    if not routes:
+        raise RuntimeError("No routes returned from Google.")
+
+    # Find the actual fastest option (by duration)
+    fastest_sec = min(route["legs"][0]["duration"]["value"] for route in routes)
+
+    # How much slower we allow Scenic Auto to be vs fastest (e.g. 40% slower max)
+    MAX_DETOUR_FACTOR = 1.4
+    max_allowed_sec = fastest_sec * MAX_DETOUR_FACTOR
+
+    best_route_points = None
+    best_scenic_sec = None
+    best_score = -1
+
+    grand = list_grand_landmarks()
+
+    for route in routes:
+        poly = route["overview_polyline"]["points"]
+        pts = polyline.decode(poly)
+
+        duration = route["legs"][0]["duration"]["value"]
+
+        # Skip routes that exceed our detour cap
+        if duration > max_allowed_sec:
+            continue
+
+        # Weighted scenic score
+        score = 0
+        for lm in grand:
+            radius = get_visibility_radius(lm)
+            idx, dist = closest_route_point_index(lm, pts)
+            if dist <= radius:
+                score += score_grand_landmark(lm)
+
+        if score > best_score:
+            best_score = score
+            best_route_points = pts
+            best_scenic_sec = duration
+
+    # If no scenic route passed the detour cap, just use the fastest route
+    if best_route_points is None:
+        # Pick the actual fastest route from the API routes
+        best_fastest_route = min(
+            routes, key=lambda rt: rt["legs"][0]["duration"]["value"]
+        )
+        poly = best_fastest_route["overview_polyline"]["points"]
+        best_route_points = polyline.decode(poly)
+        best_scenic_sec = fastest_sec
+
+    return best_route_points, fastest_sec, best_scenic_sec
+
+# -----------------------------------------------------
+# 3. Scenic Select – user-chosen grand landmarks
+# -----------------------------------------------------
+def scenic_select_route(start: str, end: str, chosen_landmarks):
+    """
+    Build a scenic route:
+        start → lm1 → lm2 → ... → end
+
+    chosen_landmarks is a LIST OF LANDMARK DICTS.
+    Returns: (points, fastest_sec, scenic_sec)
+    """
+    # Baseline fastest duration
+    _, fastest_sec = get_route_and_duration(start, end)
+
+    all_points = []
+    scenic_sec_total = 0
+    last = start
+
+    for lm in chosen_landmarks:
+        mid = f"{lm['lat']},{lm['lng']}"
+        leg_points, leg_sec = get_route_and_duration(last, mid)
+        scenic_sec_total += leg_sec
+
+        # Append, avoiding duplicate joints
+        if all_points:
+            all_points.extend(leg_points[1:])
+        else:
+            all_points.extend(leg_points)
+
+        last = mid
+
+    # Final leg
+    final_points, final_sec = get_route_and_duration(last, end)
+    scenic_sec_total += final_sec
+
+    if all_points:
+        all_points.extend(final_points[1:])
+    else:
+        all_points.extend(final_points)
+
+    return all_points, fastest_sec, scenic_sec_total
+
+
+# -----------------------------------------------------
+# 4. Landmark extraction for any route
+# -----------------------------------------------------
+def extract_landmarks(route_points):
+    """Return all visible landmarks for a given polyline route."""
+    visible = []
+
+    for lm in landmarks:
+        radius = get_visibility_radius(lm)
+        idx, dist = closest_route_point_index(lm, route_points)
+        if dist <= radius:
+            side = landmark_side_of_route(lm, route_points, idx)
+            visible.append(
+                {
+                    "name": lm["name"],
+                    "lat": lm["lat"],
+                    "lng": lm["lng"],
+                    "script": lm.get("script", ""),
+                    "distance_m": dist,
+                    "side": side,
+                    "route_index": idx,
+                }
+            )
+
+    visible.sort(key=lambda l: l["route_index"])
+    visible = cluster_landmarks(visible)
+    return visible
+
+
+# -----------------------------------------------------
+# 5. The main API: plan_route()
+# -----------------------------------------------------
+
+def plan_route(start: str, end: str, mode: str, chosen_landmark_indexes=None):
+    """
+    The single clean API entry point.
+    mode:
+        "1" -> fastest
+        "2" -> scenic auto
+        "3" -> scenic select  (requires chosen_landmark_indexes)
+    Returns a structured dict for UI/CLI/GUI.
+
+    Output:
+    {
+        "mode": "...",
+        "fastest_eta": float_minutes,
+        "chosen_eta": float_minutes,
+        "difference": float_minutes,
+        "landmarks": [...],
+        "route_points": [...],
+    }
+    """
+
+    # Always compute baseline first
+    baseline_points, baseline_fastest_sec = get_route_and_duration(start, end)
+
+    # Fastest mode
+    if mode == "1":
+        route_points = baseline_points
+        actual_sec = baseline_fastest_sec
+        mode_name = "Fastest"
+
+    # Scenic Auto
+    elif mode == "2":
+        scenic_points, _, scenic_sec = scenic_auto_route(start, end)
+        route_points = scenic_points
+        actual_sec = scenic_sec
+        mode_name = "Scenic Auto"
+
+    # Scenic Select
+    elif mode == "3":
+        # We expect chosen_landmark_indexes from the UI/CLI
+        base_pts, _ = get_route_and_duration(start, end)
+        all_grand = grand_landmarks_near_route(base_pts)
+
+        chosen = [
+            all_grand[i]
+            for i in chosen_landmark_indexes
+            if 0 <= i < len(all_grand)
+        ]
+        chosen = chosen[:MAX_SCENIC_SELECT_CHOICES]
+
+        route_points, _, scenic_sec = scenic_select_route(start, end, chosen)
+        actual_sec = scenic_sec
+        mode_name = "Scenic Select"
+
+    else:
+        raise ValueError("Unknown mode")
+
+    # Landmarks along chosen route
+    lm_results = extract_landmarks(route_points)
+
+    # Final times in minutes
+    fastest_min = baseline_fastest_sec / 60.0
+    actual_min = actual_sec / 60.0
+    diff_min = actual_min - fastest_min
+
+    # Limit landmark density based on route duration
+    lm_results = limit_landmarks_by_duration(lm_results, actual_min)
+
+    return {
+        "mode": mode_name,
+        "fastest_eta": fastest_min,
+        "chosen_eta": actual_min,
+        "difference": diff_min,
+        "landmarks": lm_results,
+        "route_points": route_points,
+    }

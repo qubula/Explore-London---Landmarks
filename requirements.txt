@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+jinja2
+openai
+requests
+polyline
+geopy
+wikipedia-api

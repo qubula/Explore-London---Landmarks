@@ -1,0 +1,22 @@
+# Environment variables (DO NOT COMMIT!)
+.env
+
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Claude Code
+.claude/
+
+# Backup files
+V4_backup_*.zip
