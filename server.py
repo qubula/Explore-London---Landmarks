@@ -113,10 +113,13 @@ async def handle_form(
                 indexes = indexes[:MAX_SCENIC_SELECT_CHOICES]
                 result = plan_route(start, end, "3", indexes)
 
-        # 4️⃣ No mode selected yet (initial form): Just show empty form
+        # 4️⃣ No mode selected yet (initial submission): Compute fastest + scenic preview
         else:
-            # Don't compute anything until user selects a mode
-            pass
+            # First submission: show route times so user can choose a mode
+            fastest = plan_route(start, end, "1")
+            result_scenic = plan_route(start, end, "2")
+            scenic_eta = result_scenic["chosen_eta"]
+            scenic_diff = result_scenic["difference"]
 
         # Build Google Maps URL only when we have a final result
         if result is not None:
