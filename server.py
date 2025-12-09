@@ -70,43 +70,37 @@ async def handle_form(
     error_message = None
 
     try:
-        # 1️⃣ Always compute fastest route (baseline)
-        fastest = plan_route(start, end, "1")
-
-        # 2️⃣ Scenic Auto preview (for times)
+        # OPTIMIZATION: Only compute what's needed for the selected mode
+        fastest = None
         scenic_eta = None
         scenic_diff = None
-        scenic_preview = None
-        try:
-            scenic_preview = plan_route(start, end, "2")
-            scenic_eta = scenic_preview["chosen_eta"]
-            scenic_diff = scenic_preview["difference"]
-        except Exception as e:
-            print(f"[Warning] Scenic preview failed: {e}")
-
-        # 3️⃣ Grand landmarks (for Scenic Select ONLY, when needed)
-        grand_all = grand_landmarks_near_route(fastest["route_points"])
-        grand_list = grand_all[:MAX_GRAND_MENU_ITEMS]
-
-        # 4️⃣ Decide what phase we’re in
+        grand_list = []
         result = None
         maps_url = None
 
+        # 1️⃣ Mode 1 (Fastest): Only compute fastest route
         if mode == "1":
-            result = fastest
+            result = plan_route(start, end, "1")
+            fastest = result  # For display
 
+        # 2️⃣ Mode 2 (Scenic Auto): Compute fastest + scenic
         elif mode == "2":
-            result = scenic_preview if scenic_preview is not None else plan_route(
-                start, end, "2"
-            )
+            fastest = plan_route(start, end, "1")
+            result = plan_route(start, end, "2")
+            scenic_eta = result["chosen_eta"]
+            scenic_diff = result["difference"]
 
+        # 3️⃣ Mode 3 (Scenic Select): Compute fastest + find grand landmarks
         elif mode == "3":
-            # Scenic Select: two-phase, like the terminal.
+            fastest = plan_route(start, end, "1")
+            grand_all = grand_landmarks_near_route(fastest["route_points"])
+            grand_list = grand_all[:MAX_GRAND_MENU_ITEMS]
+
             if not scenic_choices.strip():
-                # Phase 1: user has chosen mode 3, but no landmark numbers yet.
+                # Phase 1: Show landmark menu
                 result = None
             else:
-                # Phase 2: user has entered landmark numbers. Now compute Scenic Select.
+                # Phase 2: Compute route through selected landmarks
                 indexes = []
                 parts = scenic_choices.split(",")
                 for p in parts:
@@ -118,6 +112,11 @@ async def handle_form(
 
                 indexes = indexes[:MAX_SCENIC_SELECT_CHOICES]
                 result = plan_route(start, end, "3", indexes)
+
+        # 4️⃣ No mode selected yet (initial form): Just show empty form
+        else:
+            # Don't compute anything until user selects a mode
+            pass
 
         # Build Google Maps URL only when we have a final result
         if result is not None:
