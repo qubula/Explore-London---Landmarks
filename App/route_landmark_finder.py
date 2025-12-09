@@ -189,15 +189,22 @@ def filter_landmarks(raw_landmarks):
 # ------------------------------------------------------
 
 def get_visibility_radius(landmark):
+    """
+    Return trigger radius in meters based on landmark type.
+
+    Reduced radii for better accuracy in dense urban environments:
+    - Only trigger when landmark is actually visible
+    - Accounts for buildings/trees blocking views in London streets
+    """
     kind = classify_landmark_kind(landmark)
 
     if kind == "region":
-        return 120  # areas like Covent Garden, Soho
+        return 100  # areas like Covent Garden, Soho (reduced from 120m)
     if kind == "big_building":
-        return 70   # big, very visible buildings
+        return 50   # palaces, museums, cathedrals (reduced from 70m)
     if kind == "medium_place":
-        return 50   # parks, hotels, theatres
-    return 30       # statues, plaques, smaller objects
+        return 40   # parks, hotels, theatres (reduced from 50m)
+    return 25       # statues, plaques, smaller objects (reduced from 30m)
 
 
 # ------------------------------------------------------
