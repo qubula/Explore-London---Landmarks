@@ -31,12 +31,15 @@ TOUR_TYPES = {
         "icon": "🏛️",
         "keywords": [
             "bridge", "tower", "building", "palace", "cathedral", "church",
-            "abbey", "minster", "basilica", "arch", "gate", "hall",
-            "theatre", "opera", "station", "shard", "gherkin", "walkie talkie",
+            "abbey", "basilica", "arch", "gate", "hall",
+            "opera house", "station", "shard", "gherkin", "walkie talkie",
             "skyscraper", "monument", "dome", "spire", "clocktower"
         ],
-        "exclude_keywords": ["museum", "gallery", "park", "garden", "square"],
-        "min_score": 30,  # Only architectural landmarks with score ≥30
+        "exclude_keywords": [
+            "museum", "gallery", "park", "garden", "square",
+            "theatre", "playhouse", "theater"  # Exclude performance venues
+        ],
+        "min_score": 50,  # Raised from 30 for higher quality
         "boost_keywords": {
             "tower bridge": 100,
             "st paul": 90,
@@ -60,8 +63,11 @@ TOUR_TYPES = {
             "imperial", "national", "british", "london museum", "history",
             "churchill", "war rooms", "bunker"
         ],
-        "exclude_keywords": ["modern", "contemporary", "new", "2000", "2010", "2020"],
-        "min_score": 25,
+        "exclude_keywords": [
+            "modern", "contemporary", "new", "2000", "2010", "2020",
+            "theatre", "playhouse", "theater"  # Exclude performance venues
+        ],
+        "min_score": 45,  # Raised from 25 for higher quality
         "boost_keywords": {
             "british museum": 100,
             "tower of london": 95,
@@ -84,8 +90,10 @@ TOUR_TYPES = {
             "ceremonial", "coronation", "monarch", "sovereign",
             "state", "majesty"
         ],
-        "exclude_keywords": [],
-        "min_score": 40,
+        "exclude_keywords": [
+            "theatre", "playhouse", "theater"  # Exclude performance venues
+        ],
+        "min_score": 55,  # Raised from 40 for higher quality
         "boost_keywords": {
             "buckingham palace": 100,
             "kensington palace": 90,
@@ -108,8 +116,11 @@ TOUR_TYPES = {
             "portrait gallery", "courtauld", "saatchi", "whitechapel",
             "serpentine", "barbican"
         ],
-        "exclude_keywords": ["memorial", "monument", "war"],
-        "min_score": 35,
+        "exclude_keywords": [
+            "memorial", "monument", "war",
+            "theatre", "playhouse", "theater"  # Exclude performance venues
+        ],
+        "min_score": 50,  # Raised from 35 for higher quality
         "boost_keywords": {
             "british museum": 100,
             "national gallery": 95,
@@ -132,8 +143,11 @@ TOUR_TYPES = {
             "botanical", "arboretum", "nature reserve", "wood",
             "forest", "meadow"
         ],
-        "exclude_keywords": ["museum", "palace", "bridge", "gallery"],
-        "min_score": 20,
+        "exclude_keywords": [
+            "museum", "palace", "bridge", "gallery",
+            "theatre", "playhouse", "theater"  # Exclude performance venues
+        ],
+        "min_score": 40,  # Raised from 20 for higher quality
         "boost_keywords": {
             "hyde park": 85,
             "kew gardens": 90,
@@ -150,13 +164,18 @@ TOUR_TYPES = {
         "description": "Cathedrals, churches, abbeys, and religious sites",
         "icon": "⛪",
         "keywords": [
-            "cathedral", "church", "abbey", "minster", "basilica",
+            "cathedral", "church", "abbey", "basilica",
             "chapel", "temple", "synagogue", "mosque", "monastery",
             "st paul", "westminster abbey", "southwark cathedral",
+            "york minster", "beverly minster",  # Specific minsters only
             "religious", "holy", "sacred", "priest", "bishop"
         ],
-        "exclude_keywords": ["museum"],
-        "min_score": 30,
+        "exclude_keywords": [
+            "museum",
+            "theatre", "playhouse", "theater",  # Exclude performance venues
+            "palace theatre", "victoria palace"  # Specific exclusions
+        ],
+        "min_score": 50,  # Raised from 30 for higher quality
         "boost_keywords": {
             "st paul's cathedral": 100,
             "westminster abbey": 100,
@@ -177,8 +196,11 @@ TOUR_TYPES = {
             "modern", "contemporary", "2000", "2010", "2020",
             "skyscraper", "high-rise", "new", "recent"
         ],
-        "exclude_keywords": ["victorian", "georgian", "medieval", "tudor", "19th century", "1800"],
-        "min_score": 25,
+        "exclude_keywords": [
+            "victorian", "georgian", "medieval", "tudor", "19th century", "1800",
+            "theatre", "playhouse", "theater"  # Exclude performance venues unless explicitly modern
+        ],
+        "min_score": 45,  # Raised from 25 for higher quality
         "boost_keywords": {
             "the shard": 100,
             "london eye": 95,
@@ -200,8 +222,11 @@ TOUR_TYPES = {
             "crystal palace", "railway", "station", "industry",
             "industrial", "iron", "steel", "brick"
         ],
-        "exclude_keywords": ["modern", "contemporary", "2000", "2010", "2020", "millennium"],
-        "min_score": 25,
+        "exclude_keywords": [
+            "modern", "contemporary", "2000", "2010", "2020", "millennium",
+            "theatre", "playhouse", "theater"  # Exclude performance venues unless explicitly Victorian
+        ],
+        "min_score": 45,  # Raised from 25 for higher quality
         "boost_keywords": {
             "tower bridge": 95,
             "victoria and albert museum": 90,
