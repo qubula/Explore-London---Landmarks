@@ -40,21 +40,20 @@ def build_google_maps_url(start: str, end: str, landmarks, travelmode: str = "wa
 
 @app.get("/", response_class=HTMLResponse)
 async def show_form(request: Request):
-    # First load: nothing computed yet
+    # Initial page load
     return templates.TemplateResponse(
-        "index.html",
+        "index_new.html",
         {
             "request": request,
             "start": "",
             "end": "",
-            "mode": "",
-            "fastest": None,
-            "scenic_eta": None,
-            "scenic_diff": None,
+            "mode": "1",
+            "tour_type": "all",
             "grand_list": [],
             "result": None,
             "maps_url": None,
             "max_choices": MAX_SCENIC_SELECT_CHOICES,
+            "error_message": None,
         },
     )
 
@@ -64,107 +63,68 @@ async def handle_form(
     request: Request,
     start: str = Form(...),
     end: str = Form(...),
-    mode: str = Form(""),           # may be blank on first submit
-    tour_type: str = Form("all"),   # tour type selection
-    scenic_choices: str = Form(""), # used only in Scenic Select step 2
+    mode: str = Form("1"),
+    tour_type: str = Form("all"),
+    scenic_choices: str = Form(""),
 ):
     error_message = None
+    grand_list = []
+    result = None
+    maps_url = None
 
     try:
-        # OPTIMIZATION: Only compute what's needed for the selected mode
-        fastest = None
-        scenic_eta = None
-        scenic_diff = None
-        grand_list = []
-        result = None
-        maps_url = None
-
-        # 1️⃣ Mode 1 (Fastest): Only compute fastest route
-        if mode == "1":
-            result = plan_route(start, end, "1", tour_type=tour_type)
-            fastest = result  # For display
-
-        # 2️⃣ Mode 2 (Scenic Auto): Compute fastest + scenic
-        elif mode == "2":
+        # Mode 3 (Scenic Select) requires grand landmarks list
+        if mode == "3":
+            # Always compute fastest route to get grand landmarks
             fastest = plan_route(start, end, "1", tour_type=tour_type)
-            result = plan_route(start, end, "2", tour_type=tour_type)
-            scenic_eta = result["chosen_eta"]
-            scenic_diff = result["difference"]
-
-        # 3️⃣ Mode 3 (Scenic Select): Compute fastest + find grand landmarks
-        elif mode == "3":
-            fastest = plan_route(start, end, "1", tour_type=tour_type)
-            grand_all = grand_landmarks_near_route(fastest["route_points"], tour_type=tour_type)
+            grand_all = grand_landmarks_near_route(
+                fastest["route_points"],
+                tour_type=tour_type
+            )
             grand_list = grand_all[:MAX_GRAND_MENU_ITEMS]
 
-            if not scenic_choices.strip():
-                # Phase 1: Show landmark menu
-                result = None
-            else:
-                # Phase 2: Compute route through selected landmarks
+            # If user selected landmarks, compute route
+            if scenic_choices.strip():
                 indexes = []
-                parts = scenic_choices.split(",")
-                for p in parts:
-                    p = p.strip()
-                    if p.isdigit():
-                        idx = int(p) - 1
+                for num in scenic_choices.split(","):
+                    num = num.strip()
+                    if num.isdigit():
+                        idx = int(num) - 1  # Convert to 0-indexed
                         if 0 <= idx < len(grand_list):
                             indexes.append(idx)
 
                 indexes = indexes[:MAX_SCENIC_SELECT_CHOICES]
                 result = plan_route(start, end, "3", indexes, tour_type=tour_type)
+            # else: show landmark selection (no result yet)
 
-        # 4️⃣ No mode selected yet (initial submission): Compute fastest + scenic preview
+        # Mode 1 (Fastest) or Mode 2 (Scenic Auto)
         else:
-            # First submission: show route times so user can choose a mode
-            fastest = plan_route(start, end, "1", tour_type=tour_type)
-            result_scenic = plan_route(start, end, "2", tour_type=tour_type)
-            scenic_eta = result_scenic["chosen_eta"]
-            scenic_diff = result_scenic["difference"]
+            result = plan_route(start, end, mode, tour_type=tour_type)
 
-        # Build Google Maps URL only when we have a final result
-        if result is not None:
+        # Build Google Maps URL if we have a result
+        if result:
             maps_url = build_google_maps_url(start, end, result["landmarks"])
-        else:
-            maps_url = None
-
-        context = {
-            "request": request,
-            "start": start,
-            "end": end,
-            "mode": mode,
-            "fastest": fastest,
-            "scenic_eta": scenic_eta,
-            "scenic_diff": scenic_diff,
-            "grand_list": grand_list,
-            "result": result,
-            "maps_url": maps_url,
-            "max_choices": MAX_SCENIC_SELECT_CHOICES,
-            "error_message": error_message,
-        }
 
     except RuntimeError as e:
-        # Most likely: Google Directions error like NOT_FOUND
         error_message = str(e)
         print(f"[Route error] {error_message}")
 
-        # On error we still want the form & inputs, but no timings/results
-        context = {
-            "request": request,
-            "start": start,
-            "end": end,
-            "mode": mode,
-            "fastest": None,
-            "scenic_eta": None,
-            "scenic_diff": None,
-            "grand_list": [],
-            "result": None,
-            "maps_url": None,
-            "max_choices": MAX_SCENIC_SELECT_CHOICES,
-            "error_message": error_message,
-        }
+    context = {
+        "request": request,
+        "start": start,
+        "end": end,
+        "mode": mode,
+        "tour_type": tour_type,
+        "grand_list": grand_list,
+        "result": result,
+        "maps_url": maps_url,
+        "max_choices": MAX_SCENIC_SELECT_CHOICES,
+        "error_message": error_message,
+    }
 
-    return templates.TemplateResponse("index.html", context)
+    return templates.TemplateResponse("index_new.html", context)
+
+
 from fastapi import Query
 import json
 
@@ -177,27 +137,20 @@ async def track_page(
     tour_type: str = Query("all"),
 ):
     """
-    This function runs when the user opens /track in the browser.
-    It recomputes the route and sends the landmark list to the browser
-    for GPS tracking.
+    GPS tracking page for live audio tour.
     """
-
-    # Recompute route depending on the mode (same logic as homepage)
+    # Recompute route with tour type
     if mode == "1":
         result = plan_route(start, end, "1", tour_type=tour_type)
     elif mode == "2":
         result = plan_route(start, end, "2", tour_type=tour_type)
     else:
-        # For now, scenic select reuses scenic auto path
+        # Scenic select defaults to scenic auto for tracking
         result = plan_route(start, end, "2", tour_type=tour_type)
 
-    # Landmarks along the route
     landmarks = result["landmarks"]
-
-    # Convert Python list → JSON text for JavaScript
     landmarks_json = json.dumps(landmarks)
 
-    # Render the "track" page
     return templates.TemplateResponse(
         "track.html",
         {
@@ -205,6 +158,7 @@ async def track_page(
             "start": start,
             "end": end,
             "mode": mode,
+            "tour_type": tour_type,
             "landmarks_json": landmarks_json,
         },
     )
