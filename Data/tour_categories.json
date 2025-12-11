@@ -1,6 +1,6 @@
 {
   "architecture": {
-    "count": 46,
+    "count": 69,
     "name": "Architecture Tour",
     "icon": "\ud83c\udfdb\ufe0f",
     "color": "#EF4444",
@@ -280,11 +280,149 @@
         "lat": 51.4904254,
         "lng": -0.1293135,
         "score": 50
+      },
+      {
+        "name": "Saint Paul's Knightsbridge",
+        "lat": 51.5014833,
+        "lng": -0.155684,
+        "score": 43
+      },
+      {
+        "name": "The Monument to the Great Fire of London",
+        "lat": 51.5101415,
+        "lng": -0.0859491,
+        "score": 35
+      },
+      {
+        "name": "Anglo-Belgian War Memorial",
+        "lat": 51.5086558,
+        "lng": -0.1207417,
+        "score": 35
+      },
+      {
+        "name": "Royal Air Force Memorial",
+        "lat": 51.5039918,
+        "lng": -0.1230828,
+        "score": 35
+      },
+      {
+        "name": "National Submarine War Memorial",
+        "lat": 51.5108862,
+        "lng": -0.1110141,
+        "score": 35
+      },
+      {
+        "name": "London and North Western Railway War Memorial",
+        "lat": 51.5272435,
+        "lng": -0.1325382,
+        "score": 35
+      },
+      {
+        "name": "Lancaster Gate Memorial Cross",
+        "lat": 51.5115009,
+        "lng": -0.1800953,
+        "score": 35
+      },
+      {
+        "name": "Heminge & Condell memorial",
+        "lat": 51.5163813,
+        "lng": -0.0930327,
+        "score": 35
+      },
+      {
+        "name": "Civil Service Rifles War Memorial",
+        "lat": 51.5103797,
+        "lng": -0.1175556,
+        "score": 35
+      },
+      {
+        "name": "Statue of Queen Anne",
+        "lat": 51.5004813,
+        "lng": -0.1330307,
+        "score": 35
+      },
+      {
+        "name": "John F. Kennedy Memorial",
+        "lat": 51.5238903,
+        "lng": -0.1446216,
+        "score": 35
+      },
+      {
+        "name": "Great Western Railway War Memorial",
+        "lat": 51.5169364,
+        "lng": -0.1782233,
+        "score": 35
+      },
+      {
+        "name": "Silvertown War Memorial",
+        "lat": 51.499443,
+        "lng": 0.0276983,
+        "score": 35
+      },
+      {
+        "name": "Memorial to the Siege of C\u00e1diz",
+        "lat": 51.504214,
+        "lng": -0.1272915,
+        "score": 35
+      },
+      {
+        "name": "National Covid Memorial Wall",
+        "lat": 51.4999572,
+        "lng": -0.1200594,
+        "score": 35
+      },
+      {
+        "name": "St Michael Cornhill War Memorial",
+        "lat": 51.5132768,
+        "lng": -0.0856279,
+        "score": 35
+      },
+      {
+        "name": "The Rolling Bridge",
+        "lat": 51.5183946,
+        "lng": -0.174722,
+        "score": 32
+      },
+      {
+        "name": "Tower of All Hallows Staining",
+        "lat": 51.5115627,
+        "lng": -0.0804428,
+        "score": 30
+      },
+      {
+        "name": "Bridgepoint Lofts",
+        "lat": 51.5403857,
+        "lng": 0.0383511,
+        "score": 30
+      },
+      {
+        "name": "Prince George, Duke of Cambridge",
+        "lat": 51.505221,
+        "lng": -0.1265862,
+        "score": 30
+      },
+      {
+        "name": "Tower Hill Postern",
+        "lat": 51.5094466,
+        "lng": -0.0759463,
+        "score": 30
+      },
+      {
+        "name": "Queen's Tower",
+        "lat": 51.4983509,
+        "lng": -0.1768904,
+        "score": 30
+      },
+      {
+        "name": "Golders Green Clock Tower",
+        "lat": 51.5716283,
+        "lng": -0.1952388,
+        "score": 30
       }
     ]
   },
   "historical": {
-    "count": 91,
+    "count": 193,
     "name": "Historical Tour",
     "icon": "\ud83d\udcdc",
     "color": "#8B4513",
@@ -834,11 +972,623 @@
         "lat": 51.4904254,
         "lng": -0.1293135,
         "score": 50
+      },
+      {
+        "name": "Diana Memorial Fountain",
+        "lat": 51.5046314,
+        "lng": -0.1714597,
+        "score": 35
+      },
+      {
+        "name": "Berkeley Square",
+        "lat": 51.5096414,
+        "lng": -0.1458119,
+        "score": 35
+      },
+      {
+        "name": "Michael Faraday Memorial substation",
+        "lat": 51.4951062,
+        "lng": -0.1006375,
+        "score": 35
+      },
+      {
+        "name": "Commonwealth Memorial Gates",
+        "lat": 51.5024721,
+        "lng": -0.1490909,
+        "score": 35
+      },
+      {
+        "name": "Royal Air Force Memorial",
+        "lat": 51.5039918,
+        "lng": -0.1230828,
+        "score": 35
+      },
+      {
+        "name": "Nelson's Column",
+        "lat": 51.5077588,
+        "lng": -0.12793,
+        "score": 35
+      },
+      {
+        "name": "Royal Artillery Memorial",
+        "lat": 51.5025664,
+        "lng": -0.1519526,
+        "score": 35
+      },
+      {
+        "name": "Burdett-Coutts Memorial",
+        "lat": 51.5370678,
+        "lng": -0.0396294,
+        "score": 35
+      },
+      {
+        "name": "Parliament Square",
+        "lat": 51.5006259,
+        "lng": -0.126826,
+        "score": 35
+      },
+      {
+        "name": "Duke of York Column",
+        "lat": 51.5063097,
+        "lng": -0.1317352,
+        "score": 35
+      },
+      {
+        "name": "Memorial to the Great Exhibition",
+        "lat": 51.5003933,
+        "lng": -0.1772832,
+        "score": 35
+      },
+      {
+        "name": "The Albert Memorial",
+        "lat": 51.5023845,
+        "lng": -0.1776744,
+        "score": 35
+      },
+      {
+        "name": "Victoria Memorial",
+        "lat": 51.5018399,
+        "lng": -0.1405865,
+        "score": 35
+      },
+      {
+        "name": "Buxton Memorial Fountain",
+        "lat": 51.496129,
+        "lng": -0.1247439,
+        "score": 35
+      },
+      {
+        "name": "Emmeline and Christabel Pankhurst Memorial",
+        "lat": 51.4977775,
+        "lng": -0.1253086,
+        "score": 35
+      },
+      {
+        "name": "Shaftesbury Memorial Fountain",
+        "lat": 51.5098881,
+        "lng": -0.1344742,
+        "score": 35
+      },
+      {
+        "name": "7 July Memorial",
+        "lat": 51.5059795,
+        "lng": -0.1527751,
+        "score": 35
+      },
+      {
+        "name": "Canada Memorial",
+        "lat": 51.5029024,
+        "lng": -0.1426133,
+        "score": 35
+      },
+      {
+        "name": "Holocaust Memorial",
+        "lat": 51.5042779,
+        "lng": -0.158779,
+        "score": 35
+      },
+      {
+        "name": "Edith Cavell Memorial",
+        "lat": 51.509375,
+        "lng": -0.1271672,
+        "score": 35
+      },
+      {
+        "name": "Lancaster Gate Memorial Cross",
+        "lat": 51.5115009,
+        "lng": -0.1800953,
+        "score": 35
+      },
+      {
+        "name": "Heminge & Condell memorial",
+        "lat": 51.5163813,
+        "lng": -0.0930327,
+        "score": 35
+      },
+      {
+        "name": "Statue of Queen Anne",
+        "lat": 51.5004813,
+        "lng": -0.1330307,
+        "score": 35
+      },
+      {
+        "name": "Cheylesmore Memorial",
+        "lat": 51.5087741,
+        "lng": -0.1208706,
+        "score": 35
+      },
+      {
+        "name": "John F. Kennedy Memorial",
+        "lat": 51.5238903,
+        "lng": -0.1446216,
+        "score": 35
+      },
+      {
+        "name": "Quintin and Alice Hogg Memorial",
+        "lat": 51.5189313,
+        "lng": -0.1444295,
+        "score": 35
+      },
+      {
+        "name": "Iraq & Afghanistan Memorial",
+        "lat": 51.5034427,
+        "lng": -0.1242367,
+        "score": 35
+      },
+      {
+        "name": "Amy Winehouse Statue",
+        "lat": 51.5423755,
+        "lng": -0.1478161,
+        "score": 35
+      },
+      {
+        "name": "Royal Naval Division Memorial",
+        "lat": 51.5053473,
+        "lng": -0.1290306,
+        "score": 35
+      },
+      {
+        "name": "Memorial to the Siege of C\u00e1diz",
+        "lat": 51.504214,
+        "lng": -0.1272915,
+        "score": 35
+      },
+      {
+        "name": "Statue of Herbert Kitchener",
+        "lat": 51.5038752,
+        "lng": -0.1279914,
+        "score": 35
+      },
+      {
+        "name": "Equestrian statue \"Physical Energy\"",
+        "lat": 51.5067642,
+        "lng": -0.1783174,
+        "score": 35
+      },
+      {
+        "name": "Queen Alexandra Memorial",
+        "lat": 51.5046719,
+        "lng": -0.1367952,
+        "score": 35
+      },
+      {
+        "name": "Sigmund Freud Statue",
+        "lat": 51.5462067,
+        "lng": -0.1755993,
+        "score": 35
+      },
+      {
+        "name": "National Covid Memorial Wall",
+        "lat": 51.4999572,
+        "lng": -0.1200594,
+        "score": 35
+      },
+      {
+        "name": "Queen Eleanor Memorial Cross",
+        "lat": 51.5084396,
+        "lng": -0.1252942,
+        "score": 35
+      },
+      {
+        "name": "John Donne Memorial",
+        "lat": 51.5132888,
+        "lng": -0.09737,
+        "score": 35
+      },
+      {
+        "name": "Park Square Gardens",
+        "lat": 51.5244103,
+        "lng": -0.1468696,
+        "score": 30
+      },
+      {
+        "name": "West Square Gardens",
+        "lat": 51.4951846,
+        "lng": -0.1055267,
+        "score": 30
+      },
+      {
+        "name": "Red Lion Square Gardens",
+        "lat": 51.5191892,
+        "lng": -0.1188966,
+        "score": 30
+      },
+      {
+        "name": "Knightsbridge",
+        "lat": 51.5008444,
+        "lng": -0.166965,
+        "score": 30
+      },
+      {
+        "name": "The Shard",
+        "lat": 51.5043718,
+        "lng": -0.0864754,
+        "score": 30
+      },
+      {
+        "name": "Tower of Church of St Augustine",
+        "lat": 51.5478194,
+        "lng": -0.0545078,
+        "score": 30
+      },
+      {
+        "name": "Hyde Park Square",
+        "lat": 51.5140136,
+        "lng": -0.169069,
+        "score": 30
+      },
+      {
+        "name": "Thurloe Square Garden",
+        "lat": 51.4950006,
+        "lng": -0.1717137,
+        "score": 30
+      },
+      {
+        "name": "Bridgepoint Lofts",
+        "lat": 51.5403857,
+        "lng": 0.0383511,
+        "score": 30
+      },
+      {
+        "name": "Prince George, Duke of Cambridge",
+        "lat": 51.505221,
+        "lng": -0.1265862,
+        "score": 30
+      },
+      {
+        "name": "Tower Hill Postern",
+        "lat": 51.5094466,
+        "lng": -0.0759463,
+        "score": 30
+      },
+      {
+        "name": "Queen's Tower",
+        "lat": 51.4983509,
+        "lng": -0.1768904,
+        "score": 30
+      },
+      {
+        "name": "Golders Green Clock Tower",
+        "lat": 51.5716283,
+        "lng": -0.1952388,
+        "score": 30
+      },
+      {
+        "name": "The Regent's Park",
+        "lat": 51.5301451,
+        "lng": -0.1553995,
+        "score": 25
+      },
+      {
+        "name": "Mile End Park",
+        "lat": 51.5231644,
+        "lng": -0.0361394,
+        "score": 25
+      },
+      {
+        "name": "Brockwell Park",
+        "lat": 51.4505405,
+        "lng": -0.1068653,
+        "score": 25
+      },
+      {
+        "name": "Kensington Gardens",
+        "lat": 51.5066483,
+        "lng": -0.1802006,
+        "score": 25
+      },
+      {
+        "name": "Old Deer Park",
+        "lat": 51.4671036,
+        "lng": -0.3067639,
+        "score": 25
+      },
+      {
+        "name": "Finsbury Park",
+        "lat": 51.5702554,
+        "lng": -0.1010473,
+        "score": 25
+      },
+      {
+        "name": "Stationers Park",
+        "lat": 51.5792895,
+        "lng": -0.1122109,
+        "score": 25
+      },
+      {
+        "name": "Hurlingham Park",
+        "lat": 51.4690524,
+        "lng": -0.2021224,
+        "score": 25
+      },
+      {
+        "name": "South Park",
+        "lat": 51.4690551,
+        "lng": -0.1942851,
+        "score": 25
+      },
+      {
+        "name": "Bishop's Park",
+        "lat": 51.4710647,
+        "lng": -0.2162396,
+        "score": 25
+      },
+      {
+        "name": "Golders Hill Park",
+        "lat": 51.566872,
+        "lng": -0.1880759,
+        "score": 25
+      },
+      {
+        "name": "Dulwich Park",
+        "lat": 51.4455239,
+        "lng": -0.0786786,
+        "score": 25
+      },
+      {
+        "name": "Wanstead Park",
+        "lat": 51.5679663,
+        "lng": 0.0386568,
+        "score": 25
+      },
+      {
+        "name": "Inner Temple Garden",
+        "lat": 51.5118836,
+        "lng": -0.1095735,
+        "score": 25
+      },
+      {
+        "name": "Hans Place Garden",
+        "lat": 51.4978384,
+        "lng": -0.1609936,
+        "score": 25
+      },
+      {
+        "name": "Holland Park",
+        "lat": 51.5027819,
+        "lng": -0.2031275,
+        "score": 25
+      },
+      {
+        "name": "Geraldine Mary Harmsworth Park",
+        "lat": 51.4959219,
+        "lng": -0.1085162,
+        "score": 25
+      },
+      {
+        "name": "College Garden",
+        "lat": 51.4979954,
+        "lng": -0.1270008,
+        "score": 25
+      },
+      {
+        "name": "Chelsea Physic Garden",
+        "lat": 51.4846484,
+        "lng": -0.1621613,
+        "score": 25
+      },
+      {
+        "name": "Victoria Park",
+        "lat": 51.5383538,
+        "lng": -0.0401376,
+        "score": 25
+      },
+      {
+        "name": "King's Stairs Gardens",
+        "lat": 51.4999535,
+        "lng": -0.0572221,
+        "score": 25
+      },
+      {
+        "name": "Cator Park",
+        "lat": 51.4598284,
+        "lng": 0.0268534,
+        "score": 25
+      },
+      {
+        "name": "Ravenscourt Park",
+        "lat": 51.4970749,
+        "lng": -0.2394476,
+        "score": 25
+      },
+      {
+        "name": "Burgess Park",
+        "lat": 51.4836533,
+        "lng": -0.0841817,
+        "score": 25
+      },
+      {
+        "name": "Fryent Country Park",
+        "lat": 51.5769525,
+        "lng": -0.277489,
+        "score": 25
+      },
+      {
+        "name": "Barking Park",
+        "lat": 51.5456951,
+        "lng": 0.0852744,
+        "score": 25
+      },
+      {
+        "name": "Sir John McDougall Gardens",
+        "lat": 51.4970378,
+        "lng": -0.0267783,
+        "score": 25
+      },
+      {
+        "name": "Finsbury Circus Gardens",
+        "lat": 51.5178542,
+        "lng": -0.0864699,
+        "score": 25
+      },
+      {
+        "name": "Bartlett Park",
+        "lat": 51.5151054,
+        "lng": -0.0218741,
+        "score": 25
+      },
+      {
+        "name": "Cathnor Park",
+        "lat": 51.5026832,
+        "lng": -0.2366855,
+        "score": 25
+      },
+      {
+        "name": "Tabard Gardens",
+        "lat": 51.4986107,
+        "lng": -0.089085,
+        "score": 25
+      },
+      {
+        "name": "Brimmington Park",
+        "lat": 51.4780794,
+        "lng": -0.0565245,
+        "score": 25
+      },
+      {
+        "name": "St Mary Magdalene Gardens",
+        "lat": 51.5480751,
+        "lng": -0.1084837,
+        "score": 25
+      },
+      {
+        "name": "Manor House Gardens",
+        "lat": 51.4561173,
+        "lng": 0.0054607,
+        "score": 25
+      },
+      {
+        "name": "Cremorne Gardens",
+        "lat": 51.4796573,
+        "lng": -0.178352,
+        "score": 25
+      },
+      {
+        "name": "Mount Street Gardens",
+        "lat": 51.5093107,
+        "lng": -0.1500613,
+        "score": 25
+      },
+      {
+        "name": "Danson Park",
+        "lat": 51.4551052,
+        "lng": 0.117162,
+        "score": 25
+      },
+      {
+        "name": "Red Cross Garden",
+        "lat": 51.5031415,
+        "lng": -0.0945564,
+        "score": 25
+      },
+      {
+        "name": "Gwendwr Gardens",
+        "lat": 51.4913369,
+        "lng": -0.2085622,
+        "score": 25
+      },
+      {
+        "name": "Old Paradise Gardens",
+        "lat": 51.4933103,
+        "lng": -0.1190478,
+        "score": 25
+      },
+      {
+        "name": "Potters Fields Park",
+        "lat": 51.5041607,
+        "lng": -0.078101,
+        "score": 25
+      },
+      {
+        "name": "Hyde Park",
+        "lat": 51.5074147,
+        "lng": -0.1630518,
+        "score": 25
+      },
+      {
+        "name": "St. James's Park",
+        "lat": 51.5031135,
+        "lng": -0.1344197,
+        "score": 25
+      },
+      {
+        "name": "Horn Park",
+        "lat": 51.4430174,
+        "lng": 0.025267,
+        "score": 25
+      },
+      {
+        "name": "Southwark Park",
+        "lat": 51.4952182,
+        "lng": -0.0539053,
+        "score": 25
+      },
+      {
+        "name": "Cartwright Gardens",
+        "lat": 51.5268593,
+        "lng": -0.1267283,
+        "score": 25
+      },
+      {
+        "name": "Hyde Park Gate",
+        "lat": 51.5003567,
+        "lng": -0.1827516,
+        "score": 25
+      },
+      {
+        "name": "Battersea Park",
+        "lat": 51.4792184,
+        "lng": -0.1574113,
+        "score": 25
+      },
+      {
+        "name": "Altab Ali Park",
+        "lat": 51.5161873,
+        "lng": -0.0685052,
+        "score": 25
+      },
+      {
+        "name": "Belair Park",
+        "lat": 51.4431808,
+        "lng": -0.0909713,
+        "score": 25
+      },
+      {
+        "name": "Churchill Gardens Estate",
+        "lat": 51.4863073,
+        "lng": -0.1415312,
+        "score": 25
+      },
+      {
+        "name": "Park Royal",
+        "lat": 51.5284366,
+        "lng": -0.2797183,
+        "score": 25
       }
     ]
   },
   "royal": {
-    "count": 57,
+    "count": 602,
     "name": "Royal Tour",
     "icon": "\ud83d\udc51",
     "color": "#9333EA",
@@ -1184,11 +1934,869 @@
         "lat": 51.5015392,
         "lng": -0.1667254,
         "score": 55
+      },
+      {
+        "name": "St Paul",
+        "lat": 51.4914769,
+        "lng": -0.2254989,
+        "score": 54
+      },
+      {
+        "name": "St Paul's Churchyard",
+        "lat": 51.5137725,
+        "lng": -0.0977424,
+        "score": 54
+      },
+      {
+        "name": "All Hallows-by-the-Tower",
+        "lat": 51.5093762,
+        "lng": -0.0793066,
+        "score": 52
+      },
+      {
+        "name": "British Library",
+        "lat": 51.5300022,
+        "lng": -0.1277087,
+        "score": 50
+      },
+      {
+        "name": "Dana Research Centre and Library",
+        "lat": 51.4971028,
+        "lng": -0.1790422,
+        "score": 50
+      },
+      {
+        "name": "Peckham Library",
+        "lat": 51.4742816,
+        "lng": -0.06932,
+        "score": 50
+      },
+      {
+        "name": "Kilburn Library",
+        "lat": 51.5363825,
+        "lng": -0.1911436,
+        "score": 50
+      },
+      {
+        "name": "Kensington Central Library",
+        "lat": 51.5014344,
+        "lng": -0.1944214,
+        "score": 50
+      },
+      {
+        "name": "Imperial College Central Library",
+        "lat": 51.4982322,
+        "lng": -0.1782009,
+        "score": 50
+      },
+      {
+        "name": "Swiss Cottage Library",
+        "lat": 51.5423489,
+        "lng": -0.1732767,
+        "score": 50
+      },
+      {
+        "name": "Maughan Library",
+        "lat": 51.5151674,
+        "lng": -0.1104409,
+        "score": 50
+      },
+      {
+        "name": "London Library",
+        "lat": 51.5073215,
+        "lng": -0.136938,
+        "score": 50
+      },
+      {
+        "name": "The Library at Willesden Green",
+        "lat": 51.5468199,
+        "lng": -0.2289303,
+        "score": 50
+      },
+      {
+        "name": "RHS Lindley Library",
+        "lat": 51.4944304,
+        "lng": -0.1346948,
+        "score": 50
+      },
+      {
+        "name": "Gordon Museum",
+        "lat": 51.5035633,
+        "lng": -0.0895713,
+        "score": 50
+      },
+      {
+        "name": "Diana Memorial Fountain",
+        "lat": 51.5046314,
+        "lng": -0.1714597,
+        "score": 35
+      },
+      {
+        "name": "Commonwealth Memorial Gates",
+        "lat": 51.5024721,
+        "lng": -0.1490909,
+        "score": 35
+      },
+      {
+        "name": "Royal Air Force Memorial",
+        "lat": 51.5039918,
+        "lng": -0.1230828,
+        "score": 35
+      },
+      {
+        "name": "Battle of Britain Memorial",
+        "lat": 51.502939,
+        "lng": -0.123428,
+        "score": 35
+      },
+      {
+        "name": "Nelson's Column",
+        "lat": 51.5077588,
+        "lng": -0.12793,
+        "score": 35
+      },
+      {
+        "name": "Royal Artillery Memorial",
+        "lat": 51.5025664,
+        "lng": -0.1519526,
+        "score": 35
+      },
+      {
+        "name": "Burdett-Coutts Memorial",
+        "lat": 51.5370678,
+        "lng": -0.0396294,
+        "score": 35
+      },
+      {
+        "name": "Parliament Square",
+        "lat": 51.5006259,
+        "lng": -0.126826,
+        "score": 35
+      },
+      {
+        "name": "London Troops War Memorial",
+        "lat": 51.5135204,
+        "lng": -0.088069,
+        "score": 35
+      },
+      {
+        "name": "Duke of York Column",
+        "lat": 51.5063097,
+        "lng": -0.1317352,
+        "score": 35
+      },
+      {
+        "name": "Memorial to the Great Exhibition",
+        "lat": 51.5003933,
+        "lng": -0.1772832,
+        "score": 35
+      },
+      {
+        "name": "Monument to the 2002 Bali bombings",
+        "lat": 51.5024054,
+        "lng": -0.1295373,
+        "score": 35
+      },
+      {
+        "name": "Islington Green War Memorial",
+        "lat": 51.536188,
+        "lng": -0.1033121,
+        "score": 35
+      },
+      {
+        "name": "The Albert Memorial",
+        "lat": 51.5023845,
+        "lng": -0.1776744,
+        "score": 35
+      },
+      {
+        "name": "Victoria Memorial",
+        "lat": 51.5018399,
+        "lng": -0.1405865,
+        "score": 35
+      },
+      {
+        "name": "Buxton Memorial Fountain",
+        "lat": 51.496129,
+        "lng": -0.1247439,
+        "score": 35
+      },
+      {
+        "name": "Emmeline and Christabel Pankhurst Memorial",
+        "lat": 51.4977775,
+        "lng": -0.1253086,
+        "score": 35
+      },
+      {
+        "name": "National Submarine War Memorial",
+        "lat": 51.5108862,
+        "lng": -0.1110141,
+        "score": 35
+      },
+      {
+        "name": "Wellington Monument",
+        "lat": 51.5029333,
+        "lng": -0.1514358,
+        "score": 35
+      },
+      {
+        "name": "Crimean War Memorial",
+        "lat": 51.5073833,
+        "lng": -0.1326772,
+        "score": 35
+      },
+      {
+        "name": "Canada Memorial",
+        "lat": 51.5029024,
+        "lng": -0.1426133,
+        "score": 35
+      },
+      {
+        "name": "Memorial to Heroic Self Sacrifice",
+        "lat": 51.516885,
+        "lng": -0.0978561,
+        "score": 35
+      },
+      {
+        "name": "Edith Cavell Memorial",
+        "lat": 51.509375,
+        "lng": -0.1271672,
+        "score": 35
+      },
+      {
+        "name": "Lancaster Gate Memorial Cross",
+        "lat": 51.5115009,
+        "lng": -0.1800953,
+        "score": 35
+      },
+      {
+        "name": "Heminge & Condell memorial",
+        "lat": 51.5163813,
+        "lng": -0.0930327,
+        "score": 35
+      },
+      {
+        "name": "RAF Bomber Command Memorial",
+        "lat": 51.5032945,
+        "lng": -0.1490017,
+        "score": 35
+      },
+      {
+        "name": "Agatha Christie Memorial",
+        "lat": 51.5117788,
+        "lng": -0.1273662,
+        "score": 35
+      },
+      {
+        "name": "Fleet Air Arm Memorial",
+        "lat": 51.5040372,
+        "lng": -0.1239442,
+        "score": 35
+      },
+      {
+        "name": "Bobby Moore statue",
+        "lat": 51.55749,
+        "lng": -0.2795952,
+        "score": 35
+      },
+      {
+        "name": "Civil Service Rifles War Memorial",
+        "lat": 51.5103797,
+        "lng": -0.1175556,
+        "score": 35
+      },
+      {
+        "name": "Chindit Memorial",
+        "lat": 51.5032997,
+        "lng": -0.1239983,
+        "score": 35
+      },
+      {
+        "name": "Statue of Queen Anne",
+        "lat": 51.5004813,
+        "lng": -0.1330307,
+        "score": 35
+      },
+      {
+        "name": "Statue of Edward Jenner",
+        "lat": 51.5105767,
+        "lng": -0.1751211,
+        "score": 35
+      },
+      {
+        "name": "Cheylesmore Memorial",
+        "lat": 51.5087741,
+        "lng": -0.1208706,
+        "score": 35
+      },
+      {
+        "name": "Statue of James II",
+        "lat": 51.5084879,
+        "lng": -0.1290067,
+        "score": 35
+      },
+      {
+        "name": "Great Western Railway War Memorial",
+        "lat": 51.5169364,
+        "lng": -0.1782233,
+        "score": 35
+      },
+      {
+        "name": "Silvertown War Memorial",
+        "lat": 51.499443,
+        "lng": 0.0276983,
+        "score": 35
+      },
+      {
+        "name": "Royal Naval Division Memorial",
+        "lat": 51.5053473,
+        "lng": -0.1290306,
+        "score": 35
+      },
+      {
+        "name": "Memorial to the Siege of C\u00e1diz",
+        "lat": 51.504214,
+        "lng": -0.1272915,
+        "score": 35
+      },
+      {
+        "name": "Statue of Herbert Kitchener",
+        "lat": 51.5038752,
+        "lng": -0.1279914,
+        "score": 35
+      },
+      {
+        "name": "Queen Alexandra Memorial",
+        "lat": 51.5046719,
+        "lng": -0.1367952,
+        "score": 35
+      },
+      {
+        "name": "24th East Surrey Division War Memorial",
+        "lat": 51.4805123,
+        "lng": -0.1538335,
+        "score": 35
+      },
+      {
+        "name": "National Covid Memorial Wall",
+        "lat": 51.4999572,
+        "lng": -0.1200594,
+        "score": 35
+      },
+      {
+        "name": "Queen Eleanor Memorial Cross",
+        "lat": 51.5084396,
+        "lng": -0.1252942,
+        "score": 35
+      },
+      {
+        "name": "John Donne Memorial",
+        "lat": 51.5132888,
+        "lng": -0.09737,
+        "score": 35
+      },
+      {
+        "name": "Park Square Gardens",
+        "lat": 51.5244103,
+        "lng": -0.1468696,
+        "score": 30
+      },
+      {
+        "name": "Queen Square Gardens",
+        "lat": 51.5217715,
+        "lng": -0.1224453,
+        "score": 30
+      },
+      {
+        "name": "Red Lion Square Gardens",
+        "lat": 51.5191892,
+        "lng": -0.1188966,
+        "score": 30
+      },
+      {
+        "name": "Argyle Square Gardens",
+        "lat": 51.5290446,
+        "lng": -0.122248,
+        "score": 30
+      },
+      {
+        "name": "St James's Square Gardens",
+        "lat": 51.5071797,
+        "lng": -0.1352818,
+        "score": 30
+      },
+      {
+        "name": "Cadogan Square Garden",
+        "lat": 51.4951593,
+        "lng": -0.1606098,
+        "score": 30
+      },
+      {
+        "name": "Lowndes Square Gardens",
+        "lat": 51.5003981,
+        "lng": -0.1585234,
+        "score": 30
+      },
+      {
+        "name": "The Shard",
+        "lat": 51.5043718,
+        "lng": -0.0864754,
+        "score": 30
+      },
+      {
+        "name": "Redcliffe Square Gardens",
+        "lat": 51.4881799,
+        "lng": -0.1883456,
+        "score": 30
+      },
+      {
+        "name": "Tower of Church of St Augustine",
+        "lat": 51.5478194,
+        "lng": -0.0545078,
+        "score": 30
+      },
+      {
+        "name": "Leinster Square Gardens",
+        "lat": 51.5138951,
+        "lng": -0.1925415,
+        "score": 30
+      },
+      {
+        "name": "Brunswick Square Gardens",
+        "lat": 51.5244675,
+        "lng": -0.1217204,
+        "score": 30
+      },
+      {
+        "name": "Mecklenburgh Square Gardens",
+        "lat": 51.5250986,
+        "lng": -0.1187146,
+        "score": 30
+      },
+      {
+        "name": "Arbour Square Gardens",
+        "lat": 51.5142796,
+        "lng": -0.0478684,
+        "score": 30
+      },
+      {
+        "name": "Thurloe Square Garden",
+        "lat": 51.4950006,
+        "lng": -0.1717137,
+        "score": 30
+      },
+      {
+        "name": "London Eye",
+        "lat": 51.5033416,
+        "lng": -0.1196765,
+        "score": 30
+      },
+      {
+        "name": "Soho Square Gardens",
+        "lat": 51.515292,
+        "lng": -0.132211,
+        "score": 30
+      },
+      {
+        "name": "Queen's Tower",
+        "lat": 51.4983509,
+        "lng": -0.1768904,
+        "score": 30
+      },
+      {
+        "name": "Golders Green Clock Tower",
+        "lat": 51.5716283,
+        "lng": -0.1952388,
+        "score": 30
+      },
+      {
+        "name": "The Regent's Park",
+        "lat": 51.5301451,
+        "lng": -0.1553995,
+        "score": 25
+      },
+      {
+        "name": "Mile End Park",
+        "lat": 51.5231644,
+        "lng": -0.0361394,
+        "score": 25
+      },
+      {
+        "name": "Queen Elizabeth Olympic Park",
+        "lat": 51.5450402,
+        "lng": -0.0150579,
+        "score": 25
+      },
+      {
+        "name": "Kensington Gardens",
+        "lat": 51.5066483,
+        "lng": -0.1802006,
+        "score": 25
+      },
+      {
+        "name": "Old Deer Park",
+        "lat": 51.4671036,
+        "lng": -0.3067639,
+        "score": 25
+      },
+      {
+        "name": "Whitehall Garden",
+        "lat": 51.5039218,
+        "lng": -0.1239099,
+        "score": 25
+      },
+      {
+        "name": "Bishop's Park",
+        "lat": 51.4710647,
+        "lng": -0.2162396,
+        "score": 25
+      },
+      {
+        "name": "Clissold Park",
+        "lat": 51.5609928,
+        "lng": -0.0877696,
+        "score": 25
+      },
+      {
+        "name": "Inner Temple Garden",
+        "lat": 51.5118836,
+        "lng": -0.1095735,
+        "score": 25
+      },
+      {
+        "name": "Philbeach Gardens",
+        "lat": 51.4912359,
+        "lng": -0.1985816,
+        "score": 25
+      },
+      {
+        "name": "Hans Place Garden",
+        "lat": 51.4978384,
+        "lng": -0.1609936,
+        "score": 25
+      },
+      {
+        "name": "Leyton Jubilee Park",
+        "lat": 51.5625657,
+        "lng": -0.0242792,
+        "score": 25
+      },
+      {
+        "name": "Holland Park",
+        "lat": 51.5027819,
+        "lng": -0.2031275,
+        "score": 25
+      },
+      {
+        "name": "Haggerston Park",
+        "lat": 51.5330692,
+        "lng": -0.0677039,
+        "score": 25
+      },
+      {
+        "name": "King's Stairs Gardens",
+        "lat": 51.4999535,
+        "lng": -0.0572221,
+        "score": 25
+      },
+      {
+        "name": "West Ham Park",
+        "lat": 51.5391992,
+        "lng": 0.0178617,
+        "score": 25
+      },
+      {
+        "name": "Max Roach Park",
+        "lat": 51.4683283,
+        "lng": -0.1116277,
+        "score": 25
+      },
+      {
+        "name": "Beckton District Park",
+        "lat": 51.5145805,
+        "lng": 0.0473047,
+        "score": 25
+      },
+      {
+        "name": "Cator Park",
+        "lat": 51.4598284,
+        "lng": 0.0268534,
+        "score": 25
+      },
+      {
+        "name": "Eaglesfield Park",
+        "lat": 51.4701575,
+        "lng": 0.0710424,
+        "score": 25
+      },
+      {
+        "name": "Maryon Park",
+        "lat": 51.4892979,
+        "lng": 0.0425577,
+        "score": 25
+      },
+      {
+        "name": "Greatfields Park",
+        "lat": 51.5312554,
+        "lng": 0.0902837,
+        "score": 25
+      },
+      {
+        "name": "Barking Park",
+        "lat": 51.5456951,
+        "lng": 0.0852744,
+        "score": 25
+      },
+      {
+        "name": "Sir John McDougall Gardens",
+        "lat": 51.4970378,
+        "lng": -0.0267783,
+        "score": 25
+      },
+      {
+        "name": "St George's Gardens",
+        "lat": 51.526163,
+        "lng": -0.1210331,
+        "score": 25
+      },
+      {
+        "name": "Bartlett Park",
+        "lat": 51.5151054,
+        "lng": -0.0218741,
+        "score": 25
+      },
+      {
+        "name": "Folkestone Gardens",
+        "lat": 51.4834188,
+        "lng": -0.0399309,
+        "score": 25
+      },
+      {
+        "name": "Tabard Gardens",
+        "lat": 51.4986107,
+        "lng": -0.089085,
+        "score": 25
+      },
+      {
+        "name": "Manor House Gardens",
+        "lat": 51.4561173,
+        "lng": 0.0054607,
+        "score": 25
+      },
+      {
+        "name": "Cremorne Gardens",
+        "lat": 51.4796573,
+        "lng": -0.178352,
+        "score": 25
+      },
+      {
+        "name": "Newington Gardens",
+        "lat": 51.4976288,
+        "lng": -0.0961447,
+        "score": 25
+      },
+      {
+        "name": "Northbrook Park",
+        "lat": 51.4413495,
+        "lng": 0.0137164,
+        "score": 25
+      },
+      {
+        "name": "Gwendwr Gardens",
+        "lat": 51.4913369,
+        "lng": -0.2085622,
+        "score": 25
+      },
+      {
+        "name": "Richmond Park",
+        "lat": 51.4386116,
+        "lng": -0.2769154,
+        "score": 25
+      },
+      {
+        "name": "Lillington Gardens Estate",
+        "lat": 51.4905262,
+        "lng": -0.1352019,
+        "score": 25
+      },
+      {
+        "name": "Abney Park Chapel",
+        "lat": 51.5644013,
+        "lng": -0.0773434,
+        "score": 25
+      },
+      {
+        "name": "St Luke's, Redcliffe Gardens",
+        "lat": 51.4877244,
+        "lng": -0.1893794,
+        "score": 25
+      },
+      {
+        "name": "The Rose Garden",
+        "lat": 51.5036922,
+        "lng": -0.1278038,
+        "score": 25
+      },
+      {
+        "name": "Middle Temple Garden",
+        "lat": 51.5118018,
+        "lng": -0.1113582,
+        "score": 25
+      },
+      {
+        "name": "St James, Sussex Gardens",
+        "lat": 51.5130541,
+        "lng": -0.176502,
+        "score": 25
+      },
+      {
+        "name": "Sutcliffe Park",
+        "lat": 51.4550025,
+        "lng": 0.0297345,
+        "score": 25
+      },
+      {
+        "name": "Hyde Park",
+        "lat": 51.5074147,
+        "lng": -0.1630518,
+        "score": 25
+      },
+      {
+        "name": "St. James's Park",
+        "lat": 51.5031135,
+        "lng": -0.1344197,
+        "score": 25
+      },
+      {
+        "name": "Horn Park",
+        "lat": 51.4430174,
+        "lng": 0.025267,
+        "score": 25
+      },
+      {
+        "name": "Cartwright Gardens",
+        "lat": 51.5268593,
+        "lng": -0.1267283,
+        "score": 25
+      },
+      {
+        "name": "Hyde Park Gate",
+        "lat": 51.5003567,
+        "lng": -0.1827516,
+        "score": 25
+      },
+      {
+        "name": "The Roof Gardens",
+        "lat": 51.5011318,
+        "lng": -0.1918455,
+        "score": 25
+      },
+      {
+        "name": "The Green Park",
+        "lat": 51.50452,
+        "lng": -0.1441729,
+        "score": 25
+      },
+      {
+        "name": "Churchill Gardens Estate",
+        "lat": 51.4863073,
+        "lng": -0.1415312,
+        "score": 25
+      },
+      {
+        "name": "Park Royal",
+        "lat": 51.5284366,
+        "lng": -0.2797183,
+        "score": 25
+      },
+      {
+        "name": "Hatton Garden",
+        "lat": 51.5200487,
+        "lng": -0.1083706,
+        "score": 25
+      },
+      {
+        "name": "Brondesbury Park",
+        "lat": 51.5396558,
+        "lng": -0.2190292,
+        "score": 25
+      },
+      {
+        "name": "Grove Park",
+        "lat": 51.4861734,
+        "lng": -0.2711251,
+        "score": 25
+      },
+      {
+        "name": "London Zoo",
+        "lat": 51.5353021,
+        "lng": -0.1552372,
+        "score": 5
+      },
+      {
+        "name": "Bank of England",
+        "lat": 51.5141144,
+        "lng": -0.088557,
+        "score": 5
+      },
+      {
+        "name": "Kensington Town Hall",
+        "lat": 51.5021038,
+        "lng": -0.1951896,
+        "score": 5
+      },
+      {
+        "name": "Clapham Common",
+        "lat": 51.4581026,
+        "lng": -0.1502973,
+        "score": 5
+      },
+      {
+        "name": "10 Downing Street",
+        "lat": 51.5034994,
+        "lng": -0.1275539,
+        "score": 5
+      },
+      {
+        "name": "Spa Fields",
+        "lat": 51.5255681,
+        "lng": -0.1074384,
+        "score": 5
+      },
+      {
+        "name": "Royal Courts of Justice",
+        "lat": 51.5142221,
+        "lng": -0.1130412,
+        "score": 5
+      },
+      {
+        "name": "Blackheath",
+        "lat": 51.4720675,
+        "lng": 0.002614,
+        "score": 5
+      },
+      {
+        "name": "Burlington House",
+        "lat": 51.5090014,
+        "lng": -0.1394091,
+        "score": 5
+      },
+      {
+        "name": "St Helen's Bishopsgate",
+        "lat": 51.5147279,
+        "lng": -0.0817309,
+        "score": 5
+      },
+      {
+        "name": "Lincoln's Inn",
+        "lat": 51.5170075,
+        "lng": -0.1144526,
+        "score": 5
       }
     ]
   },
   "museums_galleries": {
-    "count": 73,
+    "count": 112,
     "name": "Museums & Galleries",
     "icon": "\ud83c\udfa8",
     "color": "#06B6D4",
@@ -1630,11 +3238,245 @@
         "lat": 51.4904254,
         "lng": -0.1293135,
         "score": 50
+      },
+      {
+        "name": "Parliament Square",
+        "lat": 51.5006259,
+        "lng": -0.126826,
+        "score": 35
+      },
+      {
+        "name": "Statue of Queen Anne",
+        "lat": 51.5004813,
+        "lng": -0.1330307,
+        "score": 35
+      },
+      {
+        "name": "Sigmund Freud Statue",
+        "lat": 51.5462067,
+        "lng": -0.1755993,
+        "score": 35
+      },
+      {
+        "name": "The Rolling Bridge",
+        "lat": 51.5183946,
+        "lng": -0.174722,
+        "score": 32
+      },
+      {
+        "name": "Norfolk Square Garden",
+        "lat": 51.5158883,
+        "lng": -0.1734256,
+        "score": 30
+      },
+      {
+        "name": "Park Square Gardens",
+        "lat": 51.5244103,
+        "lng": -0.1468696,
+        "score": 30
+      },
+      {
+        "name": "Queen Square Gardens",
+        "lat": 51.5217715,
+        "lng": -0.1224453,
+        "score": 30
+      },
+      {
+        "name": "Red Lion Square Gardens",
+        "lat": 51.5191892,
+        "lng": -0.1188966,
+        "score": 30
+      },
+      {
+        "name": "St James's Square Gardens",
+        "lat": 51.5071797,
+        "lng": -0.1352818,
+        "score": 30
+      },
+      {
+        "name": "Knightsbridge",
+        "lat": 51.5008444,
+        "lng": -0.166965,
+        "score": 30
+      },
+      {
+        "name": "Redcliffe Square Gardens",
+        "lat": 51.4881799,
+        "lng": -0.1883456,
+        "score": 30
+      },
+      {
+        "name": "Brunswick Square Gardens",
+        "lat": 51.5244675,
+        "lng": -0.1217204,
+        "score": 30
+      },
+      {
+        "name": "Mecklenburgh Square Gardens",
+        "lat": 51.5250986,
+        "lng": -0.1187146,
+        "score": 30
+      },
+      {
+        "name": "Arbour Square Gardens",
+        "lat": 51.5142796,
+        "lng": -0.0478684,
+        "score": 30
+      },
+      {
+        "name": "Thurloe Square Garden",
+        "lat": 51.4950006,
+        "lng": -0.1717137,
+        "score": 30
+      },
+      {
+        "name": "Tower Hill Postern",
+        "lat": 51.5094466,
+        "lng": -0.0759463,
+        "score": 30
+      },
+      {
+        "name": "Queen's Tower",
+        "lat": 51.4983509,
+        "lng": -0.1768904,
+        "score": 30
+      },
+      {
+        "name": "View from the Shard",
+        "lat": 51.5045103,
+        "lng": -0.0864374,
+        "score": 30
+      },
+      {
+        "name": "The Regent's Park",
+        "lat": 51.5301451,
+        "lng": -0.1553995,
+        "score": 25
+      },
+      {
+        "name": "Queen Elizabeth Olympic Park",
+        "lat": 51.5450402,
+        "lng": -0.0150579,
+        "score": 25
+      },
+      {
+        "name": "Kensington Gardens",
+        "lat": 51.5066483,
+        "lng": -0.1802006,
+        "score": 25
+      },
+      {
+        "name": "Old Deer Park",
+        "lat": 51.4671036,
+        "lng": -0.3067639,
+        "score": 25
+      },
+      {
+        "name": "Finsbury Park",
+        "lat": 51.5702554,
+        "lng": -0.1010473,
+        "score": 25
+      },
+      {
+        "name": "Wimbledon Park",
+        "lat": 51.4382637,
+        "lng": -0.2057571,
+        "score": 25
+      },
+      {
+        "name": "Vauxhall Pleasure Gardens",
+        "lat": 51.4874704,
+        "lng": -0.1207242,
+        "score": 25
+      },
+      {
+        "name": "Island Gardens",
+        "lat": 51.4870191,
+        "lng": -0.0080626,
+        "score": 25
+      },
+      {
+        "name": "Abney Park",
+        "lat": 51.5643592,
+        "lng": -0.076837,
+        "score": 25
+      },
+      {
+        "name": "Wanstead Park",
+        "lat": 51.5679663,
+        "lng": 0.0386568,
+        "score": 25
+      },
+      {
+        "name": "Hans Place Garden",
+        "lat": 51.4978384,
+        "lng": -0.1609936,
+        "score": 25
+      },
+      {
+        "name": "Holland Park",
+        "lat": 51.5027819,
+        "lng": -0.2031275,
+        "score": 25
+      },
+      {
+        "name": "Beckton District Park",
+        "lat": 51.5145805,
+        "lng": 0.0473047,
+        "score": 25
+      },
+      {
+        "name": "Maryon Park",
+        "lat": 51.4892979,
+        "lng": 0.0425577,
+        "score": 25
+      },
+      {
+        "name": "Bartlett Park",
+        "lat": 51.5151054,
+        "lng": -0.0218741,
+        "score": 25
+      },
+      {
+        "name": "Manor House Gardens",
+        "lat": 51.4561173,
+        "lng": 0.0054607,
+        "score": 25
+      },
+      {
+        "name": "Northbrook Park",
+        "lat": 51.4413495,
+        "lng": 0.0137164,
+        "score": 25
+      },
+      {
+        "name": "Abney Park Chapel",
+        "lat": 51.5644013,
+        "lng": -0.0773434,
+        "score": 25
+      },
+      {
+        "name": "Whittington Park",
+        "lat": 51.5618773,
+        "lng": -0.12881,
+        "score": 25
+      },
+      {
+        "name": "Manor Park",
+        "lat": 51.5506867,
+        "lng": 0.0476391,
+        "score": 25
+      },
+      {
+        "name": "Dartmouth Park",
+        "lat": 51.5592533,
+        "lng": -0.1441412,
+        "score": 25
       }
     ]
   },
   "parks_gardens": {
-    "count": 15,
+    "count": 457,
     "name": "Parks & Gardens",
     "icon": "\ud83c\udf33",
     "color": "#10B981",
@@ -1728,11 +3570,1121 @@
         "lat": 51.5214424,
         "lng": -0.1388044,
         "score": 53
+      },
+      {
+        "name": "Berkeley Square",
+        "lat": 51.5096414,
+        "lng": -0.1458119,
+        "score": 35
+      },
+      {
+        "name": "Commonwealth Memorial Gates",
+        "lat": 51.5024721,
+        "lng": -0.1490909,
+        "score": 35
+      },
+      {
+        "name": "Nelson's Column",
+        "lat": 51.5077588,
+        "lng": -0.12793,
+        "score": 35
+      },
+      {
+        "name": "Burdett-Coutts Memorial",
+        "lat": 51.5370678,
+        "lng": -0.0396294,
+        "score": 35
+      },
+      {
+        "name": "Duke of York Column",
+        "lat": 51.5063097,
+        "lng": -0.1317352,
+        "score": 35
+      },
+      {
+        "name": "Memorial to the Great Exhibition",
+        "lat": 51.5003933,
+        "lng": -0.1772832,
+        "score": 35
+      },
+      {
+        "name": "Monument to the 2002 Bali bombings",
+        "lat": 51.5024054,
+        "lng": -0.1295373,
+        "score": 35
+      },
+      {
+        "name": "Islington Green War Memorial",
+        "lat": 51.536188,
+        "lng": -0.1033121,
+        "score": 35
+      },
+      {
+        "name": "The Albert Memorial",
+        "lat": 51.5023845,
+        "lng": -0.1776744,
+        "score": 35
+      },
+      {
+        "name": "Buxton Memorial Fountain",
+        "lat": 51.496129,
+        "lng": -0.1247439,
+        "score": 35
+      },
+      {
+        "name": "Sir Hugh Myddleton Memorial",
+        "lat": 51.5357375,
+        "lng": -0.1036111,
+        "score": 35
+      },
+      {
+        "name": "Wellington Monument",
+        "lat": 51.5029333,
+        "lng": -0.1514358,
+        "score": 35
+      },
+      {
+        "name": "Crimean War Memorial",
+        "lat": 51.5073833,
+        "lng": -0.1326772,
+        "score": 35
+      },
+      {
+        "name": "7 July Memorial",
+        "lat": 51.5059795,
+        "lng": -0.1527751,
+        "score": 35
+      },
+      {
+        "name": "Canada Memorial",
+        "lat": 51.5029024,
+        "lng": -0.1426133,
+        "score": 35
+      },
+      {
+        "name": "Holocaust Memorial",
+        "lat": 51.5042779,
+        "lng": -0.158779,
+        "score": 35
+      },
+      {
+        "name": "RAF Bomber Command Memorial",
+        "lat": 51.5032945,
+        "lng": -0.1490017,
+        "score": 35
+      },
+      {
+        "name": "Agatha Christie Memorial",
+        "lat": 51.5117788,
+        "lng": -0.1273662,
+        "score": 35
+      },
+      {
+        "name": "Fleet Air Arm Memorial",
+        "lat": 51.5040372,
+        "lng": -0.1239442,
+        "score": 35
+      },
+      {
+        "name": "Bobby Moore statue",
+        "lat": 51.55749,
+        "lng": -0.2795952,
+        "score": 35
+      },
+      {
+        "name": "Chindit Memorial",
+        "lat": 51.5032997,
+        "lng": -0.1239983,
+        "score": 35
+      },
+      {
+        "name": "Imperial Camel Corps Memorial",
+        "lat": 51.5085112,
+        "lng": -0.1217869,
+        "score": 35
+      },
+      {
+        "name": "Statue of Edward Jenner",
+        "lat": 51.5105767,
+        "lng": -0.1751211,
+        "score": 35
+      },
+      {
+        "name": "Cheylesmore Memorial",
+        "lat": 51.5087741,
+        "lng": -0.1208706,
+        "score": 35
+      },
+      {
+        "name": "Quintin and Alice Hogg Memorial",
+        "lat": 51.5189313,
+        "lng": -0.1444295,
+        "score": 35
+      },
+      {
+        "name": "Iraq & Afghanistan Memorial",
+        "lat": 51.5034427,
+        "lng": -0.1242367,
+        "score": 35
+      },
+      {
+        "name": "Royal Naval Division Memorial",
+        "lat": 51.5053473,
+        "lng": -0.1290306,
+        "score": 35
+      },
+      {
+        "name": "Memorial to the Siege of C\u00e1diz",
+        "lat": 51.504214,
+        "lng": -0.1272915,
+        "score": 35
+      },
+      {
+        "name": "Statue of Herbert Kitchener",
+        "lat": 51.5038752,
+        "lng": -0.1279914,
+        "score": 35
+      },
+      {
+        "name": "Fulham War Memorial",
+        "lat": 51.4689278,
+        "lng": -0.2112218,
+        "score": 35
+      },
+      {
+        "name": "Korean War Memorial",
+        "lat": 51.5037302,
+        "lng": -0.1239525,
+        "score": 35
+      },
+      {
+        "name": "24th East Surrey Division War Memorial",
+        "lat": 51.4805123,
+        "lng": -0.1538335,
+        "score": 35
+      },
+      {
+        "name": "John Donne Memorial",
+        "lat": 51.5132888,
+        "lng": -0.09737,
+        "score": 35
+      },
+      {
+        "name": "Bank of England War Memorial",
+        "lat": 51.5140335,
+        "lng": -0.0885778,
+        "score": 35
+      },
+      {
+        "name": "Norfolk Square Garden",
+        "lat": 51.5158883,
+        "lng": -0.1734256,
+        "score": 30
+      },
+      {
+        "name": "Park Square Gardens",
+        "lat": 51.5244103,
+        "lng": -0.1468696,
+        "score": 30
+      },
+      {
+        "name": "West Square Gardens",
+        "lat": 51.4951846,
+        "lng": -0.1055267,
+        "score": 30
+      },
+      {
+        "name": "Queen Square Gardens",
+        "lat": 51.5217715,
+        "lng": -0.1224453,
+        "score": 30
+      },
+      {
+        "name": "Red Lion Square Gardens",
+        "lat": 51.5191892,
+        "lng": -0.1188966,
+        "score": 30
+      },
+      {
+        "name": "Argyle Square Gardens",
+        "lat": 51.5290446,
+        "lng": -0.122248,
+        "score": 30
+      },
+      {
+        "name": "St James's Square Gardens",
+        "lat": 51.5071797,
+        "lng": -0.1352818,
+        "score": 30
+      },
+      {
+        "name": "Bloomsbury Square Gardens",
+        "lat": 51.5189192,
+        "lng": -0.1228238,
+        "score": 30
+      },
+      {
+        "name": "Lonsdale Square Garden",
+        "lat": 51.5396068,
+        "lng": -0.1082045,
+        "score": 30
+      },
+      {
+        "name": "Redcliffe Square Gardens",
+        "lat": 51.4881799,
+        "lng": -0.1883456,
+        "score": 30
+      },
+      {
+        "name": "Tower of Church of St Augustine",
+        "lat": 51.5478194,
+        "lng": -0.0545078,
+        "score": 30
+      },
+      {
+        "name": "Leinster Square Gardens",
+        "lat": 51.5138951,
+        "lng": -0.1925415,
+        "score": 30
+      },
+      {
+        "name": "Mecklenburgh Square Gardens",
+        "lat": 51.5250986,
+        "lng": -0.1187146,
+        "score": 30
+      },
+      {
+        "name": "Arbour Square Gardens",
+        "lat": 51.5142796,
+        "lng": -0.0478684,
+        "score": 30
+      },
+      {
+        "name": "Soho Square Gardens",
+        "lat": 51.515292,
+        "lng": -0.132211,
+        "score": 30
+      },
+      {
+        "name": "Walcot Square Gardens",
+        "lat": 51.494163,
+        "lng": -0.1090263,
+        "score": 30
+      },
+      {
+        "name": "Golders Green Clock Tower",
+        "lat": 51.5716283,
+        "lng": -0.1952388,
+        "score": 30
+      },
+      {
+        "name": "Queen Elizabeth Olympic Park",
+        "lat": 51.5450402,
+        "lng": -0.0150579,
+        "score": 25
+      },
+      {
+        "name": "Brockwell Park",
+        "lat": 51.4505405,
+        "lng": -0.1068653,
+        "score": 25
+      },
+      {
+        "name": "Old Deer Park",
+        "lat": 51.4671036,
+        "lng": -0.3067639,
+        "score": 25
+      },
+      {
+        "name": "Gladstone Park",
+        "lat": 51.5578225,
+        "lng": -0.2352947,
+        "score": 25
+      },
+      {
+        "name": "Finsbury Park",
+        "lat": 51.5702554,
+        "lng": -0.1010473,
+        "score": 25
+      },
+      {
+        "name": "Wimbledon Park",
+        "lat": 51.4382637,
+        "lng": -0.2057571,
+        "score": 25
+      },
+      {
+        "name": "Stationers Park",
+        "lat": 51.5792895,
+        "lng": -0.1122109,
+        "score": 25
+      },
+      {
+        "name": "Hammersmith Park",
+        "lat": 51.5102941,
+        "lng": -0.2283516,
+        "score": 25
+      },
+      {
+        "name": "South Park",
+        "lat": 51.4690551,
+        "lng": -0.1942851,
+        "score": 25
+      },
+      {
+        "name": "Clissold Park",
+        "lat": 51.5609928,
+        "lng": -0.0877696,
+        "score": 25
+      },
+      {
+        "name": "Abney Park",
+        "lat": 51.5643592,
+        "lng": -0.076837,
+        "score": 25
+      },
+      {
+        "name": "Deptford Park",
+        "lat": 51.4865068,
+        "lng": -0.0392458,
+        "score": 25
+      },
+      {
+        "name": "Dulwich Park",
+        "lat": 51.4455239,
+        "lng": -0.0786786,
+        "score": 25
+      },
+      {
+        "name": "Inner Temple Garden",
+        "lat": 51.5118836,
+        "lng": -0.1095735,
+        "score": 25
+      },
+      {
+        "name": "Leyton Jubilee Park",
+        "lat": 51.5625657,
+        "lng": -0.0242792,
+        "score": 25
+      },
+      {
+        "name": "Springfield Park",
+        "lat": 51.5707295,
+        "lng": -0.0586664,
+        "score": 25
+      },
+      {
+        "name": "College Garden",
+        "lat": 51.4979954,
+        "lng": -0.1270008,
+        "score": 25
+      },
+      {
+        "name": "Waterlow Park",
+        "lat": 51.5685248,
+        "lng": -0.1448685,
+        "score": 25
+      },
+      {
+        "name": "Victoria Park",
+        "lat": 51.5383538,
+        "lng": -0.0401376,
+        "score": 25
+      },
+      {
+        "name": "King's Stairs Gardens",
+        "lat": 51.4999535,
+        "lng": -0.0572221,
+        "score": 25
+      },
+      {
+        "name": "West Ham Park",
+        "lat": 51.5391992,
+        "lng": 0.0178617,
+        "score": 25
+      },
+      {
+        "name": "Wandsworth Park",
+        "lat": 51.462312,
+        "lng": -0.2041114,
+        "score": 25
+      },
+      {
+        "name": "Max Roach Park",
+        "lat": 51.4683283,
+        "lng": -0.1116277,
+        "score": 25
+      },
+      {
+        "name": "Beckton District Park",
+        "lat": 51.5145805,
+        "lng": 0.0473047,
+        "score": 25
+      },
+      {
+        "name": "Cator Park",
+        "lat": 51.4598284,
+        "lng": 0.0268534,
+        "score": 25
+      },
+      {
+        "name": "Eaglesfield Park",
+        "lat": 51.4701575,
+        "lng": 0.0710424,
+        "score": 25
+      },
+      {
+        "name": "Maryon Park",
+        "lat": 51.4892979,
+        "lng": 0.0425577,
+        "score": 25
+      },
+      {
+        "name": "Ravenscourt Park",
+        "lat": 51.4970749,
+        "lng": -0.2394476,
+        "score": 25
+      },
+      {
+        "name": "Burgess Park",
+        "lat": 51.4836533,
+        "lng": -0.0841817,
+        "score": 25
+      },
+      {
+        "name": "Fryent Country Park",
+        "lat": 51.5769525,
+        "lng": -0.277489,
+        "score": 25
+      },
+      {
+        "name": "Greatfields Park",
+        "lat": 51.5312554,
+        "lng": 0.0902837,
+        "score": 25
+      },
+      {
+        "name": "Gunnersbury Park",
+        "lat": 51.4963715,
+        "lng": -0.2908795,
+        "score": 25
+      },
+      {
+        "name": "Thames Barrier Park",
+        "lat": 51.5007431,
+        "lng": 0.0341145,
+        "score": 25
+      },
+      {
+        "name": "Finsbury Circus Gardens",
+        "lat": 51.5178542,
+        "lng": -0.0864699,
+        "score": 25
+      },
+      {
+        "name": "St George's Gardens",
+        "lat": 51.526163,
+        "lng": -0.1210331,
+        "score": 25
+      },
+      {
+        "name": "Bartlett Park",
+        "lat": 51.5151054,
+        "lng": -0.0218741,
+        "score": 25
+      },
+      {
+        "name": "Cathnor Park",
+        "lat": 51.5026832,
+        "lng": -0.2366855,
+        "score": 25
+      },
+      {
+        "name": "Fordham Park",
+        "lat": 51.4773953,
+        "lng": -0.0362522,
+        "score": 25
+      },
+      {
+        "name": "Folkestone Gardens",
+        "lat": 51.4834188,
+        "lng": -0.0399309,
+        "score": 25
+      },
+      {
+        "name": "Tabard Gardens",
+        "lat": 51.4986107,
+        "lng": -0.089085,
+        "score": 25
+      },
+      {
+        "name": "Brimmington Park",
+        "lat": 51.4780794,
+        "lng": -0.0565245,
+        "score": 25
+      },
+      {
+        "name": "St Mary Magdalene Gardens",
+        "lat": 51.5480751,
+        "lng": -0.1084837,
+        "score": 25
+      },
+      {
+        "name": "Paddington Street Gardens North",
+        "lat": 51.5209311,
+        "lng": -0.1547781,
+        "score": 25
+      },
+      {
+        "name": "Manor House Gardens",
+        "lat": 51.4561173,
+        "lng": 0.0054607,
+        "score": 25
+      },
+      {
+        "name": "Brownswood Park",
+        "lat": 51.5647805,
+        "lng": -0.0972619,
+        "score": 25
+      },
+      {
+        "name": "Cremorne Gardens",
+        "lat": 51.4796573,
+        "lng": -0.178352,
+        "score": 25
+      },
+      {
+        "name": "Mount Street Gardens",
+        "lat": 51.5093107,
+        "lng": -0.1500613,
+        "score": 25
+      },
+      {
+        "name": "Danson Park",
+        "lat": 51.4551052,
+        "lng": 0.117162,
+        "score": 25
+      },
+      {
+        "name": "Red Cross Garden",
+        "lat": 51.5031415,
+        "lng": -0.0945564,
+        "score": 25
+      },
+      {
+        "name": "Newington Gardens",
+        "lat": 51.4976288,
+        "lng": -0.0961447,
+        "score": 25
+      },
+      {
+        "name": "Northbrook Park",
+        "lat": 51.4413495,
+        "lng": 0.0137164,
+        "score": 25
+      },
+      {
+        "name": "Gwendwr Gardens",
+        "lat": 51.4913369,
+        "lng": -0.2085622,
+        "score": 25
+      },
+      {
+        "name": "Lillington Gardens Estate",
+        "lat": 51.4905262,
+        "lng": -0.1352019,
+        "score": 25
+      },
+      {
+        "name": "Finsbury Park Mosque",
+        "lat": 51.5635767,
+        "lng": -0.1056814,
+        "score": 25
+      },
+      {
+        "name": "Abney Park Chapel",
+        "lat": 51.5644013,
+        "lng": -0.0773434,
+        "score": 25
+      },
+      {
+        "name": "Westbourne Gardens",
+        "lat": 51.5172079,
+        "lng": -0.1904807,
+        "score": 25
+      },
+      {
+        "name": "St Luke's, Redcliffe Gardens",
+        "lat": 51.4877244,
+        "lng": -0.1893794,
+        "score": 25
+      },
+      {
+        "name": "Old Paradise Gardens",
+        "lat": 51.4933103,
+        "lng": -0.1190478,
+        "score": 25
+      },
+      {
+        "name": "Shoreditch Park",
+        "lat": 51.5346112,
+        "lng": -0.0860094,
+        "score": 25
+      },
+      {
+        "name": "The Rose Garden",
+        "lat": 51.5036922,
+        "lng": -0.1278038,
+        "score": 25
+      },
+      {
+        "name": "Middle Temple Garden",
+        "lat": 51.5118018,
+        "lng": -0.1113582,
+        "score": 25
+      },
+      {
+        "name": "Paddington Street Gardens South",
+        "lat": 51.5199028,
+        "lng": -0.1541224,
+        "score": 25
+      },
+      {
+        "name": "St James, Sussex Gardens",
+        "lat": 51.5130541,
+        "lng": -0.176502,
+        "score": 25
+      },
+      {
+        "name": "Bow Creek Ecology Park",
+        "lat": 51.512606,
+        "lng": 0.0039743,
+        "score": 25
+      },
+      {
+        "name": "Sutcliffe Park",
+        "lat": 51.4550025,
+        "lng": 0.0297345,
+        "score": 25
+      },
+      {
+        "name": "Ruskin Park",
+        "lat": 51.4643617,
+        "lng": -0.0939463,
+        "score": 25
+      },
+      {
+        "name": "Whittington Park",
+        "lat": 51.5618773,
+        "lng": -0.12881,
+        "score": 25
+      },
+      {
+        "name": "Southwark Park",
+        "lat": 51.4952182,
+        "lng": -0.0539053,
+        "score": 25
+      },
+      {
+        "name": "Opera Holland Park",
+        "lat": 51.5023041,
+        "lng": -0.2021397,
+        "score": 25
+      },
+      {
+        "name": "St Mary's Gardens",
+        "lat": 51.4933311,
+        "lng": -0.1091271,
+        "score": 25
+      },
+      {
+        "name": "Cartwright Gardens",
+        "lat": 51.5268593,
+        "lng": -0.1267283,
+        "score": 25
+      },
+      {
+        "name": "The Roof Gardens",
+        "lat": 51.5011318,
+        "lng": -0.1918455,
+        "score": 25
+      },
+      {
+        "name": "Battersea Park",
+        "lat": 51.4792184,
+        "lng": -0.1574113,
+        "score": 25
+      },
+      {
+        "name": "Altab Ali Park",
+        "lat": 51.5161873,
+        "lng": -0.0685052,
+        "score": 25
+      },
+      {
+        "name": "Belair Park",
+        "lat": 51.4431808,
+        "lng": -0.0909713,
+        "score": 25
+      },
+      {
+        "name": "London Blossom Garden",
+        "lat": 51.5471958,
+        "lng": -0.0157651,
+        "score": 25
+      },
+      {
+        "name": "Churchill Gardens Estate",
+        "lat": 51.4863073,
+        "lng": -0.1415312,
+        "score": 25
+      },
+      {
+        "name": "Upton Park",
+        "lat": 51.5369171,
+        "lng": 0.034673,
+        "score": 25
+      },
+      {
+        "name": "Manor Park",
+        "lat": 51.5506867,
+        "lng": 0.0476391,
+        "score": 25
+      },
+      {
+        "name": "Belsize Park",
+        "lat": 51.5473926,
+        "lng": -0.1683005,
+        "score": 25
+      },
+      {
+        "name": "Tufnell Park",
+        "lat": 51.5559163,
+        "lng": -0.139113,
+        "score": 25
+      },
+      {
+        "name": "Park Royal",
+        "lat": 51.5284366,
+        "lng": -0.2797183,
+        "score": 25
+      },
+      {
+        "name": "Brondesbury Park",
+        "lat": 51.5396558,
+        "lng": -0.2190292,
+        "score": 25
+      },
+      {
+        "name": "Grove Park",
+        "lat": 51.4861734,
+        "lng": -0.2711251,
+        "score": 25
+      },
+      {
+        "name": "Dartmouth Park",
+        "lat": 51.5592533,
+        "lng": -0.1441412,
+        "score": 25
+      },
+      {
+        "name": "London Zoo",
+        "lat": 51.5353021,
+        "lng": -0.1552372,
+        "score": 5
+      },
+      {
+        "name": "Friends House",
+        "lat": 51.5263841,
+        "lng": -0.1324047,
+        "score": 5
+      },
+      {
+        "name": "Clapham Common",
+        "lat": 51.4581026,
+        "lng": -0.1502973,
+        "score": 5
+      },
+      {
+        "name": "Highgate Cemetery",
+        "lat": 51.5663343,
+        "lng": -0.1465865,
+        "score": 5
+      },
+      {
+        "name": "Russia Dock Woodland",
+        "lat": 51.5007623,
+        "lng": -0.0388587,
+        "score": 5
+      },
+      {
+        "name": "Spa Fields",
+        "lat": 51.5255681,
+        "lng": -0.1074384,
+        "score": 5
+      },
+      {
+        "name": "Royal Courts of Justice",
+        "lat": 51.5142221,
+        "lng": -0.1130412,
+        "score": 5
+      },
+      {
+        "name": "Lubetkin Pool",
+        "lat": 51.5340183,
+        "lng": -0.153437,
+        "score": 5
+      },
+      {
+        "name": "Wandsworth Common",
+        "lat": 51.4517195,
+        "lng": -0.1713231,
+        "score": 5
+      },
+      {
+        "name": "Blackheath",
+        "lat": 51.4720675,
+        "lng": 0.002614,
+        "score": 5
+      },
+      {
+        "name": "Stoke Newington Common",
+        "lat": 51.5614735,
+        "lng": -0.0697128,
+        "score": 5
+      },
+      {
+        "name": "Hoop Lane Jewish Cemetery",
+        "lat": 51.5780312,
+        "lng": -0.1944507,
+        "score": 5
+      },
+      {
+        "name": "Lincoln's Inn",
+        "lat": 51.5170075,
+        "lng": -0.1144526,
+        "score": 5
+      },
+      {
+        "name": "Grosvenor Square",
+        "lat": 51.5115067,
+        "lng": -0.1513923,
+        "score": 5
+      },
+      {
+        "name": "Shree Swaminarayan Mandir",
+        "lat": 51.5473915,
+        "lng": -0.2614588,
+        "score": 5
+      },
+      {
+        "name": "Barnes Common",
+        "lat": 51.4684728,
+        "lng": -0.2406559,
+        "score": 5
+      },
+      {
+        "name": "Putney Lower Common",
+        "lat": 51.4701061,
+        "lng": -0.2282682,
+        "score": 5
+      },
+      {
+        "name": "Parsons Green",
+        "lat": 51.4735096,
+        "lng": -0.1994916,
+        "score": 5
+      },
+      {
+        "name": "Shepherds Bush Green",
+        "lat": 51.5042477,
+        "lng": -0.2219807,
+        "score": 5
+      },
+      {
+        "name": "Woburn Square",
+        "lat": 51.5233255,
+        "lng": -0.1296417,
+        "score": 5
+      },
+      {
+        "name": "Gordon Square",
+        "lat": 51.524262,
+        "lng": -0.1308717,
+        "score": 5
+      },
+      {
+        "name": "Golden Square",
+        "lat": 51.511655,
+        "lng": -0.1371829,
+        "score": 5
+      },
+      {
+        "name": "College Green",
+        "lat": 51.4980919,
+        "lng": -0.1261387,
+        "score": 5
+      },
+      {
+        "name": "Clitterhouse Playing Fields",
+        "lat": 51.5692669,
+        "lng": -0.2148786,
+        "score": 5
+      },
+      {
+        "name": "Putney Vale Cemetery",
+        "lat": 51.439309,
+        "lng": -0.2426891,
+        "score": 5
+      },
+      {
+        "name": "Myatt's Fields",
+        "lat": 51.4736932,
+        "lng": -0.10351,
+        "score": 5
+      },
+      {
+        "name": "Eaton Square",
+        "lat": 51.4958611,
+        "lng": -0.1517075,
+        "score": 5
+      },
+      {
+        "name": "London Fields",
+        "lat": 51.5405754,
+        "lng": -0.0604479,
+        "score": 5
+      },
+      {
+        "name": "Blythe Hill Fields",
+        "lat": 51.446963,
+        "lng": -0.0353013,
+        "score": 5
+      },
+      {
+        "name": "Mabley Green",
+        "lat": 51.5489062,
+        "lng": -0.0317414,
+        "score": 5
+      },
+      {
+        "name": "Cleveland Square",
+        "lat": 51.5146618,
+        "lng": -0.1823516,
+        "score": 5
+      },
+      {
+        "name": "Islington Green",
+        "lat": 51.5361506,
+        "lng": -0.1030493,
+        "score": 5
+      },
+      {
+        "name": "Saint Mary's Church",
+        "lat": 51.5384071,
+        "lng": -0.1017177,
+        "score": 5
+      },
+      {
+        "name": "Nunhead Cemetery",
+        "lat": 51.4627139,
+        "lng": -0.0515417,
+        "score": 5
+      },
+      {
+        "name": "Brompton Cemetery",
+        "lat": 51.4851517,
+        "lng": -0.1907856,
+        "score": 5
+      },
+      {
+        "name": "City of London Cemetery and Crematorium",
+        "lat": 51.5591988,
+        "lng": 0.0507459,
+        "score": 5
+      },
+      {
+        "name": "Paddington Green",
+        "lat": 51.5205729,
+        "lng": -0.1740378,
+        "score": 5
+      },
+      {
+        "name": "Eel Brook Common",
+        "lat": 51.4764278,
+        "lng": -0.1949946,
+        "score": 5
+      },
+      {
+        "name": "Burton Court",
+        "lat": 51.4883355,
+        "lng": -0.1597474,
+        "score": 5
+      },
+      {
+        "name": "Tedworth Square",
+        "lat": 51.4872761,
+        "lng": -0.162949,
+        "score": 5
+      },
+      {
+        "name": "Hoxton Square",
+        "lat": 51.5277265,
+        "lng": -0.0812148,
+        "score": 5
+      },
+      {
+        "name": "Clapton Square",
+        "lat": 51.550973,
+        "lng": -0.053898,
+        "score": 5
+      },
+      {
+        "name": "London Central Mosque",
+        "lat": 51.5289777,
+        "lng": -0.165071,
+        "score": 5
+      },
+      {
+        "name": "Hampstead Heath Extension",
+        "lat": 51.5743522,
+        "lng": -0.1839484,
+        "score": 5
+      },
+      {
+        "name": "Chiswick House",
+        "lat": 51.4838165,
+        "lng": -0.2585421,
+        "score": 5
+      },
+      {
+        "name": "South Ealing Cemetery",
+        "lat": 51.4972474,
+        "lng": -0.3023914,
+        "score": 5
+      },
+      {
+        "name": "St Mary's Catholic Cemetery",
+        "lat": 51.5282537,
+        "lng": -0.2328908,
+        "score": 5
+      },
+      {
+        "name": "Tredegar Square",
+        "lat": 51.5271252,
+        "lng": -0.0321838,
+        "score": 5
+      },
+      {
+        "name": "St Patrick's Catholic Cemetery",
+        "lat": 51.5583553,
+        "lng": -0.0005801,
+        "score": 5
       }
     ]
   },
   "religious": {
-    "count": 37,
+    "count": 426,
     "name": "Religious Heritage",
     "icon": "\u26ea",
     "color": "#F59E0B",
@@ -1958,11 +4910,989 @@
         "lat": 51.5172321,
         "lng": -0.0604426,
         "score": 50
+      },
+      {
+        "name": "Saint Paul's Knightsbridge",
+        "lat": 51.5014833,
+        "lng": -0.155684,
+        "score": 43
+      },
+      {
+        "name": "The Monument to the Great Fire of London",
+        "lat": 51.5101415,
+        "lng": -0.0859491,
+        "score": 35
+      },
+      {
+        "name": "Battle of Britain Memorial",
+        "lat": 51.502939,
+        "lng": -0.123428,
+        "score": 35
+      },
+      {
+        "name": "Parliament Square",
+        "lat": 51.5006259,
+        "lng": -0.126826,
+        "score": 35
+      },
+      {
+        "name": "The Albert Memorial",
+        "lat": 51.5023845,
+        "lng": -0.1776744,
+        "score": 35
+      },
+      {
+        "name": "National Submarine War Memorial",
+        "lat": 51.5108862,
+        "lng": -0.1110141,
+        "score": 35
+      },
+      {
+        "name": "Memorial to Heroic Self Sacrifice",
+        "lat": 51.516885,
+        "lng": -0.0978561,
+        "score": 35
+      },
+      {
+        "name": "Lancaster Gate Memorial Cross",
+        "lat": 51.5115009,
+        "lng": -0.1800953,
+        "score": 35
+      },
+      {
+        "name": "Heminge & Condell memorial",
+        "lat": 51.5163813,
+        "lng": -0.0930327,
+        "score": 35
+      },
+      {
+        "name": "Fleet Air Arm Memorial",
+        "lat": 51.5040372,
+        "lng": -0.1239442,
+        "score": 35
+      },
+      {
+        "name": "Chindit Memorial",
+        "lat": 51.5032997,
+        "lng": -0.1239983,
+        "score": 35
+      },
+      {
+        "name": "Imperial Camel Corps Memorial",
+        "lat": 51.5085112,
+        "lng": -0.1217869,
+        "score": 35
+      },
+      {
+        "name": "Great Western Railway War Memorial",
+        "lat": 51.5169364,
+        "lng": -0.1782233,
+        "score": 35
+      },
+      {
+        "name": "Royal Naval Division Memorial",
+        "lat": 51.5053473,
+        "lng": -0.1290306,
+        "score": 35
+      },
+      {
+        "name": "Statue of Herbert Kitchener",
+        "lat": 51.5038752,
+        "lng": -0.1279914,
+        "score": 35
+      },
+      {
+        "name": "Queen Alexandra Memorial",
+        "lat": 51.5046719,
+        "lng": -0.1367952,
+        "score": 35
+      },
+      {
+        "name": "24th East Surrey Division War Memorial",
+        "lat": 51.4805123,
+        "lng": -0.1538335,
+        "score": 35
+      },
+      {
+        "name": "St Michael Cornhill War Memorial",
+        "lat": 51.5132768,
+        "lng": -0.0856279,
+        "score": 35
+      },
+      {
+        "name": "John Donne Memorial",
+        "lat": 51.5132888,
+        "lng": -0.09737,
+        "score": 35
+      },
+      {
+        "name": "Norfolk Square Garden",
+        "lat": 51.5158883,
+        "lng": -0.1734256,
+        "score": 30
+      },
+      {
+        "name": "Argyle Square Gardens",
+        "lat": 51.5290446,
+        "lng": -0.122248,
+        "score": 30
+      },
+      {
+        "name": "Lowndes Square Gardens",
+        "lat": 51.5003981,
+        "lng": -0.1585234,
+        "score": 30
+      },
+      {
+        "name": "Redcliffe Square Gardens",
+        "lat": 51.4881799,
+        "lng": -0.1883456,
+        "score": 30
+      },
+      {
+        "name": "Tower of Church of St Augustine",
+        "lat": 51.5478194,
+        "lng": -0.0545078,
+        "score": 30
+      },
+      {
+        "name": "Tower of All Hallows Staining",
+        "lat": 51.5115627,
+        "lng": -0.0804428,
+        "score": 30
+      },
+      {
+        "name": "Soho Square Gardens",
+        "lat": 51.515292,
+        "lng": -0.132211,
+        "score": 30
+      },
+      {
+        "name": "Vauxhall Pleasure Gardens",
+        "lat": 51.4874704,
+        "lng": -0.1207242,
+        "score": 25
+      },
+      {
+        "name": "Bishop's Park",
+        "lat": 51.4710647,
+        "lng": -0.2162396,
+        "score": 25
+      },
+      {
+        "name": "Clissold Park",
+        "lat": 51.5609928,
+        "lng": -0.0877696,
+        "score": 25
+      },
+      {
+        "name": "Inner Temple Garden",
+        "lat": 51.5118836,
+        "lng": -0.1095735,
+        "score": 25
+      },
+      {
+        "name": "College Garden",
+        "lat": 51.4979954,
+        "lng": -0.1270008,
+        "score": 25
+      },
+      {
+        "name": "West Ham Park",
+        "lat": 51.5391992,
+        "lng": 0.0178617,
+        "score": 25
+      },
+      {
+        "name": "St Mary Magdalene Gardens",
+        "lat": 51.5480751,
+        "lng": -0.1084837,
+        "score": 25
+      },
+      {
+        "name": "Mount Street Gardens",
+        "lat": 51.5093107,
+        "lng": -0.1500613,
+        "score": 25
+      },
+      {
+        "name": "Lillington Gardens Estate",
+        "lat": 51.4905262,
+        "lng": -0.1352019,
+        "score": 25
+      },
+      {
+        "name": "Finsbury Park Mosque",
+        "lat": 51.5635767,
+        "lng": -0.1056814,
+        "score": 25
+      },
+      {
+        "name": "Abney Park Chapel",
+        "lat": 51.5644013,
+        "lng": -0.0773434,
+        "score": 25
+      },
+      {
+        "name": "St Luke's, Redcliffe Gardens",
+        "lat": 51.4877244,
+        "lng": -0.1893794,
+        "score": 25
+      },
+      {
+        "name": "Old Paradise Gardens",
+        "lat": 51.4933103,
+        "lng": -0.1190478,
+        "score": 25
+      },
+      {
+        "name": "Middle Temple Garden",
+        "lat": 51.5118018,
+        "lng": -0.1113582,
+        "score": 25
+      },
+      {
+        "name": "St James, Sussex Gardens",
+        "lat": 51.5130541,
+        "lng": -0.176502,
+        "score": 25
+      },
+      {
+        "name": "Hyde Park",
+        "lat": 51.5074147,
+        "lng": -0.1630518,
+        "score": 25
+      },
+      {
+        "name": "Hyde Park Gate",
+        "lat": 51.5003567,
+        "lng": -0.1827516,
+        "score": 25
+      },
+      {
+        "name": "Altab Ali Park",
+        "lat": 51.5161873,
+        "lng": -0.0685052,
+        "score": 25
+      },
+      {
+        "name": "Churchill Gardens Estate",
+        "lat": 51.4863073,
+        "lng": -0.1415312,
+        "score": 25
+      },
+      {
+        "name": "Hatton Garden",
+        "lat": 51.5200487,
+        "lng": -0.1083706,
+        "score": 25
+      },
+      {
+        "name": "Grove Park",
+        "lat": 51.4861734,
+        "lng": -0.2711251,
+        "score": 25
+      },
+      {
+        "name": "Clapham Common",
+        "lat": 51.4581026,
+        "lng": -0.1502973,
+        "score": 5
+      },
+      {
+        "name": "Spa Fields",
+        "lat": 51.5255681,
+        "lng": -0.1074384,
+        "score": 5
+      },
+      {
+        "name": "Royal Courts of Justice",
+        "lat": 51.5142221,
+        "lng": -0.1130412,
+        "score": 5
+      },
+      {
+        "name": "St Helen's Bishopsgate",
+        "lat": 51.5147279,
+        "lng": -0.0817309,
+        "score": 5
+      },
+      {
+        "name": "Hoop Lane Jewish Cemetery",
+        "lat": 51.5780312,
+        "lng": -0.1944507,
+        "score": 5
+      },
+      {
+        "name": "Lincoln's Inn",
+        "lat": 51.5170075,
+        "lng": -0.1144526,
+        "score": 5
+      },
+      {
+        "name": "St Brides",
+        "lat": 51.5137757,
+        "lng": -0.1055038,
+        "score": 5
+      },
+      {
+        "name": "Shree Swaminarayan Mandir",
+        "lat": 51.5473915,
+        "lng": -0.2614588,
+        "score": 5
+      },
+      {
+        "name": "Barnes Common",
+        "lat": 51.4684728,
+        "lng": -0.2406559,
+        "score": 5
+      },
+      {
+        "name": "Woburn Square",
+        "lat": 51.5233255,
+        "lng": -0.1296417,
+        "score": 5
+      },
+      {
+        "name": "Dean's Yard",
+        "lat": 51.4985817,
+        "lng": -0.1290543,
+        "score": 5
+      },
+      {
+        "name": "College Green",
+        "lat": 51.4980919,
+        "lng": -0.1261387,
+        "score": 5
+      },
+      {
+        "name": "Putney Vale Cemetery",
+        "lat": 51.439309,
+        "lng": -0.2426891,
+        "score": 5
+      },
+      {
+        "name": "Saint Anne's Limehouse",
+        "lat": 51.5116766,
+        "lng": -0.0302971,
+        "score": 5
+      },
+      {
+        "name": "Saint Mary's Church",
+        "lat": 51.5384071,
+        "lng": -0.1017177,
+        "score": 5
+      },
+      {
+        "name": "Brompton Cemetery",
+        "lat": 51.4851517,
+        "lng": -0.1907856,
+        "score": 5
+      },
+      {
+        "name": "City of London Cemetery and Crematorium",
+        "lat": 51.5591988,
+        "lng": 0.0507459,
+        "score": 5
+      },
+      {
+        "name": "Clapton Square",
+        "lat": 51.550973,
+        "lng": -0.053898,
+        "score": 5
+      },
+      {
+        "name": "London Central Mosque",
+        "lat": 51.5289777,
+        "lng": -0.165071,
+        "score": 5
+      },
+      {
+        "name": "Camden Square",
+        "lat": 51.5446787,
+        "lng": -0.1321377,
+        "score": 5
+      },
+      {
+        "name": "St Clement Danes",
+        "lat": 51.5131185,
+        "lng": -0.1138432,
+        "score": 5
+      },
+      {
+        "name": "Little Dean's Yard",
+        "lat": 51.4984339,
+        "lng": -0.1279376,
+        "score": 5
+      },
+      {
+        "name": "South Ealing Cemetery",
+        "lat": 51.4972474,
+        "lng": -0.3023914,
+        "score": 5
+      },
+      {
+        "name": "St Mary's Catholic Cemetery",
+        "lat": 51.5282537,
+        "lng": -0.2328908,
+        "score": 5
+      },
+      {
+        "name": "Brady Street Cemetery",
+        "lat": 51.5219207,
+        "lng": -0.0607179,
+        "score": 5
+      },
+      {
+        "name": "St Anselm Kennington Cross",
+        "lat": 51.4887767,
+        "lng": -0.1117573,
+        "score": 5
+      },
+      {
+        "name": "Saint Agnes Church",
+        "lat": 51.4832648,
+        "lng": -0.1066429,
+        "score": 5
+      },
+      {
+        "name": "Thornhill Square",
+        "lat": 51.5401583,
+        "lng": -0.1152467,
+        "score": 5
+      },
+      {
+        "name": "St Dunstan's",
+        "lat": 51.5168635,
+        "lng": -0.0416593,
+        "score": 5
+      },
+      {
+        "name": "Turnham Green",
+        "lat": 51.4918662,
+        "lng": -0.2657567,
+        "score": 5
+      },
+      {
+        "name": "Pimlico",
+        "lat": 51.4889993,
+        "lng": -0.1398817,
+        "score": 5
+      },
+      {
+        "name": "Kew",
+        "lat": 51.4771443,
+        "lng": -0.2855658,
+        "score": 5
+      },
+      {
+        "name": "Christ Church",
+        "lat": 51.4921004,
+        "lng": -0.2650665,
+        "score": 5
+      },
+      {
+        "name": "Hallfield Estate",
+        "lat": 51.5156619,
+        "lng": -0.1846854,
+        "score": 5
+      },
+      {
+        "name": "St. George's Square",
+        "lat": 51.4870369,
+        "lng": -0.1345834,
+        "score": 5
+      },
+      {
+        "name": "St John's Wood",
+        "lat": 51.5305852,
+        "lng": -0.1684109,
+        "score": 5
+      },
+      {
+        "name": "Bromley Recreation Ground",
+        "lat": 51.5266266,
+        "lng": -0.0134539,
+        "score": 5
+      },
+      {
+        "name": "Warwick Square",
+        "lat": 51.4906998,
+        "lng": -0.1412852,
+        "score": 5
+      },
+      {
+        "name": "Dissenters' Chapel",
+        "lat": 51.5269287,
+        "lng": -0.2159155,
+        "score": 5
+      },
+      {
+        "name": "Saint Matthew's",
+        "lat": 51.459685,
+        "lng": -0.1159537,
+        "score": 5
+      },
+      {
+        "name": "Saint Mary le Strand",
+        "lat": 51.5121899,
+        "lng": -0.1168414,
+        "score": 5
+      },
+      {
+        "name": "St Alban",
+        "lat": 51.49581,
+        "lng": -0.2630103,
+        "score": 5
+      },
+      {
+        "name": "St Pancras Old Church",
+        "lat": 51.5349454,
+        "lng": -0.1301563,
+        "score": 5
+      },
+      {
+        "name": "Mayfair",
+        "lat": 51.5110872,
+        "lng": -0.147058,
+        "score": 5
+      },
+      {
+        "name": "St Giles",
+        "lat": 51.5154723,
+        "lng": -0.1284181,
+        "score": 5
+      },
+      {
+        "name": "St. Luke's Kentish Town",
+        "lat": 51.5484032,
+        "lng": -0.133776,
+        "score": 5
+      },
+      {
+        "name": "Lisson Green Estate",
+        "lat": 51.5261964,
+        "lng": -0.1682632,
+        "score": 5
+      },
+      {
+        "name": "Metropolitan Tabernacle",
+        "lat": 51.4940811,
+        "lng": -0.1013516,
+        "score": 5
+      },
+      {
+        "name": "Stoke Newington",
+        "lat": 51.5578698,
+        "lng": -0.0822482,
+        "score": 5
+      },
+      {
+        "name": "Clerkenwell",
+        "lat": 51.5237268,
+        "lng": -0.1055555,
+        "score": 5
+      },
+      {
+        "name": "Wembley",
+        "lat": 51.5531547,
+        "lng": -0.2957562,
+        "score": 5
+      },
+      {
+        "name": "St Augustine's, Queen's Gate",
+        "lat": 51.4933634,
+        "lng": -0.1780056,
+        "score": 5
+      },
+      {
+        "name": "Camberwell",
+        "lat": 51.4745706,
+        "lng": -0.0925416,
+        "score": 5
+      },
+      {
+        "name": "Holy Trinity",
+        "lat": 51.5000642,
+        "lng": -0.1788335,
+        "score": 5
+      },
+      {
+        "name": "St Mary Magdalene",
+        "lat": 51.5483868,
+        "lng": -0.107913,
+        "score": 5
+      },
+      {
+        "name": "Union Chapel",
+        "lat": 51.5447652,
+        "lng": -0.1024392,
+        "score": 5
+      },
+      {
+        "name": "All Souls Church",
+        "lat": 51.518153,
+        "lng": -0.1430256,
+        "score": 5
+      },
+      {
+        "name": "Christ Apostolic Church",
+        "lat": 51.552478,
+        "lng": -0.1424452,
+        "score": 5
+      },
+      {
+        "name": "St Mary of Eton",
+        "lat": 51.5453885,
+        "lng": -0.0305915,
+        "score": 5
+      },
+      {
+        "name": "St Stephen's Church",
+        "lat": 51.553206,
+        "lng": -0.1684122,
+        "score": 5
+      },
+      {
+        "name": "American International Church",
+        "lat": 51.521056,
+        "lng": -0.135423,
+        "score": 5
+      },
+      {
+        "name": "Saint Andrew",
+        "lat": 51.5172647,
+        "lng": -0.1066078,
+        "score": 5
+      },
+      {
+        "name": "St Martin-in-the-Fields",
+        "lat": 51.5088308,
+        "lng": -0.1266767,
+        "score": 5
+      },
+      {
+        "name": "St. Sepulchre's Church",
+        "lat": 51.5166696,
+        "lng": -0.1022347,
+        "score": 5
+      },
+      {
+        "name": "St Bartholomew-The Great",
+        "lat": 51.5188923,
+        "lng": -0.0994083,
+        "score": 5
+      },
+      {
+        "name": "St Mark's Churchyard",
+        "lat": 51.4813879,
+        "lng": -0.1119464,
+        "score": 5
+      },
+      {
+        "name": "St Katherine's Church",
+        "lat": 51.5146104,
+        "lng": -0.2429699,
+        "score": 5
+      },
+      {
+        "name": "St Giles-without-Cripplegate",
+        "lat": 51.5186922,
+        "lng": -0.0938517,
+        "score": 5
+      },
+      {
+        "name": "All Saints",
+        "lat": 51.4693346,
+        "lng": -0.0694031,
+        "score": 5
+      },
+      {
+        "name": "LSO St. Luke's",
+        "lat": 51.525216,
+        "lng": -0.0940034,
+        "score": 5
+      },
+      {
+        "name": "St. Clement's Church",
+        "lat": 51.5120675,
+        "lng": -0.215783,
+        "score": 5
+      },
+      {
+        "name": "Islamic Centre of England",
+        "lat": 51.5354273,
+        "lng": -0.1889909,
+        "score": 5
+      },
+      {
+        "name": "Shree Swaminarayan Temple",
+        "lat": 51.5461226,
+        "lng": -0.2151558,
+        "score": 5
+      },
+      {
+        "name": "Holy Trinity Brompton",
+        "lat": 51.4978708,
+        "lng": -0.1699222,
+        "score": 5
+      },
+      {
+        "name": "All Saints Church",
+        "lat": 51.4685966,
+        "lng": -0.2117912,
+        "score": 5
+      },
+      {
+        "name": "Church of Saint Peter",
+        "lat": 51.4979256,
+        "lng": -0.1490776,
+        "score": 5
+      },
+      {
+        "name": "St. Luke's",
+        "lat": 51.4896346,
+        "lng": -0.1693943,
+        "score": 5
+      },
+      {
+        "name": "Saint George's Hanover Square",
+        "lat": 51.5125669,
+        "lng": -0.1427854,
+        "score": 5
+      },
+      {
+        "name": "Grosvenor Chapel",
+        "lat": 51.5090318,
+        "lng": -0.1512021,
+        "score": 5
+      },
+      {
+        "name": "Church of the Immaculate Conception",
+        "lat": 51.5094246,
+        "lng": -0.1491337,
+        "score": 5
+      },
+      {
+        "name": "Church of Christ the King",
+        "lat": 51.5234855,
+        "lng": -0.1315112,
+        "score": 5
+      },
+      {
+        "name": "St Giles-in-the-Fields",
+        "lat": 51.5153197,
+        "lng": -0.1283968,
+        "score": 5
+      },
+      {
+        "name": "Church of St Charles Borromeo",
+        "lat": 51.5200947,
+        "lng": -0.1400702,
+        "score": 5
+      },
+      {
+        "name": "St Anne's Churchyard",
+        "lat": 51.5122818,
+        "lng": -0.1324917,
+        "score": 5
+      },
+      {
+        "name": "St Mark's Church",
+        "lat": 51.5378713,
+        "lng": -0.1522108,
+        "score": 5
+      },
+      {
+        "name": "Church of our Most Holy Redeemer",
+        "lat": 51.5255192,
+        "lng": -0.1091795,
+        "score": 5
+      },
+      {
+        "name": "Saint John's, Waterloo",
+        "lat": 51.5045657,
+        "lng": -0.111975,
+        "score": 5
+      },
+      {
+        "name": "Ascension Church Centre",
+        "lat": 51.5112468,
+        "lng": 0.0372243,
+        "score": 5
+      },
+      {
+        "name": "Saint Jude-on-the-Hill",
+        "lat": 51.5801551,
+        "lng": -0.189878,
+        "score": 5
+      },
+      {
+        "name": "St Pancras Church",
+        "lat": 51.5272195,
+        "lng": -0.1299821,
+        "score": 5
+      },
+      {
+        "name": "Boundary Estate",
+        "lat": 51.5259725,
+        "lng": -0.0747511,
+        "score": 5
+      },
+      {
+        "name": "St Anselm and St Cecilia",
+        "lat": 51.5166729,
+        "lng": -0.1193417,
+        "score": 5
+      },
+      {
+        "name": "St John's Parish Community Church",
+        "lat": 51.5007416,
+        "lng": 0.0586872,
+        "score": 5
+      },
+      {
+        "name": "St Mary and St Michael Church",
+        "lat": 51.5136904,
+        "lng": -0.0520554,
+        "score": 5
+      },
+      {
+        "name": "St. Paul's, Lorrimore Square",
+        "lat": 51.4850021,
+        "lng": -0.1007793,
+        "score": 5
+      },
+      {
+        "name": "St Alban the Martyr",
+        "lat": 51.5197036,
+        "lng": -0.1108565,
+        "score": 5
+      },
+      {
+        "name": "St Margaret's Church",
+        "lat": 51.4998942,
+        "lng": -0.1267228,
+        "score": 5
+      },
+      {
+        "name": "Lauriston Road Cemetery",
+        "lat": 51.537369,
+        "lng": -0.0435476,
+        "score": 5
+      },
+      {
+        "name": "Saint Anne's Church",
+        "lat": 51.4838544,
+        "lng": -0.2878372,
+        "score": 5
+      },
+      {
+        "name": "Church of St Mary",
+        "lat": 51.5204376,
+        "lng": -0.1752151,
+        "score": 5
+      },
+      {
+        "name": "Former Holy Trinity Church",
+        "lat": 51.5243792,
+        "lng": -0.1436873,
+        "score": 5
+      },
+      {
+        "name": "St Matthias Church",
+        "lat": 51.5525327,
+        "lng": -0.0794436,
+        "score": 5
+      },
+      {
+        "name": "Newington Green Unitarian Church",
+        "lat": 51.5522543,
+        "lng": -0.0848672,
+        "score": 5
+      },
+      {
+        "name": "The Old Church",
+        "lat": 51.561372,
+        "lng": -0.0847068,
+        "score": 5
+      },
+      {
+        "name": "St. George's German Lutheran Church",
+        "lat": 51.5141824,
+        "lng": -0.0704577,
+        "score": 5
+      },
+      {
+        "name": "Saint John The Divine",
+        "lat": 51.4775601,
+        "lng": -0.1061617,
+        "score": 5
+      },
+      {
+        "name": "St Mary-at-Hill",
+        "lat": 51.510106,
+        "lng": -0.0837121,
+        "score": 5
+      },
+      {
+        "name": "St Gabriel's",
+        "lat": 51.5523726,
+        "lng": -0.2180287,
+        "score": 5
+      },
+      {
+        "name": "Old St Andrew",
+        "lat": 51.567746,
+        "lng": -0.2608598,
+        "score": 5
+      },
+      {
+        "name": "The Parish Church of St Barnabas Bethnal Green",
+        "lat": 51.5311052,
+        "lng": -0.0399799,
+        "score": 5
+      },
+      {
+        "name": "Saint James The Less",
+        "lat": 51.4907578,
+        "lng": -0.1352469,
+        "score": 5
+      },
+      {
+        "name": "St George the Martyr",
+        "lat": 51.5012808,
+        "lng": -0.0926307,
+        "score": 5
+      },
+      {
+        "name": "St Stephen",
+        "lat": 51.4951813,
+        "lng": -0.1356112,
+        "score": 5
+      },
+      {
+        "name": "St. Augustine's",
+        "lat": 51.5331542,
+        "lng": -0.1915777,
+        "score": 5
+      },
+      {
+        "name": "St James-the-Less",
+        "lat": 51.5318239,
+        "lng": -0.0477942,
+        "score": 5
+      },
+      {
+        "name": "St Matthew's Church Bayswater",
+        "lat": 51.511655,
+        "lng": -0.1911678,
+        "score": 5
       }
     ]
   },
   "modern": {
-    "count": 41,
+    "count": 283,
     "name": "Modern London",
     "icon": "\ud83c\udfd9\ufe0f",
     "color": "#3B82F6",
@@ -2212,11 +6142,965 @@
         "lat": 51.4713817,
         "lng": -0.1052039,
         "score": 50
+      },
+      {
+        "name": "The Monument to the Great Fire of London",
+        "lat": 51.5101415,
+        "lng": -0.0859491,
+        "score": 35
+      },
+      {
+        "name": "Battle of Britain Memorial",
+        "lat": 51.502939,
+        "lng": -0.123428,
+        "score": 35
+      },
+      {
+        "name": "Islington Green War Memorial",
+        "lat": 51.536188,
+        "lng": -0.1033121,
+        "score": 35
+      },
+      {
+        "name": "Sir Hugh Myddleton Memorial",
+        "lat": 51.5357375,
+        "lng": -0.1036111,
+        "score": 35
+      },
+      {
+        "name": "Memorial to Heroic Self Sacrifice",
+        "lat": 51.516885,
+        "lng": -0.0978561,
+        "score": 35
+      },
+      {
+        "name": "RAF Bomber Command Memorial",
+        "lat": 51.5032945,
+        "lng": -0.1490017,
+        "score": 35
+      },
+      {
+        "name": "Agatha Christie Memorial",
+        "lat": 51.5117788,
+        "lng": -0.1273662,
+        "score": 35
+      },
+      {
+        "name": "Fleet Air Arm Memorial",
+        "lat": 51.5040372,
+        "lng": -0.1239442,
+        "score": 35
+      },
+      {
+        "name": "Bobby Moore statue",
+        "lat": 51.55749,
+        "lng": -0.2795952,
+        "score": 35
+      },
+      {
+        "name": "Chindit Memorial",
+        "lat": 51.5032997,
+        "lng": -0.1239983,
+        "score": 35
+      },
+      {
+        "name": "Imperial Camel Corps Memorial",
+        "lat": 51.5085112,
+        "lng": -0.1217869,
+        "score": 35
+      },
+      {
+        "name": "Statue of Edward Jenner",
+        "lat": 51.5105767,
+        "lng": -0.1751211,
+        "score": 35
+      },
+      {
+        "name": "Statue of James II",
+        "lat": 51.5084879,
+        "lng": -0.1290067,
+        "score": 35
+      },
+      {
+        "name": "24th East Surrey Division War Memorial",
+        "lat": 51.4805123,
+        "lng": -0.1538335,
+        "score": 35
+      },
+      {
+        "name": "Argyle Square Gardens",
+        "lat": 51.5290446,
+        "lng": -0.122248,
+        "score": 30
+      },
+      {
+        "name": "Brunswick Square Gardens",
+        "lat": 51.5244675,
+        "lng": -0.1217204,
+        "score": 30
+      },
+      {
+        "name": "Tower of All Hallows Staining",
+        "lat": 51.5115627,
+        "lng": -0.0804428,
+        "score": 30
+      },
+      {
+        "name": "Mile End Park",
+        "lat": 51.5231644,
+        "lng": -0.0361394,
+        "score": 25
+      },
+      {
+        "name": "Queen Elizabeth Olympic Park",
+        "lat": 51.5450402,
+        "lng": -0.0150579,
+        "score": 25
+      },
+      {
+        "name": "Island Gardens",
+        "lat": 51.4870191,
+        "lng": -0.0080626,
+        "score": 25
+      },
+      {
+        "name": "Clissold Park",
+        "lat": 51.5609928,
+        "lng": -0.0877696,
+        "score": 25
+      },
+      {
+        "name": "Abney Park",
+        "lat": 51.5643592,
+        "lng": -0.076837,
+        "score": 25
+      },
+      {
+        "name": "Haggerston Park",
+        "lat": 51.5330692,
+        "lng": -0.0677039,
+        "score": 25
+      },
+      {
+        "name": "West Ham Park",
+        "lat": 51.5391992,
+        "lng": 0.0178617,
+        "score": 25
+      },
+      {
+        "name": "Beckton District Park",
+        "lat": 51.5145805,
+        "lng": 0.0473047,
+        "score": 25
+      },
+      {
+        "name": "Thames Barrier Park",
+        "lat": 51.5007431,
+        "lng": 0.0341145,
+        "score": 25
+      },
+      {
+        "name": "Fordham Park",
+        "lat": 51.4773953,
+        "lng": -0.0362522,
+        "score": 25
+      },
+      {
+        "name": "Folkestone Gardens",
+        "lat": 51.4834188,
+        "lng": -0.0399309,
+        "score": 25
+      },
+      {
+        "name": "Newbury Park",
+        "lat": 51.5758531,
+        "lng": 0.0922634,
+        "score": 25
+      },
+      {
+        "name": "Brownswood Park",
+        "lat": 51.5647805,
+        "lng": -0.0972619,
+        "score": 25
+      },
+      {
+        "name": "Newington Gardens",
+        "lat": 51.4976288,
+        "lng": -0.0961447,
+        "score": 25
+      },
+      {
+        "name": "Richmond Park",
+        "lat": 51.4386116,
+        "lng": -0.2769154,
+        "score": 25
+      },
+      {
+        "name": "Finsbury Park Mosque",
+        "lat": 51.5635767,
+        "lng": -0.1056814,
+        "score": 25
+      },
+      {
+        "name": "Abney Park Chapel",
+        "lat": 51.5644013,
+        "lng": -0.0773434,
+        "score": 25
+      },
+      {
+        "name": "St Luke's, Redcliffe Gardens",
+        "lat": 51.4877244,
+        "lng": -0.1893794,
+        "score": 25
+      },
+      {
+        "name": "Shoreditch Park",
+        "lat": 51.5346112,
+        "lng": -0.0860094,
+        "score": 25
+      },
+      {
+        "name": "Stepney Green Park",
+        "lat": 51.5177842,
+        "lng": -0.0463551,
+        "score": 25
+      },
+      {
+        "name": "Bow Creek Ecology Park",
+        "lat": 51.512606,
+        "lng": 0.0039743,
+        "score": 25
+      },
+      {
+        "name": "Whittington Park",
+        "lat": 51.5618773,
+        "lng": -0.12881,
+        "score": 25
+      },
+      {
+        "name": "Opera Holland Park",
+        "lat": 51.5023041,
+        "lng": -0.2021397,
+        "score": 25
+      },
+      {
+        "name": "The Roof Gardens",
+        "lat": 51.5011318,
+        "lng": -0.1918455,
+        "score": 25
+      },
+      {
+        "name": "London Blossom Garden",
+        "lat": 51.5471958,
+        "lng": -0.0157651,
+        "score": 25
+      },
+      {
+        "name": "Upton Park",
+        "lat": 51.5369171,
+        "lng": 0.034673,
+        "score": 25
+      },
+      {
+        "name": "Manor Park",
+        "lat": 51.5506867,
+        "lng": 0.0476391,
+        "score": 25
+      },
+      {
+        "name": "Park Royal",
+        "lat": 51.5284366,
+        "lng": -0.2797183,
+        "score": 25
+      },
+      {
+        "name": "Hatton Garden",
+        "lat": 51.5200487,
+        "lng": -0.1083706,
+        "score": 25
+      },
+      {
+        "name": "Grove Park",
+        "lat": 51.4861734,
+        "lng": -0.2711251,
+        "score": 25
+      },
+      {
+        "name": "Bank of England",
+        "lat": 51.5141144,
+        "lng": -0.088557,
+        "score": 5
+      },
+      {
+        "name": "Russia Dock Woodland",
+        "lat": 51.5007623,
+        "lng": -0.0388587,
+        "score": 5
+      },
+      {
+        "name": "Lubetkin Pool",
+        "lat": 51.5340183,
+        "lng": -0.153437,
+        "score": 5
+      },
+      {
+        "name": "Stoke Newington Common",
+        "lat": 51.5614735,
+        "lng": -0.0697128,
+        "score": 5
+      },
+      {
+        "name": "St Brides",
+        "lat": 51.5137757,
+        "lng": -0.1055038,
+        "score": 5
+      },
+      {
+        "name": "Woburn Square",
+        "lat": 51.5233255,
+        "lng": -0.1296417,
+        "score": 5
+      },
+      {
+        "name": "Dean's Yard",
+        "lat": 51.4985817,
+        "lng": -0.1290543,
+        "score": 5
+      },
+      {
+        "name": "Blythe Hill Fields",
+        "lat": 51.446963,
+        "lng": -0.0353013,
+        "score": 5
+      },
+      {
+        "name": "Wanstead Flats",
+        "lat": 51.5596801,
+        "lng": 0.021889,
+        "score": 5
+      },
+      {
+        "name": "HMS Belfast",
+        "lat": 51.5065635,
+        "lng": -0.0813098,
+        "score": 5
+      },
+      {
+        "name": "Eel Brook Common",
+        "lat": 51.4764278,
+        "lng": -0.1949946,
+        "score": 5
+      },
+      {
+        "name": "Tedworth Square",
+        "lat": 51.4872761,
+        "lng": -0.162949,
+        "score": 5
+      },
+      {
+        "name": "Hampstead Heath Extension",
+        "lat": 51.5743522,
+        "lng": -0.1839484,
+        "score": 5
+      },
+      {
+        "name": "Camberwell New Cemetery",
+        "lat": 51.4532833,
+        "lng": -0.0462913,
+        "score": 5
+      },
+      {
+        "name": "City Hall",
+        "lat": 51.5048047,
+        "lng": -0.0786534,
+        "score": 5
+      },
+      {
+        "name": "Gunnersbury Cemetery",
+        "lat": 51.4947285,
+        "lng": -0.2852926,
+        "score": 5
+      },
+      {
+        "name": "St Patrick's Catholic Cemetery",
+        "lat": 51.5583553,
+        "lng": -0.0005801,
+        "score": 5
+      },
+      {
+        "name": "Carpenters Estate",
+        "lat": 51.5382323,
+        "lng": -0.0053113,
+        "score": 5
+      },
+      {
+        "name": "Wembley Stadium",
+        "lat": 51.5560663,
+        "lng": -0.2796038,
+        "score": 5
+      },
+      {
+        "name": "East London Cemetery",
+        "lat": 51.5271032,
+        "lng": 0.0146826,
+        "score": 5
+      },
+      {
+        "name": "East Ham",
+        "lat": 51.5330843,
+        "lng": 0.0544661,
+        "score": 5
+      },
+      {
+        "name": "Bemerton Estate",
+        "lat": 51.5395853,
+        "lng": -0.1183684,
+        "score": 5
+      },
+      {
+        "name": "Granary Square",
+        "lat": 51.5352711,
+        "lng": -0.1253303,
+        "score": 5
+      },
+      {
+        "name": "Brady Street Cemetery",
+        "lat": 51.5219207,
+        "lng": -0.0607179,
+        "score": 5
+      },
+      {
+        "name": "Aberfeldy Village",
+        "lat": 51.5134439,
+        "lng": -0.0039524,
+        "score": 5
+      },
+      {
+        "name": "Pembury Estate",
+        "lat": 51.5512344,
+        "lng": -0.0579265,
+        "score": 5
+      },
+      {
+        "name": "Pimlico",
+        "lat": 51.4889993,
+        "lng": -0.1398817,
+        "score": 5
+      },
+      {
+        "name": "Hallfield Estate",
+        "lat": 51.5156619,
+        "lng": -0.1846854,
+        "score": 5
+      },
+      {
+        "name": "Tate Modern",
+        "lat": 51.5074292,
+        "lng": -0.0993862,
+        "score": 5
+      },
+      {
+        "name": "Harrods",
+        "lat": 51.4992448,
+        "lng": -0.1630069,
+        "score": 5
+      },
+      {
+        "name": "Saint Mary le Strand",
+        "lat": 51.5121899,
+        "lng": -0.1168414,
+        "score": 5
+      },
+      {
+        "name": "Walworth",
+        "lat": 51.4901142,
+        "lng": -0.0906603,
+        "score": 5
+      },
+      {
+        "name": "Crouch End",
+        "lat": 51.5796918,
+        "lng": -0.1236831,
+        "score": 5
+      },
+      {
+        "name": "Stamford Hill",
+        "lat": 51.5707092,
+        "lng": -0.0690402,
+        "score": 5
+      },
+      {
+        "name": "Stoke Newington",
+        "lat": 51.5578698,
+        "lng": -0.0822482,
+        "score": 5
+      },
+      {
+        "name": "Bethnal Green",
+        "lat": 51.5303456,
+        "lng": -0.0561633,
+        "score": 5
+      },
+      {
+        "name": "Dalston",
+        "lat": 51.543212,
+        "lng": -0.0760128,
+        "score": 5
+      },
+      {
+        "name": "Haggerston",
+        "lat": 51.5366603,
+        "lng": -0.0740127,
+        "score": 5
+      },
+      {
+        "name": "Wapping",
+        "lat": 51.5071316,
+        "lng": -0.0620152,
+        "score": 5
+      },
+      {
+        "name": "Bermondsey",
+        "lat": 51.4970125,
+        "lng": -0.063268,
+        "score": 5
+      },
+      {
+        "name": "Millwall",
+        "lat": 51.4933423,
+        "lng": -0.0212187,
+        "score": 5
+      },
+      {
+        "name": "Rotherhithe",
+        "lat": 51.5002908,
+        "lng": -0.0436321,
+        "score": 5
+      },
+      {
+        "name": "Cubitt Town",
+        "lat": 51.4936677,
+        "lng": -0.0082433,
+        "score": 5
+      },
+      {
+        "name": "Bromley-by-Bow",
+        "lat": 51.5229529,
+        "lng": -0.0179722,
+        "score": 5
+      },
+      {
+        "name": "Archway",
+        "lat": 51.5656796,
+        "lng": -0.1345871,
+        "score": 5
+      },
+      {
+        "name": "Willesden",
+        "lat": 51.5466216,
+        "lng": -0.2358661,
+        "score": 5
+      },
+      {
+        "name": "Marylebone",
+        "lat": 51.5196374,
+        "lng": -0.1519627,
+        "score": 5
+      },
+      {
+        "name": "Canning Town",
+        "lat": 51.5181741,
+        "lng": 0.0134976,
+        "score": 5
+      },
+      {
+        "name": "West Ham",
+        "lat": 51.5343383,
+        "lng": 0.0077868,
+        "score": 5
+      },
+      {
+        "name": "Kings Place",
+        "lat": 51.5349732,
+        "lng": -0.12167,
+        "score": 5
+      },
+      {
+        "name": "Chiswick",
+        "lat": 51.4923137,
+        "lng": -0.263818,
+        "score": 5
+      },
+      {
+        "name": "Plaistow",
+        "lat": 51.5293798,
+        "lng": 0.0249097,
+        "score": 5
+      },
+      {
+        "name": "Deptford",
+        "lat": 51.4758453,
+        "lng": -0.0215164,
+        "score": 5
+      },
+      {
+        "name": "New Cross Gate",
+        "lat": 51.4746978,
+        "lng": -0.045284,
+        "score": 5
+      },
+      {
+        "name": "Christ Apostolic Church",
+        "lat": 51.552478,
+        "lng": -0.1424452,
+        "score": 5
+      },
+      {
+        "name": "O2 Academy Brixton",
+        "lat": 51.4655423,
+        "lng": -0.1148654,
+        "score": 5
+      },
+      {
+        "name": "Old Tech College",
+        "lat": 51.5329292,
+        "lng": 0.0562964,
+        "score": 5
+      },
+      {
+        "name": "Claremont Square",
+        "lat": 51.5312335,
+        "lng": -0.1103652,
+        "score": 5
+      },
+      {
+        "name": "Caledonian Estate",
+        "lat": 51.5464933,
+        "lng": -0.1166974,
+        "score": 5
+      },
+      {
+        "name": "Screen on the Green",
+        "lat": 51.5368532,
+        "lng": -0.1036648,
+        "score": 5
+      },
+      {
+        "name": "North Woolwich",
+        "lat": 51.5004071,
+        "lng": 0.064154,
+        "score": 5
+      },
+      {
+        "name": "Church of Saint Peter",
+        "lat": 51.4979256,
+        "lng": -0.1490776,
+        "score": 5
+      },
+      {
+        "name": "St. Luke's",
+        "lat": 51.4896346,
+        "lng": -0.1693943,
+        "score": 5
+      },
+      {
+        "name": "Saint George's Hanover Square",
+        "lat": 51.5125669,
+        "lng": -0.1427854,
+        "score": 5
+      },
+      {
+        "name": "Grosvenor Chapel",
+        "lat": 51.5090318,
+        "lng": -0.1512021,
+        "score": 5
+      },
+      {
+        "name": "St Giles-in-the-Fields",
+        "lat": 51.5153197,
+        "lng": -0.1283968,
+        "score": 5
+      },
+      {
+        "name": "Ascension Church Centre",
+        "lat": 51.5112468,
+        "lng": 0.0372243,
+        "score": 5
+      },
+      {
+        "name": "Boundary Estate",
+        "lat": 51.5259725,
+        "lng": -0.0747511,
+        "score": 5
+      },
+      {
+        "name": "Bow Quarter",
+        "lat": 51.5317209,
+        "lng": -0.0214875,
+        "score": 5
+      },
+      {
+        "name": "New Era Estate",
+        "lat": 51.5361099,
+        "lng": -0.081397,
+        "score": 5
+      },
+      {
+        "name": "St Matthias Church",
+        "lat": 51.5525327,
+        "lng": -0.0794436,
+        "score": 5
+      },
+      {
+        "name": "Newington Green Unitarian Church",
+        "lat": 51.5522543,
+        "lng": -0.0848672,
+        "score": 5
+      },
+      {
+        "name": "St Gabriel's",
+        "lat": 51.5523726,
+        "lng": -0.2180287,
+        "score": 5
+      },
+      {
+        "name": "The House of Dreams",
+        "lat": 51.459918,
+        "lng": -0.0793057,
+        "score": 5
+      },
+      {
+        "name": "St George the Martyr",
+        "lat": 51.5012808,
+        "lng": -0.0926307,
+        "score": 5
+      },
+      {
+        "name": "The Royal Central School of Speech and Drama",
+        "lat": 51.5443049,
+        "lng": -0.1740702,
+        "score": 5
+      },
+      {
+        "name": "St. Marylebone Parish Church",
+        "lat": 51.5226514,
+        "lng": -0.1523265,
+        "score": 5
+      },
+      {
+        "name": "The Parish Church of St. Paul, Harringay",
+        "lat": 51.5783433,
+        "lng": -0.1039318,
+        "score": 5
+      },
+      {
+        "name": "Peckham Platform",
+        "lat": 51.4738485,
+        "lng": -0.0693987,
+        "score": 5
+      },
+      {
+        "name": "Shacklewell Lane Mosque",
+        "lat": 51.5510022,
+        "lng": -0.0740297,
+        "score": 5
+      },
+      {
+        "name": "Bourne Estate",
+        "lat": 51.5209529,
+        "lng": -0.111086,
+        "score": 5
+      },
+      {
+        "name": "East Sheen Common",
+        "lat": 51.4590702,
+        "lng": -0.2796975,
+        "score": 5
+      },
+      {
+        "name": "White Cube",
+        "lat": 51.4994478,
+        "lng": -0.0823295,
+        "score": 5
+      },
+      {
+        "name": "New West End Synagogue",
+        "lat": 51.5110933,
+        "lng": -0.1902071,
+        "score": 5
+      },
+      {
+        "name": "Royal Institute of British Architects",
+        "lat": 51.5212707,
+        "lng": -0.1448646,
+        "score": 5
+      },
+      {
+        "name": "St John's, Smith Square",
+        "lat": 51.4959743,
+        "lng": -0.1269996,
+        "score": 5
+      },
+      {
+        "name": "Sambourne House",
+        "lat": 51.5004846,
+        "lng": -0.1968743,
+        "score": 5
+      },
+      {
+        "name": "North Sheen (Fulham New) Cemetery",
+        "lat": 51.4714824,
+        "lng": -0.2784883,
+        "score": 5
+      },
+      {
+        "name": "St Magnus the Martyr",
+        "lat": 51.5093359,
+        "lng": -0.086209,
+        "score": 5
+      },
+      {
+        "name": "Emmanuel Church Forest Gate",
+        "lat": 51.546271,
+        "lng": 0.0264049,
+        "score": 5
+      },
+      {
+        "name": "Spa Green",
+        "lat": 51.5287095,
+        "lng": -0.1054428,
+        "score": 5
+      },
+      {
+        "name": "Cavendish Square",
+        "lat": 51.5165076,
+        "lng": -0.145032,
+        "score": 5
+      },
+      {
+        "name": "ArcelorMittal Orbit",
+        "lat": 51.5382851,
+        "lng": -0.0130051,
+        "score": 5
+      },
+      {
+        "name": "Saint Andrew Undershaft",
+        "lat": 51.5137685,
+        "lng": -0.0810647,
+        "score": 5
+      },
+      {
+        "name": "Fourth Plinth",
+        "lat": 51.5081789,
+        "lng": -0.128709,
+        "score": 5
+      },
+      {
+        "name": "House Mill",
+        "lat": 51.5274181,
+        "lng": -0.0078504,
+        "score": 5
+      },
+      {
+        "name": "Finsbury Estate",
+        "lat": 51.526491,
+        "lng": -0.1059425,
+        "score": 5
+      },
+      {
+        "name": "The City Temple",
+        "lat": 51.5172069,
+        "lng": -0.1060739,
+        "score": 5
+      },
+      {
+        "name": "Prince Charles Cinema",
+        "lat": 51.5114935,
+        "lng": -0.1301247,
+        "score": 5
+      },
+      {
+        "name": "Methodist Central Hall",
+        "lat": 51.5000101,
+        "lng": -0.1300439,
+        "score": 5
+      },
+      {
+        "name": "Eglwys Jewin Church",
+        "lat": 51.5216692,
+        "lng": -0.0951977,
+        "score": 5
+      },
+      {
+        "name": "Churchill War Rooms",
+        "lat": 51.5022134,
+        "lng": -0.1292483,
+        "score": 5
+      },
+      {
+        "name": "Cabot Square",
+        "lat": 51.5053107,
+        "lng": -0.0228593,
+        "score": 5
+      },
+      {
+        "name": "Bricklayers Arms Roundabout",
+        "lat": 51.4944156,
+        "lng": -0.0856514,
+        "score": 5
+      },
+      {
+        "name": "Saint John the Baptist Church, Hoxton",
+        "lat": 51.5305348,
+        "lng": -0.0835188,
+        "score": 5
+      },
+      {
+        "name": "Jewish Burial Ground",
+        "lat": 51.5478581,
+        "lng": -0.0795821,
+        "score": 5
+      },
+      {
+        "name": "Stave Hill",
+        "lat": 51.5010897,
+        "lng": -0.0404578,
+        "score": 5
+      },
+      {
+        "name": "Bunhill Fields",
+        "lat": 51.5235065,
+        "lng": -0.0887151,
+        "score": 5
+      },
+      {
+        "name": "All Hallows Staining",
+        "lat": 51.5115089,
+        "lng": -0.0803425,
+        "score": 5
+      },
+      {
+        "name": "St Patrick's Church, Soho Square",
+        "lat": 51.5154699,
+        "lng": -0.1311663,
+        "score": 5
+      },
+      {
+        "name": "Chisenhale Art Place",
+        "lat": 51.5330577,
+        "lng": -0.0397096,
+        "score": 5
+      },
+      {
+        "name": "Camden Arts Centre",
+        "lat": 51.5511852,
+        "lng": -0.1834845,
+        "score": 5
       }
     ]
   },
   "victorian": {
-    "count": 29,
+    "count": 307,
     "name": "Victorian Era",
     "icon": "\ud83c\udfa9",
     "color": "#EC4899",
@@ -2394,6 +7278,1032 @@
         "lat": 51.4888746,
         "lng": -0.1101789,
         "score": 50
+      },
+      {
+        "name": "Michael Faraday Memorial substation",
+        "lat": 51.4951062,
+        "lng": -0.1006375,
+        "score": 35
+      },
+      {
+        "name": "Parliament Square",
+        "lat": 51.5006259,
+        "lng": -0.126826,
+        "score": 35
+      },
+      {
+        "name": "Memorial to the Great Exhibition",
+        "lat": 51.5003933,
+        "lng": -0.1772832,
+        "score": 35
+      },
+      {
+        "name": "The Albert Memorial",
+        "lat": 51.5023845,
+        "lng": -0.1776744,
+        "score": 35
+      },
+      {
+        "name": "Victoria Memorial",
+        "lat": 51.5018399,
+        "lng": -0.1405865,
+        "score": 35
+      },
+      {
+        "name": "Shaftesbury Memorial Fountain",
+        "lat": 51.5098881,
+        "lng": -0.1344742,
+        "score": 35
+      },
+      {
+        "name": "London and North Western Railway War Memorial",
+        "lat": 51.5272435,
+        "lng": -0.1325382,
+        "score": 35
+      },
+      {
+        "name": "Lancaster Gate Memorial Cross",
+        "lat": 51.5115009,
+        "lng": -0.1800953,
+        "score": 35
+      },
+      {
+        "name": "Heminge & Condell memorial",
+        "lat": 51.5163813,
+        "lng": -0.0930327,
+        "score": 35
+      },
+      {
+        "name": "Imperial Camel Corps Memorial",
+        "lat": 51.5085112,
+        "lng": -0.1217869,
+        "score": 35
+      },
+      {
+        "name": "John F. Kennedy Memorial",
+        "lat": 51.5238903,
+        "lng": -0.1446216,
+        "score": 35
+      },
+      {
+        "name": "Great Western Railway War Memorial",
+        "lat": 51.5169364,
+        "lng": -0.1782233,
+        "score": 35
+      },
+      {
+        "name": "Silvertown War Memorial",
+        "lat": 51.499443,
+        "lng": 0.0276983,
+        "score": 35
+      },
+      {
+        "name": "Memorial to the Siege of C\u00e1diz",
+        "lat": 51.504214,
+        "lng": -0.1272915,
+        "score": 35
+      },
+      {
+        "name": "Statue of Herbert Kitchener",
+        "lat": 51.5038752,
+        "lng": -0.1279914,
+        "score": 35
+      },
+      {
+        "name": "Equestrian statue \"Physical Energy\"",
+        "lat": 51.5067642,
+        "lng": -0.1783174,
+        "score": 35
+      },
+      {
+        "name": "Queen Eleanor Memorial Cross",
+        "lat": 51.5084396,
+        "lng": -0.1252942,
+        "score": 35
+      },
+      {
+        "name": "Park Square Gardens",
+        "lat": 51.5244103,
+        "lng": -0.1468696,
+        "score": 30
+      },
+      {
+        "name": "Red Lion Square Gardens",
+        "lat": 51.5191892,
+        "lng": -0.1188966,
+        "score": 30
+      },
+      {
+        "name": "Bloomsbury Square Gardens",
+        "lat": 51.5189192,
+        "lng": -0.1228238,
+        "score": 30
+      },
+      {
+        "name": "Lowndes Square Gardens",
+        "lat": 51.5003981,
+        "lng": -0.1585234,
+        "score": 30
+      },
+      {
+        "name": "Knightsbridge",
+        "lat": 51.5008444,
+        "lng": -0.166965,
+        "score": 30
+      },
+      {
+        "name": "Lonsdale Square Garden",
+        "lat": 51.5396068,
+        "lng": -0.1082045,
+        "score": 30
+      },
+      {
+        "name": "Leinster Square Gardens",
+        "lat": 51.5138951,
+        "lng": -0.1925415,
+        "score": 30
+      },
+      {
+        "name": "Mecklenburgh Square Gardens",
+        "lat": 51.5250986,
+        "lng": -0.1187146,
+        "score": 30
+      },
+      {
+        "name": "Thurloe Square Garden",
+        "lat": 51.4950006,
+        "lng": -0.1717137,
+        "score": 30
+      },
+      {
+        "name": "Brockwell Park",
+        "lat": 51.4505405,
+        "lng": -0.1068653,
+        "score": 25
+      },
+      {
+        "name": "Hendon Park",
+        "lat": 51.5811287,
+        "lng": -0.2216207,
+        "score": 25
+      },
+      {
+        "name": "Mountsfield Park",
+        "lat": 51.4474451,
+        "lng": -0.0093265,
+        "score": 25
+      },
+      {
+        "name": "Finsbury Park",
+        "lat": 51.5702554,
+        "lng": -0.1010473,
+        "score": 25
+      },
+      {
+        "name": "Wimbledon Park",
+        "lat": 51.4382637,
+        "lng": -0.2057571,
+        "score": 25
+      },
+      {
+        "name": "Stationers Park",
+        "lat": 51.5792895,
+        "lng": -0.1122109,
+        "score": 25
+      },
+      {
+        "name": "Hurlingham Park",
+        "lat": 51.4690524,
+        "lng": -0.2021224,
+        "score": 25
+      },
+      {
+        "name": "Vauxhall Pleasure Gardens",
+        "lat": 51.4874704,
+        "lng": -0.1207242,
+        "score": 25
+      },
+      {
+        "name": "Whitehall Garden",
+        "lat": 51.5039218,
+        "lng": -0.1239099,
+        "score": 25
+      },
+      {
+        "name": "Island Gardens",
+        "lat": 51.4870191,
+        "lng": -0.0080626,
+        "score": 25
+      },
+      {
+        "name": "Deptford Park",
+        "lat": 51.4865068,
+        "lng": -0.0392458,
+        "score": 25
+      },
+      {
+        "name": "Dulwich Park",
+        "lat": 51.4455239,
+        "lng": -0.0786786,
+        "score": 25
+      },
+      {
+        "name": "Wanstead Park",
+        "lat": 51.5679663,
+        "lng": 0.0386568,
+        "score": 25
+      },
+      {
+        "name": "Holland Park",
+        "lat": 51.5027819,
+        "lng": -0.2031275,
+        "score": 25
+      },
+      {
+        "name": "Chelsea Physic Garden",
+        "lat": 51.4846484,
+        "lng": -0.1621613,
+        "score": 25
+      },
+      {
+        "name": "Ravenscourt Park",
+        "lat": 51.4970749,
+        "lng": -0.2394476,
+        "score": 25
+      },
+      {
+        "name": "Burgess Park",
+        "lat": 51.4836533,
+        "lng": -0.0841817,
+        "score": 25
+      },
+      {
+        "name": "Gunnersbury Park",
+        "lat": 51.4963715,
+        "lng": -0.2908795,
+        "score": 25
+      },
+      {
+        "name": "Brookmill Park",
+        "lat": 51.4702611,
+        "lng": -0.0198315,
+        "score": 25
+      },
+      {
+        "name": "Folkestone Gardens",
+        "lat": 51.4834188,
+        "lng": -0.0399309,
+        "score": 25
+      },
+      {
+        "name": "Brimmington Park",
+        "lat": 51.4780794,
+        "lng": -0.0565245,
+        "score": 25
+      },
+      {
+        "name": "Newbury Park",
+        "lat": 51.5758531,
+        "lng": 0.0922634,
+        "score": 25
+      },
+      {
+        "name": "Lillington Gardens Estate",
+        "lat": 51.4905262,
+        "lng": -0.1352019,
+        "score": 25
+      },
+      {
+        "name": "Finsbury Park Mosque",
+        "lat": 51.5635767,
+        "lng": -0.1056814,
+        "score": 25
+      },
+      {
+        "name": "St Luke's, Redcliffe Gardens",
+        "lat": 51.4877244,
+        "lng": -0.1893794,
+        "score": 25
+      },
+      {
+        "name": "Potters Fields Park",
+        "lat": 51.5041607,
+        "lng": -0.078101,
+        "score": 25
+      },
+      {
+        "name": "Hyde Park",
+        "lat": 51.5074147,
+        "lng": -0.1630518,
+        "score": 25
+      },
+      {
+        "name": "St. James's Park",
+        "lat": 51.5031135,
+        "lng": -0.1344197,
+        "score": 25
+      },
+      {
+        "name": "Cartwright Gardens",
+        "lat": 51.5268593,
+        "lng": -0.1267283,
+        "score": 25
+      },
+      {
+        "name": "Altab Ali Park",
+        "lat": 51.5161873,
+        "lng": -0.0685052,
+        "score": 25
+      },
+      {
+        "name": "Churchill Gardens Estate",
+        "lat": 51.4863073,
+        "lng": -0.1415312,
+        "score": 25
+      },
+      {
+        "name": "Belsize Park",
+        "lat": 51.5473926,
+        "lng": -0.1683005,
+        "score": 25
+      },
+      {
+        "name": "Tufnell Park",
+        "lat": 51.5559163,
+        "lng": -0.139113,
+        "score": 25
+      },
+      {
+        "name": "Brondesbury Park",
+        "lat": 51.5396558,
+        "lng": -0.2190292,
+        "score": 25
+      },
+      {
+        "name": "Dartmouth Park",
+        "lat": 51.5592533,
+        "lng": -0.1441412,
+        "score": 25
+      },
+      {
+        "name": "Kensington Town Hall",
+        "lat": 51.5021038,
+        "lng": -0.1951896,
+        "score": 5
+      },
+      {
+        "name": "Clapham Common",
+        "lat": 51.4581026,
+        "lng": -0.1502973,
+        "score": 5
+      },
+      {
+        "name": "Spa Fields",
+        "lat": 51.5255681,
+        "lng": -0.1074384,
+        "score": 5
+      },
+      {
+        "name": "Royal Courts of Justice",
+        "lat": 51.5142221,
+        "lng": -0.1130412,
+        "score": 5
+      },
+      {
+        "name": "Blackheath",
+        "lat": 51.4720675,
+        "lng": 0.002614,
+        "score": 5
+      },
+      {
+        "name": "Stoke Newington Common",
+        "lat": 51.5614735,
+        "lng": -0.0697128,
+        "score": 5
+      },
+      {
+        "name": "Russell Square",
+        "lat": 51.5216943,
+        "lng": -0.126069,
+        "score": 5
+      },
+      {
+        "name": "Burlington House",
+        "lat": 51.5090014,
+        "lng": -0.1394091,
+        "score": 5
+      },
+      {
+        "name": "Lincoln's Inn",
+        "lat": 51.5170075,
+        "lng": -0.1144526,
+        "score": 5
+      },
+      {
+        "name": "Parsons Green",
+        "lat": 51.4735096,
+        "lng": -0.1994916,
+        "score": 5
+      },
+      {
+        "name": "Myatt's Fields",
+        "lat": 51.4736932,
+        "lng": -0.10351,
+        "score": 5
+      },
+      {
+        "name": "Cecil Court",
+        "lat": 51.5107273,
+        "lng": -0.1276572,
+        "score": 5
+      },
+      {
+        "name": "Eaton Square",
+        "lat": 51.4958611,
+        "lng": -0.1517075,
+        "score": 5
+      },
+      {
+        "name": "London Fields",
+        "lat": 51.5405754,
+        "lng": -0.0604479,
+        "score": 5
+      },
+      {
+        "name": "Blythe Hill Fields",
+        "lat": 51.446963,
+        "lng": -0.0353013,
+        "score": 5
+      },
+      {
+        "name": "Cleveland Square",
+        "lat": 51.5146618,
+        "lng": -0.1823516,
+        "score": 5
+      },
+      {
+        "name": "Hoxton Square",
+        "lat": 51.5277265,
+        "lng": -0.0812148,
+        "score": 5
+      },
+      {
+        "name": "Royal Festival Hall",
+        "lat": 51.5058217,
+        "lng": -0.1167845,
+        "score": 5
+      },
+      {
+        "name": "Chiswick House",
+        "lat": 51.4838165,
+        "lng": -0.2585421,
+        "score": 5
+      },
+      {
+        "name": "Little Dean's Yard",
+        "lat": 51.4984339,
+        "lng": -0.1279376,
+        "score": 5
+      },
+      {
+        "name": "Ladywell Fields",
+        "lat": 51.4511743,
+        "lng": -0.0230598,
+        "score": 5
+      },
+      {
+        "name": "Young V&A",
+        "lat": 51.5290596,
+        "lng": -0.0548708,
+        "score": 5
+      },
+      {
+        "name": "Somers Town",
+        "lat": 51.5314293,
+        "lng": -0.1323592,
+        "score": 5
+      },
+      {
+        "name": "Granary Square",
+        "lat": 51.5352711,
+        "lng": -0.1253303,
+        "score": 5
+      },
+      {
+        "name": "Queen's House",
+        "lat": 51.4811879,
+        "lng": -0.0037479,
+        "score": 5
+      },
+      {
+        "name": "Saint Agnes Church",
+        "lat": 51.4832648,
+        "lng": -0.1066429,
+        "score": 5
+      },
+      {
+        "name": "No 1 Gasholder",
+        "lat": 51.4851488,
+        "lng": -0.1140223,
+        "score": 5
+      },
+      {
+        "name": "Thornhill Square",
+        "lat": 51.5401583,
+        "lng": -0.1152467,
+        "score": 5
+      },
+      {
+        "name": "Wormwood Scrubs",
+        "lat": 51.5214036,
+        "lng": -0.2397466,
+        "score": 5
+      },
+      {
+        "name": "East Greenwich Pleasaunce",
+        "lat": 51.4846713,
+        "lng": 0.0137518,
+        "score": 5
+      },
+      {
+        "name": "Turnham Green",
+        "lat": 51.4918662,
+        "lng": -0.2657567,
+        "score": 5
+      },
+      {
+        "name": "Hammersmith",
+        "lat": 51.4920377,
+        "lng": -0.2236401,
+        "score": 5
+      },
+      {
+        "name": "Barnes",
+        "lat": 51.4737383,
+        "lng": -0.2492849,
+        "score": 5
+      },
+      {
+        "name": "Pimlico",
+        "lat": 51.4889993,
+        "lng": -0.1398817,
+        "score": 5
+      },
+      {
+        "name": "Kew",
+        "lat": 51.4771443,
+        "lng": -0.2855658,
+        "score": 5
+      },
+      {
+        "name": "Brixton",
+        "lat": 51.4633914,
+        "lng": -0.1148023,
+        "score": 5
+      },
+      {
+        "name": "Powis Square",
+        "lat": 51.5161233,
+        "lng": -0.2013423,
+        "score": 5
+      },
+      {
+        "name": "Emslie Horniman Pleasance",
+        "lat": 51.5251301,
+        "lng": -0.2092382,
+        "score": 5
+      },
+      {
+        "name": "St. George's Square",
+        "lat": 51.4870369,
+        "lng": -0.1345834,
+        "score": 5
+      },
+      {
+        "name": "Onslow Square",
+        "lat": 51.4923735,
+        "lng": -0.1736315,
+        "score": 5
+      },
+      {
+        "name": "Saint Mary le Strand",
+        "lat": 51.5121899,
+        "lng": -0.1168414,
+        "score": 5
+      },
+      {
+        "name": "Barking",
+        "lat": 51.5389922,
+        "lng": 0.0804245,
+        "score": 5
+      },
+      {
+        "name": "Upper Clapton",
+        "lat": 51.5668384,
+        "lng": -0.0605697,
+        "score": 5
+      },
+      {
+        "name": "Lower Clapton",
+        "lat": 51.5546565,
+        "lng": -0.0550912,
+        "score": 5
+      },
+      {
+        "name": "Gospel Oak",
+        "lat": 51.5536863,
+        "lng": -0.1517524,
+        "score": 5
+      },
+      {
+        "name": "Bethnal Green",
+        "lat": 51.5303456,
+        "lng": -0.0561633,
+        "score": 5
+      },
+      {
+        "name": "Dalston",
+        "lat": 51.543212,
+        "lng": -0.0760128,
+        "score": 5
+      },
+      {
+        "name": "Bloomsbury",
+        "lat": 51.5210963,
+        "lng": -0.1289635,
+        "score": 5
+      },
+      {
+        "name": "Bermondsey",
+        "lat": 51.4970125,
+        "lng": -0.063268,
+        "score": 5
+      },
+      {
+        "name": "Cubitt Town",
+        "lat": 51.4936677,
+        "lng": -0.0082433,
+        "score": 5
+      },
+      {
+        "name": "Isle of Dogs",
+        "lat": 51.4978447,
+        "lng": -0.0168854,
+        "score": 5
+      },
+      {
+        "name": "Bromley-by-Bow",
+        "lat": 51.5229529,
+        "lng": -0.0179722,
+        "score": 5
+      },
+      {
+        "name": "Stratford",
+        "lat": 51.5406878,
+        "lng": 0.0016208,
+        "score": 5
+      },
+      {
+        "name": "Leytonstone",
+        "lat": 51.5683955,
+        "lng": 0.0111704,
+        "score": 5
+      },
+      {
+        "name": "Willesden",
+        "lat": 51.5466216,
+        "lng": -0.2358661,
+        "score": 5
+      },
+      {
+        "name": "South Kensington",
+        "lat": 51.4955817,
+        "lng": -0.1831368,
+        "score": 5
+      },
+      {
+        "name": "Marylebone",
+        "lat": 51.5196374,
+        "lng": -0.1519627,
+        "score": 5
+      },
+      {
+        "name": "Kensington",
+        "lat": 51.4989948,
+        "lng": -0.1991229,
+        "score": 5
+      },
+      {
+        "name": "Paddington",
+        "lat": 51.5161629,
+        "lng": -0.1744856,
+        "score": 5
+      },
+      {
+        "name": "Maida Vale",
+        "lat": 51.527592,
+        "lng": -0.1905916,
+        "score": 5
+      },
+      {
+        "name": "De Beauvoir Town",
+        "lat": 51.5405639,
+        "lng": -0.0801312,
+        "score": 5
+      },
+      {
+        "name": "West Ham",
+        "lat": 51.5343383,
+        "lng": 0.0077868,
+        "score": 5
+      },
+      {
+        "name": "Becontree",
+        "lat": 51.5492654,
+        "lng": 0.1275378,
+        "score": 5
+      },
+      {
+        "name": "Vauxhall",
+        "lat": 51.4874834,
+        "lng": -0.1229297,
+        "score": 5
+      },
+      {
+        "name": "Lambeth",
+        "lat": 51.4952111,
+        "lng": -0.1163354,
+        "score": 5
+      },
+      {
+        "name": "Dulwich",
+        "lat": 51.4418786,
+        "lng": -0.0843244,
+        "score": 5
+      },
+      {
+        "name": "New Cross Gate",
+        "lat": 51.4746978,
+        "lng": -0.045284,
+        "score": 5
+      },
+      {
+        "name": "St Mary Magdalene",
+        "lat": 51.5483868,
+        "lng": -0.107913,
+        "score": 5
+      },
+      {
+        "name": "Union Chapel",
+        "lat": 51.5447652,
+        "lng": -0.1024392,
+        "score": 5
+      },
+      {
+        "name": "Barnsbury Square",
+        "lat": 51.5418484,
+        "lng": -0.1106703,
+        "score": 5
+      },
+      {
+        "name": "St Mary of Eton",
+        "lat": 51.5453885,
+        "lng": -0.0305915,
+        "score": 5
+      },
+      {
+        "name": "Madame Tussauds",
+        "lat": 51.5228224,
+        "lng": -0.1547768,
+        "score": 5
+      },
+      {
+        "name": "Herne Hill",
+        "lat": 51.4554407,
+        "lng": -0.1001002,
+        "score": 5
+      },
+      {
+        "name": "Nags Head Market",
+        "lat": 51.5582187,
+        "lng": -0.1180036,
+        "score": 5
+      },
+      {
+        "name": "Lincoln's Inn Fields",
+        "lat": 51.5162701,
+        "lng": -0.1165698,
+        "score": 5
+      },
+      {
+        "name": "St Mark's Churchyard",
+        "lat": 51.4813879,
+        "lng": -0.1119464,
+        "score": 5
+      },
+      {
+        "name": "St. Luke's",
+        "lat": 51.4896346,
+        "lng": -0.1693943,
+        "score": 5
+      },
+      {
+        "name": "Church of the Immaculate Conception",
+        "lat": 51.5094246,
+        "lng": -0.1491337,
+        "score": 5
+      },
+      {
+        "name": "Marble Arch",
+        "lat": 51.5131844,
+        "lng": -0.1589052,
+        "score": 5
+      },
+      {
+        "name": "St Mark's Church",
+        "lat": 51.5378713,
+        "lng": -0.1522108,
+        "score": 5
+      },
+      {
+        "name": "Boundary Estate",
+        "lat": 51.5259725,
+        "lng": -0.0747511,
+        "score": 5
+      },
+      {
+        "name": "Bow Quarter",
+        "lat": 51.5317209,
+        "lng": -0.0214875,
+        "score": 5
+      },
+      {
+        "name": "Ampthill Square Estate",
+        "lat": 51.5319892,
+        "lng": -0.1371213,
+        "score": 5
+      },
+      {
+        "name": "Newington Green Unitarian Church",
+        "lat": 51.5522543,
+        "lng": -0.0848672,
+        "score": 5
+      },
+      {
+        "name": "Saint John The Divine",
+        "lat": 51.4775601,
+        "lng": -0.1061617,
+        "score": 5
+      },
+      {
+        "name": "Saint James The Less",
+        "lat": 51.4907578,
+        "lng": -0.1352469,
+        "score": 5
+      },
+      {
+        "name": "St Stephen",
+        "lat": 51.4951813,
+        "lng": -0.1356112,
+        "score": 5
+      },
+      {
+        "name": "St Matthew's Church Bayswater",
+        "lat": 51.511655,
+        "lng": -0.1911678,
+        "score": 5
+      },
+      {
+        "name": "St. John's Church",
+        "lat": 51.5106354,
+        "lng": -0.2057641,
+        "score": 5
+      },
+      {
+        "name": "St Peter's",
+        "lat": 51.5127162,
+        "lng": -0.2026834,
+        "score": 5
+      },
+      {
+        "name": "St Jude's",
+        "lat": 51.4934141,
+        "lng": -0.1875103,
+        "score": 5
+      },
+      {
+        "name": "West London Synagogue of British Jews",
+        "lat": 51.5154695,
+        "lng": -0.1619423,
+        "score": 5
+      },
+      {
+        "name": "The Church of the Annunciation",
+        "lat": 51.5144353,
+        "lng": -0.1585741,
+        "score": 5
+      },
+      {
+        "name": "The Wallace Collection",
+        "lat": 51.5175057,
+        "lng": -0.1530444,
+        "score": 5
+      },
+      {
+        "name": "Chelsea Old Church",
+        "lat": 51.4830423,
+        "lng": -0.1710049,
+        "score": 5
+      },
+      {
+        "name": "The Church of Our Most Holy Redeemer and St Thomas More",
+        "lat": 51.4845014,
+        "lng": -0.1699173,
+        "score": 5
+      },
+      {
+        "name": "Essex Unitarian Church",
+        "lat": 51.5088658,
+        "lng": -0.1935871,
+        "score": 5
+      },
+      {
+        "name": "Most Precious Blood",
+        "lat": 51.5041042,
+        "lng": -0.0940189,
+        "score": 5
+      },
+      {
+        "name": "Bourne Estate",
+        "lat": 51.5209529,
+        "lng": -0.111086,
+        "score": 5
+      },
+      {
+        "name": "St James's Church",
+        "lat": 51.5086597,
+        "lng": -0.1366398,
+        "score": 5
+      },
+      {
+        "name": "The Borough Welsh Congregational Chapel",
+        "lat": 51.5029298,
+        "lng": -0.0967589,
+        "score": 5
+      },
+      {
+        "name": "East Sheen Common",
+        "lat": 51.4590702,
+        "lng": -0.2796975,
+        "score": 5
+      },
+      {
+        "name": "St Mary Magdalen",
+        "lat": 51.498378,
+        "lng": -0.0808033,
+        "score": 5
+      },
+      {
+        "name": "St James Norlands",
+        "lat": 51.5082601,
+        "lng": -0.2131581,
+        "score": 5
+      },
+      {
+        "name": "St Stephen Walbrook",
+        "lat": 51.5126211,
+        "lng": -0.0898287,
+        "score": 5
+      },
+      {
+        "name": "St John on Bethnal Green",
+        "lat": 51.5275828,
+        "lng": -0.0548983,
+        "score": 5
+      },
+      {
+        "name": "Camden Town Hall",
+        "lat": 51.5290734,
+        "lng": -0.1253595,
+        "score": 5
+      },
+      {
+        "name": "New West End Synagogue",
+        "lat": 51.5110933,
+        "lng": -0.1902071,
+        "score": 5
+      },
+      {
+        "name": "St. Michael's Camden Town",
+        "lat": 51.5401518,
+        "lng": -0.1414936,
+        "score": 5
+      },
+      {
+        "name": "St Botolph's Aldgate",
+        "lat": 51.5140791,
+        "lng": -0.0763417,
+        "score": 5
       }
     ]
   }
