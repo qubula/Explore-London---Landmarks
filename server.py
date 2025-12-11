@@ -42,7 +42,7 @@ def build_google_maps_url(start: str, end: str, landmarks, travelmode: str = "wa
 async def show_form(request: Request):
     # Initial page load
     return templates.TemplateResponse(
-        "index_new.html",
+        "index.html",
         {
             "request": request,
             "start": "",
@@ -122,7 +122,7 @@ async def handle_form(
         "error_message": error_message,
     }
 
-    return templates.TemplateResponse("index_new.html", context)
+    return templates.TemplateResponse("index.html", context)
 
 
 from fastapi import Query
