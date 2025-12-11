@@ -22,12 +22,18 @@ def limit_landmarks_by_duration(
     landmarks: list,
     duration_min: float,
     max_per_minute: float = 0.5,
+    tour_type: str = "all",
 ) -> list:
     """
     Thin down the list of landmarks so that we show at most
     `max_per_minute` landmarks per minute of route.
 
-    Example: duration = 30 min, max_per_minute = 0.5  -> max 15 landmarks.
+    For themed tours (tour_type != "all"), uses stricter fixed limits:
+    - <15 min: 3 landmarks max
+    - 15-30 min: 4 landmarks max
+    - >30 min: 5 landmarks max
+
+    For "all" tours, uses dynamic calculation (max_per_minute).
 
     We keep the most important landmarks (using score_grand_landmark)
     but preserve their order along the route.
@@ -35,8 +41,18 @@ def limit_landmarks_by_duration(
     if not landmarks or duration_min <= 0:
         return landmarks
 
-    # Maximum number allowed
-    max_count = max(1, int(duration_min * max_per_minute))
+    # Determine maximum count based on tour type
+    if tour_type == "all":
+        # Dynamic calculation for "all" tours
+        max_count = max(1, int(duration_min * max_per_minute))
+    else:
+        # Fixed limits for themed tours (stricter quality control)
+        if duration_min < 15:
+            max_count = 3
+        elif duration_min < 30:
+            max_count = 4
+        else:
+            max_count = 5
 
     # Already under the limit? Nothing to do.
     if len(landmarks) <= max_count:
@@ -122,13 +138,18 @@ def get_fastest_route(start: str, end: str):
 # -----------------------------------------------------
 # 2. Scenic Auto – choose best alternative route
 # -----------------------------------------------------
-def scenic_auto_route(start: str, end: str):
+def scenic_auto_route(start: str, end: str, tour_type: str = "all"):
     """
     Evaluate Google's alternative routes and pick the one
     with the highest weighted grand-landmark visibility score.
 
     Also respects a maximum detour factor so we don't pick
     insanely long routes compared to the fastest option.
+
+    Args:
+        start: Starting location
+        end: Ending location
+        tour_type: Tour type filter (e.g., "architecture", "historical", "all")
 
     Returns: (best_points, fastest_sec, scenic_sec)
     """
@@ -161,7 +182,7 @@ def scenic_auto_route(start: str, end: str):
     best_scenic_sec = None
     best_score = -1
 
-    grand = list_grand_landmarks()
+    grand = list_grand_landmarks(tour_type=tour_type)
 
     for route in routes:
         poly = route["overview_polyline"]["points"]
@@ -201,12 +222,17 @@ def scenic_auto_route(start: str, end: str):
 # -----------------------------------------------------
 # 3. Scenic Select – user-chosen grand landmarks
 # -----------------------------------------------------
-def scenic_select_route(start: str, end: str, chosen_landmarks):
+def scenic_select_route(start: str, end: str, chosen_landmarks, tour_type: str = "all"):
     """
     Build a scenic route:
         start → lm1 → lm2 → ... → end
 
-    chosen_landmarks is a LIST OF LANDMARK DICTS.
+    Args:
+        start: Starting location
+        end: Ending location
+        chosen_landmarks: LIST OF LANDMARK DICTS selected by user
+        tour_type: Tour type (used for metadata, routing is via chosen landmarks)
+
     Returns: (points, fastest_sec, scenic_sec)
     """
     # Baseline fastest duration
@@ -244,11 +270,30 @@ def scenic_select_route(start: str, end: str, chosen_landmarks):
 # -----------------------------------------------------
 # 4. Landmark extraction for any route
 # -----------------------------------------------------
-def extract_landmarks(route_points):
-    """Return all visible landmarks for a given polyline route."""
+def extract_landmarks(route_points, tour_type: str = "all"):
+    """
+    Return all visible landmarks for a given polyline route.
+
+    Args:
+        route_points: List of (lat, lon) tuples defining the route
+        tour_type: Tour type filter (e.g., "architecture", "historical", "all")
+
+    Returns:
+        List of landmark dicts with visibility and side information
+    """
+    from App.categorize_landmarks import get_landmarks_for_tour_type
+
+    # Get filtered landmarks by tour type
+    all_landmarks = list(landmarks())  # Lazy load all landmarks
+    if tour_type != "all":
+        filtered = get_landmarks_for_tour_type(tour_type, all_landmarks)
+        landmark_list = [lm[0] for lm in filtered]  # Extract landmark objects
+    else:
+        landmark_list = all_landmarks
+
     visible = []
 
-    for lm in landmarks():  # Lazy load landmarks
+    for lm in landmark_list:
         radius = get_visibility_radius(lm)
         idx, dist = closest_route_point_index(lm, route_points)
         if dist <= radius:
@@ -274,24 +319,28 @@ def extract_landmarks(route_points):
 # 5. The main API: plan_route()
 # -----------------------------------------------------
 
-def plan_route(start: str, end: str, mode: str, chosen_landmark_indexes=None):
+def plan_route(start: str, end: str, mode: str, chosen_landmark_indexes=None, tour_type: str = "all"):
     """
     The single clean API entry point.
-    mode:
-        "1" -> fastest
-        "2" -> scenic auto
-        "3" -> scenic select  (requires chosen_landmark_indexes)
-    Returns a structured dict for UI/CLI/GUI.
 
-    Output:
-    {
-        "mode": "...",
-        "fastest_eta": float_minutes,
-        "chosen_eta": float_minutes,
-        "difference": float_minutes,
-        "landmarks": [...],
-        "route_points": [...],
-    }
+    Args:
+        start: Starting location (address or coords)
+        end: Ending location (address or coords)
+        mode: Route mode ("1"=fastest, "2"=scenic auto, "3"=scenic select)
+        chosen_landmark_indexes: List of indexes for scenic select mode
+        tour_type: Tour type filter (e.g., "architecture", "historical", "all")
+
+    Returns:
+        Structured dict for UI/CLI/GUI:
+        {
+            "mode": "...",
+            "tour_type": "...",
+            "fastest_eta": float_minutes,
+            "chosen_eta": float_minutes,
+            "difference": float_minutes,
+            "landmarks": [...],
+            "route_points": [...],
+        }
     """
 
     # Always compute baseline first
@@ -305,7 +354,7 @@ def plan_route(start: str, end: str, mode: str, chosen_landmark_indexes=None):
 
     # Scenic Auto
     elif mode == "2":
-        scenic_points, _, scenic_sec = scenic_auto_route(start, end)
+        scenic_points, _, scenic_sec = scenic_auto_route(start, end, tour_type=tour_type)
         route_points = scenic_points
         actual_sec = scenic_sec
         mode_name = "Scenic Auto"
@@ -314,7 +363,7 @@ def plan_route(start: str, end: str, mode: str, chosen_landmark_indexes=None):
     elif mode == "3":
         # We expect chosen_landmark_indexes from the UI/CLI
         base_pts, _ = get_route_and_duration(start, end)
-        all_grand = grand_landmarks_near_route(base_pts)
+        all_grand = grand_landmarks_near_route(base_pts, tour_type=tour_type)
 
         chosen = [
             all_grand[i]
@@ -323,26 +372,27 @@ def plan_route(start: str, end: str, mode: str, chosen_landmark_indexes=None):
         ]
         chosen = chosen[:MAX_SCENIC_SELECT_CHOICES]
 
-        route_points, _, scenic_sec = scenic_select_route(start, end, chosen)
+        route_points, _, scenic_sec = scenic_select_route(start, end, chosen, tour_type=tour_type)
         actual_sec = scenic_sec
         mode_name = "Scenic Select"
 
     else:
         raise ValueError("Unknown mode")
 
-    # Landmarks along chosen route
-    lm_results = extract_landmarks(route_points)
+    # Landmarks along chosen route (filtered by tour type)
+    lm_results = extract_landmarks(route_points, tour_type=tour_type)
 
     # Final times in minutes
     fastest_min = baseline_fastest_sec / 60.0
     actual_min = actual_sec / 60.0
     diff_min = actual_min - fastest_min
 
-    # Limit landmark density based on route duration
-    lm_results = limit_landmarks_by_duration(lm_results, actual_min)
+    # Limit landmark density based on route duration and tour type
+    lm_results = limit_landmarks_by_duration(lm_results, actual_min, tour_type=tour_type)
 
     return {
         "mode": mode_name,
+        "tour_type": tour_type,
         "fastest_eta": fastest_min,
         "chosen_eta": actual_min,
         "difference": diff_min,

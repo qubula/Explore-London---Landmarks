@@ -79,11 +79,18 @@ def score_grand_landmark(lm):
 # -------------------------------------
 # 2. List all GRAND landmarks in the DB
 # -------------------------------------
-def list_grand_landmarks():
+def list_grand_landmarks(tour_type: str = "all"):
     """
     These are big, iconic landmarks that are worth detouring for.
     We detect them based on keywords in their names.
+
+    Args:
+        tour_type: Tour type filter (e.g., "architecture", "historical", "all")
+
+    Returns:
+        List of grand landmark dicts sorted by importance (score descending)
     """
+    from App.categorize_landmarks import get_landmarks_for_tour_type
     grand_keywords = [
         "museum",
         "cathedral",
@@ -102,8 +109,17 @@ def list_grand_landmarks():
 
     important_squares_lower = [s.lower() for s in IMPORTANT_SQUARES]
 
+    # Get all landmarks (will be lazy loaded)
+    all_landmarks = list(landmarks())
+
+    # Filter by tour type first
+    if tour_type != "all":
+        filtered = get_landmarks_for_tour_type(tour_type, all_landmarks)
+        all_landmarks = [lm[0] for lm in filtered]  # Extract landmark objects
+
+    # Then apply grand landmark filtering
     grand = []
-    for lm in landmarks():  # Lazy load landmarks
+    for lm in all_landmarks:
         raw_name = lm.get("name", "")
         name = raw_name.lower()
 
@@ -158,15 +174,25 @@ def grand_landmarks_near_route(
     route_points,
     max_items: int = MAX_GRAND_MENU_ITEMS,
     radius_m: float = GRAND_LANDMARK_RADIUS_M,
+    tour_type: str = "all",
 ):
     """
     Returns up to `max_items` grand landmarks that lie within `radius_m`
     of the given route.
 
+    Args:
+        route_points: List of (lat, lon) tuples defining the route
+        max_items: Maximum number of landmarks to return
+        radius_m: Visibility radius in meters
+        tour_type: Tour type filter (e.g., "architecture", "historical", "all")
+
+    Returns:
+        List of landmark dicts near the route, sorted by route position
+
     OPTIMIZATION: Uses geographic bounds pre-filtering to avoid checking
     all landmarks. Only landmarks within 1km of route bounds are considered.
     """
-    grand = list_grand_landmarks()
+    grand = list_grand_landmarks(tour_type=tour_type)
 
     # OPTIMIZATION: Calculate bounding box for quick filtering
     bounds = get_route_bounds(route_points, buffer_km=1.0)

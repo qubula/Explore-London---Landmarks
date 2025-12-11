@@ -65,6 +65,7 @@ async def handle_form(
     start: str = Form(...),
     end: str = Form(...),
     mode: str = Form(""),           # may be blank on first submit
+    tour_type: str = Form("all"),   # tour type selection
     scenic_choices: str = Form(""), # used only in Scenic Select step 2
 ):
     error_message = None
@@ -80,20 +81,20 @@ async def handle_form(
 
         # 1️⃣ Mode 1 (Fastest): Only compute fastest route
         if mode == "1":
-            result = plan_route(start, end, "1")
+            result = plan_route(start, end, "1", tour_type=tour_type)
             fastest = result  # For display
 
         # 2️⃣ Mode 2 (Scenic Auto): Compute fastest + scenic
         elif mode == "2":
-            fastest = plan_route(start, end, "1")
-            result = plan_route(start, end, "2")
+            fastest = plan_route(start, end, "1", tour_type=tour_type)
+            result = plan_route(start, end, "2", tour_type=tour_type)
             scenic_eta = result["chosen_eta"]
             scenic_diff = result["difference"]
 
         # 3️⃣ Mode 3 (Scenic Select): Compute fastest + find grand landmarks
         elif mode == "3":
-            fastest = plan_route(start, end, "1")
-            grand_all = grand_landmarks_near_route(fastest["route_points"])
+            fastest = plan_route(start, end, "1", tour_type=tour_type)
+            grand_all = grand_landmarks_near_route(fastest["route_points"], tour_type=tour_type)
             grand_list = grand_all[:MAX_GRAND_MENU_ITEMS]
 
             if not scenic_choices.strip():
@@ -111,13 +112,13 @@ async def handle_form(
                             indexes.append(idx)
 
                 indexes = indexes[:MAX_SCENIC_SELECT_CHOICES]
-                result = plan_route(start, end, "3", indexes)
+                result = plan_route(start, end, "3", indexes, tour_type=tour_type)
 
         # 4️⃣ No mode selected yet (initial submission): Compute fastest + scenic preview
         else:
             # First submission: show route times so user can choose a mode
-            fastest = plan_route(start, end, "1")
-            result_scenic = plan_route(start, end, "2")
+            fastest = plan_route(start, end, "1", tour_type=tour_type)
+            result_scenic = plan_route(start, end, "2", tour_type=tour_type)
             scenic_eta = result_scenic["chosen_eta"]
             scenic_diff = result_scenic["difference"]
 
@@ -173,6 +174,7 @@ async def track_page(
     start: str = Query(...),
     end: str = Query(...),
     mode: str = Query("1"),
+    tour_type: str = Query("all"),
 ):
     """
     This function runs when the user opens /track in the browser.
@@ -182,12 +184,12 @@ async def track_page(
 
     # Recompute route depending on the mode (same logic as homepage)
     if mode == "1":
-        result = plan_route(start, end, "1")
+        result = plan_route(start, end, "1", tour_type=tour_type)
     elif mode == "2":
-        result = plan_route(start, end, "2")
+        result = plan_route(start, end, "2", tour_type=tour_type)
     else:
         # For now, scenic select reuses scenic auto path
-        result = plan_route(start, end, "2")
+        result = plan_route(start, end, "2", tour_type=tour_type)
 
     # Landmarks along the route
     landmarks = result["landmarks"]

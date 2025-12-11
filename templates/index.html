@@ -45,6 +45,23 @@ Scenic Auto: {{ "%.1f" % scenic_eta }} min ({{ "%+.1f" % scenic_diff }} min vs f
 Scenic Auto: (unavailable)
 {% endif %}
 
+---------------------------------------
+TOUR TYPE:
+---------------------------------------
+Select a theme (or choose "All Landmarks"):
+
+<select name="tour_type" size="9" style="width: 300px; font-family: monospace;">
+<option value="all" selected>🗺️  All Landmarks (Classic Alfie)</option>
+<option value="architecture">🏛️  Architecture Tour</option>
+<option value="historical">📜 Historical Tour</option>
+<option value="royal">👑 Royal Tour</option>
+<option value="museums_galleries">🎨 Museums & Galleries</option>
+<option value="parks_gardens">🌳 Parks & Gardens</option>
+<option value="religious">⛪ Religious Heritage</option>
+<option value="modern">🏙️  Modern London</option>
+<option value="victorian">🎩 Victorian Era</option>
+</select>
+
 Choose a mode:
 
 (1) Fastest
@@ -86,6 +103,7 @@ Later, if you pick mode 3, you'll see
 a list of grand landmarks to choose from.
 ---------------------------------------
 </pre>
+        <input type="hidden" name="tour_type" value="all" />
         {% endif %}
 
         <button type="submit">[ SUBMIT ]</button>
@@ -97,6 +115,9 @@ a list of grand landmarks to choose from.
             ROUTE SUMMARY
 =======================================
 Mode:       {{ result["mode"] }}
+{% if result.get("tour_type") and result["tour_type"] != "all" %}
+Tour Type:  {{ result["tour_type"] | replace("_", " ") | title }}
+{% endif %}
 Fastest:    {{ "%.1f" % fastest["fastest_eta"] }} min
 Chosen:     {{ "%.1f" % result["chosen_eta"] }} min
 Difference: {{ "%+.1f" % result["difference"] }} min
@@ -131,7 +152,7 @@ Difference: {{ "%+.1f" % result["difference"] }} min
     </pre>
 
     <p>
-        <a href="/track?start={{ start | urlencode }}&end={{ end | urlencode }}&mode={{ mode }}">[ START LIVE TOUR ]</a>
+        <a href="/track?start={{ start | urlencode }}&end={{ end | urlencode }}&mode={{ mode }}&tour_type={{ result.get('tour_type', 'all') }}">[ START LIVE TOUR ]</a>
     </p>
 
     {% endif %}

@@ -126,3 +126,35 @@ BIG_NAME_BOOST = {
     "the rolling bridge": 2,
     "fashion and textile museum": 0,
 }
+
+# -----------------------------------------------------------------------------
+# TOUR TYPE SETTINGS
+# -----------------------------------------------------------------------------
+
+# Maximum landmarks per journey for each tour type
+# For "all" tours: uses dynamic calculation (0.5 landmarks/minute)
+# For themed tours: uses fixed limits for quality control
+TOUR_TYPE_MAX_LANDMARKS = {
+    "all": None,  # Dynamic calculation
+    "architecture": 5,
+    "historical": 4,
+    "royal": 4,
+    "museums_galleries": 5,
+    "parks_gardens": 4,
+    "religious": 4,
+    "modern": 4,
+    "victorian": 4
+}
+
+# UI colors for each tour type (for map markers, badges, etc.)
+TOUR_TYPE_COLORS = {
+    "all": "#6B7280",           # Gray
+    "architecture": "#EF4444",  # Red
+    "historical": "#8B4513",    # Saddle Brown
+    "royal": "#9333EA",         # Purple
+    "museums_galleries": "#06B6D4",  # Cyan
+    "parks_gardens": "#10B981", # Green
+    "religious": "#F59E0B",     # Amber
+    "modern": "#3B82F6",        # Blue
+    "victorian": "#EC4899"      # Pink
+}
