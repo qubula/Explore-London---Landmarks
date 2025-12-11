@@ -39,7 +39,7 @@ TOUR_TYPES = {
             "museum", "gallery", "park", "garden", "square",
             "theatre", "playhouse", "theater"  # Exclude performance venues
         ],
-        "min_score": 50,  # Raised from 30 for higher quality
+        "min_score": 0,  # Keyword filtering only (was 30 for higher quality
         "boost_keywords": {
             "tower bridge": 100,
             "st paul": 90,
@@ -67,7 +67,7 @@ TOUR_TYPES = {
             "modern", "contemporary", "new", "2000", "2010", "2020",
             "theatre", "playhouse", "theater"  # Exclude performance venues
         ],
-        "min_score": 45,  # Raised from 25 for higher quality
+        "min_score": 0,  # Keyword filtering only (was 25 for higher quality
         "boost_keywords": {
             "british museum": 100,
             "tower of london": 95,
@@ -93,7 +93,7 @@ TOUR_TYPES = {
         "exclude_keywords": [
             "theatre", "playhouse", "theater"  # Exclude performance venues
         ],
-        "min_score": 55,  # Raised from 40 for higher quality
+        "min_score": 0,  # Keyword filtering only (was 40 for higher quality
         "boost_keywords": {
             "buckingham palace": 100,
             "kensington palace": 90,
@@ -120,7 +120,7 @@ TOUR_TYPES = {
             "memorial", "monument", "war",
             "theatre", "playhouse", "theater"  # Exclude performance venues
         ],
-        "min_score": 50,  # Raised from 35 for higher quality
+        "min_score": 0,  # Keyword filtering only (was 35 for higher quality
         "boost_keywords": {
             "british museum": 100,
             "national gallery": 95,
@@ -147,7 +147,7 @@ TOUR_TYPES = {
             "museum", "palace", "bridge", "gallery",
             "theatre", "playhouse", "theater"  # Exclude performance venues
         ],
-        "min_score": 40,  # Raised from 20 for higher quality
+        "min_score": 0,  # Keyword filtering only (was 20 for higher quality
         "boost_keywords": {
             "hyde park": 85,
             "kew gardens": 90,
@@ -175,7 +175,7 @@ TOUR_TYPES = {
             "theatre", "playhouse", "theater",  # Exclude performance venues
             "palace theatre", "victoria palace"  # Specific exclusions
         ],
-        "min_score": 50,  # Raised from 30 for higher quality
+        "min_score": 0,  # Keyword filtering only (was 30 for higher quality
         "boost_keywords": {
             "st paul's cathedral": 100,
             "westminster abbey": 100,
@@ -200,7 +200,7 @@ TOUR_TYPES = {
             "victorian", "georgian", "medieval", "tudor", "19th century", "1800",
             "theatre", "playhouse", "theater"  # Exclude performance venues unless explicitly modern
         ],
-        "min_score": 45,  # Raised from 25 for higher quality
+        "min_score": 0,  # Keyword filtering only (was 25 for higher quality
         "boost_keywords": {
             "the shard": 100,
             "london eye": 95,
@@ -226,7 +226,7 @@ TOUR_TYPES = {
             "modern", "contemporary", "2000", "2010", "2020", "millennium",
             "theatre", "playhouse", "theater"  # Exclude performance venues unless explicitly Victorian
         ],
-        "min_score": 45,  # Raised from 25 for higher quality
+        "min_score": 0,  # Keyword filtering only (was 25 for higher quality
         "boost_keywords": {
             "tower bridge": 95,
             "victoria and albert museum": 90,
