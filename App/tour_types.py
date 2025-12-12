@@ -31,12 +31,15 @@ TOUR_TYPES = {
         "icon": "🏛️",
         "keywords": [
             "bridge", "tower", "building", "palace", "cathedral", "church",
-            "abbey", "basilica", "arch", "gate", "hall",
-            "opera house", "station", "shard", "gherkin", "walkie talkie",
-            "skyscraper", "monument", "dome", "spire", "clocktower"
+            "abbey", "basilica", "archway", "gate", "hall",
+            "opera house", "railway station", "train station",
+            "shard", "gherkin", "walkie talkie",
+            "skyscraper", "monument", "dome", "spire", "clocktower",
+            "estate", "housing estate", "modernist", "brutalist", "georgian", "tudor"
         ],
         "exclude_keywords": [
-            "museum", "gallery", "park", "garden", "square",
+            "museum", "gallery",
+            # Don't exclude "park" - too broad (excludes estates near parks)
             "theatre", "playhouse", "theater"  # Exclude performance venues
         ],
         "min_score": 10,  # Small pool (76 landmarks) - light filtering for quality
@@ -48,7 +51,14 @@ TOUR_TYPES = {
             "shard": 80,
             "elizabeth tower": 95,
             "gherkin": 75,
-            "walkie talkie": 70
+            "walkie talkie": 70,
+            # Boost for housing estates and architectural styles
+            "estate": 10,
+            "housing": 5,
+            "modernist": 10,
+            "brutalist": 10,
+            "georgian": 10,
+            "tudor": 10
         },
         "color": "#EF4444"
     },
@@ -59,12 +69,13 @@ TOUR_TYPES = {
         "icon": "📜",
         "keywords": [
             "museum", "memorial", "monument", "castle", "fort", "tower",
-            "historic", "heritage", "ancient", "old", "battle", "war",
+            "historic", "heritage", "ancient", "historic building", "ancient site",
+            "battle", "war memorial",
             "imperial", "national", "british", "london museum", "history",
             "churchill", "war rooms", "bunker"
         ],
         "exclude_keywords": [
-            "modern", "contemporary", "new", "2000", "2010", "2020",
+            "modern architecture", "contemporary architecture",
             "theatre", "playhouse", "theater"  # Exclude performance venues
         ],
         "min_score": 15,  # Medium pool (200 landmarks) - moderate filtering for quality
@@ -193,11 +204,12 @@ TOUR_TYPES = {
         "keywords": [
             "shard", "gherkin", "walkie talkie", "cheese grater",
             "canary wharf", "millennium", "london eye", "o2", "wembley",
-            "modern", "contemporary", "2000", "2010", "2020",
-            "skyscraper", "high-rise", "new", "recent"
+            "modern architecture", "contemporary architecture",
+            "2000s", "2010s", "2020s",
+            "skyscraper", "high-rise"
         ],
         "exclude_keywords": [
-            "victorian", "georgian", "medieval", "tudor", "19th century", "1800",
+            "victorian", "georgian", "medieval", "tudor", "19th century",
             "theatre", "playhouse", "theater"  # Exclude performance venues unless explicitly modern
         ],
         "min_score": 5,  # Small pool (41 landmarks) - minimal filtering to preserve modern sites
@@ -209,6 +221,8 @@ TOUR_TYPES = {
             "gherkin": 85,
             "canary wharf": 75
         },
+        "era_range": (2000, 2100),
+        "strict_dates": True,
         "color": "#3B82F6"
     },
 
@@ -219,11 +233,11 @@ TOUR_TYPES = {
         "keywords": [
             "victorian", "19th century", "1800s", "1850", "1860", "1870",
             "1880", "1890", "gothic revival", "tower bridge", "albert",
-            "crystal palace", "railway", "station", "industry",
+            "crystal palace", "railway", "railway station", "train station",
             "industrial", "iron", "steel", "brick"
         ],
         "exclude_keywords": [
-            "modern", "contemporary", "2000", "2010", "2020", "millennium",
+            "modern architecture", "contemporary architecture",
             "theatre", "playhouse", "theater"  # Exclude performance venues unless explicitly Victorian
         ],
         "min_score": 5,  # Small pool (29 landmarks) - minimal filtering to preserve Victorian sites
@@ -235,6 +249,8 @@ TOUR_TYPES = {
             "st pancras": 75,
             "paddington station": 70
         },
+        "era_range": (1837, 1901),
+        "strict_dates": True,
         "color": "#EC4899"
     }
 }
