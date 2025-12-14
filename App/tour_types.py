@@ -7,6 +7,7 @@ Each tour type defines:
 - Exclude keywords for filtering out mismatches
 - Minimum score threshold
 - Boost keywords for extra scoring
+- Scenic route detour limits (factor and absolute time)
 - UI metadata (icon, color, description)
 
 To add a new tour type: Add a new entry to TOUR_TYPES dict and re-run
@@ -22,6 +23,8 @@ TOUR_TYPES = {
         "exclude_keywords": [],
         "min_score": 30,  # Large pool (1327 landmarks) - high selectivity for quality
         "boost_keywords": {},
+        "max_detour_factor": 1.4,  # 40% slower max (abundant landmarks - prioritize speed)
+        "max_detour_minutes": 3,   # Cap at 3 minutes additional time
         "color": "#6B7280"
     },
 
@@ -60,6 +63,8 @@ TOUR_TYPES = {
             "georgian": 10,
             "tudor": 10
         },
+        "max_detour_factor": 1.8,  # 80% slower max (moderate scarcity - 76 landmarks)
+        "max_detour_minutes": 6,   # Cap at 6 minutes additional time
         "color": "#EF4444"
     },
 
@@ -87,6 +92,8 @@ TOUR_TYPES = {
             "war memorial": 60,
             "monument": 55
         },
+        "max_detour_factor": 1.6,  # 60% slower max (many landmarks - 200 total)
+        "max_detour_minutes": 5,   # Cap at 5 minutes additional time
         "color": "#8B4513"
     },
 
@@ -113,6 +120,8 @@ TOUR_TYPES = {
             "royal mews": 75,
             "royal albert hall": 70
         },
+        "max_detour_factor": 2.0,  # 100% slower max (scarce - 57 landmarks)
+        "max_detour_minutes": 7,   # Cap at 7 minutes additional time
         "color": "#9333EA"
     },
 
@@ -141,6 +150,8 @@ TOUR_TYPES = {
             "science museum": 80,
             "portrait gallery": 75
         },
+        "max_detour_factor": 1.8,  # 80% slower max (moderate scarcity - 73 landmarks)
+        "max_detour_minutes": 6,   # Cap at 6 minutes additional time
         "color": "#06B6D4"
     },
 
@@ -167,6 +178,8 @@ TOUR_TYPES = {
             "st james's park": 70,
             "green park": 65
         },
+        "max_detour_factor": 2.5,  # 150% slower max (extremely scarce - 15 landmarks)
+        "max_detour_minutes": 9,   # Cap at 9 minutes additional time
         "color": "#10B981"
     },
 
@@ -194,6 +207,8 @@ TOUR_TYPES = {
             "westminster cathedral": 65,
             "temple church": 60
         },
+        "max_detour_factor": 2.2,  # 120% slower max (scarce - 37 landmarks)
+        "max_detour_minutes": 8,   # Cap at 8 minutes additional time
         "color": "#F59E0B"
     },
 
@@ -221,6 +236,8 @@ TOUR_TYPES = {
             "gherkin": 85,
             "canary wharf": 75
         },
+        "max_detour_factor": 2.2,  # 120% slower max (scarce - 41 landmarks)
+        "max_detour_minutes": 8,   # Cap at 8 minutes additional time
         "era_range": (2000, 2100),
         "strict_dates": True,
         "color": "#3B82F6"
@@ -249,6 +266,8 @@ TOUR_TYPES = {
             "st pancras": 75,
             "paddington station": 70
         },
+        "max_detour_factor": 2.5,  # 150% slower max (very scarce - 29 landmarks)
+        "max_detour_minutes": 9,   # Cap at 9 minutes additional time
         "era_range": (1837, 1901),
         "strict_dates": True,
         "color": "#EC4899"

@@ -18,6 +18,9 @@ the same internal logic.
 import requests
 import polyline
 
+from App.talking_points import get_tour_specific_script
+from App.tour_types import TOUR_TYPES
+
 def limit_landmarks_by_duration(
     landmarks: list,
     duration_min: float,
@@ -174,9 +177,15 @@ def scenic_auto_route(start: str, end: str, tour_type: str = "all"):
     # Find the actual fastest option (by duration)
     fastest_sec = min(route["legs"][0]["duration"]["value"] for route in routes)
 
-    # How much slower we allow Scenic Auto to be vs fastest (e.g. 40% slower max)
-    MAX_DETOUR_FACTOR = 1.4
-    max_allowed_sec = fastest_sec * MAX_DETOUR_FACTOR
+    # Get tour-type-specific detour allowance
+    tour_config = TOUR_TYPES.get(tour_type, TOUR_TYPES["all"])
+    max_detour_factor = tour_config.get("max_detour_factor", 1.4)
+    max_detour_minutes = tour_config.get("max_detour_minutes", 3)
+
+    # Calculate max allowed time with both factor and absolute limits
+    max_by_factor = fastest_sec * max_detour_factor
+    max_by_minutes = fastest_sec + (max_detour_minutes * 60)
+    max_allowed_sec = min(max_by_factor, max_by_minutes)
 
     best_route_points = None
     best_scenic_sec = None
@@ -303,7 +312,7 @@ def extract_landmarks(route_points, tour_type: str = "all"):
                     "name": lm["name"],
                     "lat": lm["lat"],
                     "lng": lm["lng"],
-                    "script": lm.get("script", ""),
+                    "script": get_tour_specific_script(lm, tour_type),
                     "distance_m": dist,
                     "side": side,
                     "route_index": idx,
