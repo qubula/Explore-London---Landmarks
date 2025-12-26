@@ -159,9 +159,9 @@ async def api_check_tour_availability(request: Request):
         availability = {}
         for tour_type in tour_types:
             result = plan_route(start, end, mode, tour_type=tour_type)
-            # Check if there are any landmarks in the result
+            # Filter out tour types with only 1 landmark (need at least 2)
             landmark_count = len(result.get('landmarks', []))
-            availability[tour_type] = landmark_count > 0
+            availability[tour_type] = landmark_count > 1
 
         return JSONResponse(content={"status": "success", "availability": availability})
 
