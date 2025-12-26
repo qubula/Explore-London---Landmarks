@@ -6,7 +6,7 @@
 /* ============ CSS VARIABLES ============ */
 :root {
   /* Base Colors */
-  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --bg-gradient: #ffffff;
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(255, 255, 255, 0.3);
 
