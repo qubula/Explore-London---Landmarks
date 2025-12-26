@@ -1071,6 +1071,35 @@ p {
   opacity: 0.3;
 }
 
+.sheet-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
+  -webkit-tap-highlight-color: transparent;
+  z-index: 10;
+}
+
+.sheet-close-btn:hover,
+.sheet-close-btn:active {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.sheet-close-btn svg {
+  display: block;
+}
+
 /* ============ UTILITIES ============ */
 .text-center {
   text-align: center;

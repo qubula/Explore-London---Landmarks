@@ -130,13 +130,19 @@ function confirmTour() {
     window.location.href = '/mobile/tour';
 }
 
+function closeSheet() {
+    const sheet = document.getElementById('tour-sheet');
+    sheet.classList.remove('active');
+    document.querySelectorAll('.tour-card').forEach(card => card.classList.remove('selected'));
+    selectedTour = null;
+}
+
 // Close sheet when clicking outside is a nice touch
 document.addEventListener('click', (e) => {
     const sheet = document.getElementById('tour-sheet');
-    if (sheet.classList.contains('active') && 
-        !sheet.contains(e.target) && 
+    if (sheet.classList.contains('active') &&
+        !sheet.contains(e.target) &&
         !e.target.closest('.tour-card')) {
-        sheet.classList.remove('active');
-        document.querySelectorAll('.tour-card').forEach(card => card.classList.remove('selected'));
+        closeSheet();
     }
 });
