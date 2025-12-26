@@ -20,3 +20,8 @@ __pycache__/
 
 # Backup files
 V4_backup_*.zip
+
+# Exhibition audio files
+voice_samples/
+exhibition_audio/
+Data/exhibition_landmarks.json

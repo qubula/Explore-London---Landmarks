@@ -17,9 +17,25 @@ the same internal logic.
 
 import requests
 import polyline
+import json
+import os
 
-from App.talking_points import get_tour_specific_script
+from App.talking_points import get_tour_specific_script, load_talking_points
 from App.tour_types import TOUR_TYPES
+
+# Load talking points at module startup
+load_talking_points()
+
+# Load landmark images mapping
+LANDMARK_IMAGES = {}
+try:
+    images_path = os.path.join(os.path.dirname(__file__), "..", "Data", "landmark_images.json")
+    with open(images_path, "r", encoding="utf-8") as f:
+        LANDMARK_IMAGES = json.load(f)
+except FileNotFoundError:
+    print("Warning: landmark_images.json not found, images will not be available")
+except json.JSONDecodeError:
+    print("Warning: landmark_images.json is invalid JSON")
 
 def limit_landmarks_by_duration(
     landmarks: list,
@@ -307,20 +323,35 @@ def extract_landmarks(route_points, tour_type: str = "all"):
         idx, dist = closest_route_point_index(lm, route_points)
         if dist <= radius:
             side = landmark_side_of_route(lm, route_points, idx)
+            landmark_name = lm["name"]
             visible.append(
                 {
-                    "name": lm["name"],
+                    "name": landmark_name,
                     "lat": lm["lat"],
                     "lng": lm["lng"],
                     "script": get_tour_specific_script(lm, tour_type),
                     "distance_m": dist,
                     "side": side,
                     "route_index": idx,
+                    "radius_m": radius,
+                    "image_url": LANDMARK_IMAGES.get(landmark_name),
                 }
             )
 
     visible.sort(key=lambda l: l["route_index"])
     visible = cluster_landmarks(visible)
+
+    # Filter out landmarks without tour-specific talking points
+    # This ensures landmarks only appear on tours where they have relevant educational content
+    if tour_type != "all":
+        from App.talking_points import TALKING_POINTS_CACHE
+        visible = [
+            lm for lm in visible
+            if lm["name"] in TALKING_POINTS_CACHE and
+               (tour_type in TALKING_POINTS_CACHE[lm["name"]].get("talking_points", {}) or
+                TALKING_POINTS_CACHE[lm["name"]].get("primary_tag") == tour_type)
+        ]
+
     return visible
 
 

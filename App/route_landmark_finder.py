@@ -75,6 +75,57 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     return R * c
 
 
+def perpendicular_distance_to_line_segment(
+    point_lat, point_lng,
+    line_start_lat, line_start_lng,
+    line_end_lat, line_end_lng
+):
+    """
+    Calculate perpendicular distance from a point to a line segment.
+
+    Uses vector projection to find the closest point on the line segment,
+    then calculates distance to that point using haversine formula.
+
+    OPTIMIZATION: Used for waypoint corridor filtering in scenic auto mode.
+    Helps identify landmarks that lie "between" start and end points.
+
+    Args:
+        point_lat, point_lng: Point coordinates (degrees)
+        line_start_lat, line_start_lng: Line segment start coordinates (degrees)
+        line_end_lat, line_end_lng: Line segment end coordinates (degrees)
+
+    Returns:
+        Distance in meters from point to closest point on line segment
+    """
+    # Vector from line start to line end
+    line_vec_lat = line_end_lat - line_start_lat
+    line_vec_lng = line_end_lng - line_start_lng
+
+    # Vector from line start to point
+    point_vec_lat = point_lat - line_start_lat
+    point_vec_lng = point_lng - line_start_lng
+
+    # Calculate line segment length squared
+    line_length_sq = line_vec_lat**2 + line_vec_lng**2
+
+    if line_length_sq == 0:
+        # Line segment is actually a point - return distance to that point
+        return haversine_distance(point_lat, point_lng, line_start_lat, line_start_lng)
+
+    # Calculate projection parameter t (where on the line segment the closest point is)
+    # t = 0 means closest point is line_start
+    # t = 1 means closest point is line_end
+    # 0 < t < 1 means closest point is somewhere on the segment
+    t = max(0, min(1, (point_vec_lat * line_vec_lat + point_vec_lng * line_vec_lng) / line_length_sq))
+
+    # Calculate closest point on line segment
+    closest_lat = line_start_lat + t * line_vec_lat
+    closest_lng = line_start_lng + t * line_vec_lng
+
+    # Return distance from point to closest point
+    return haversine_distance(point_lat, point_lng, closest_lat, closest_lng)
+
+
 # ------------------------------------------------------
 # 2. CLASSIFY LANDMARK TYPE (FOR VISIBILITY + FILTERING)
 # ------------------------------------------------------

@@ -339,58 +339,106 @@ def build_database():
             file_total = len(features)
             file_named_interesting = 0
             file_used = 0
+import json
+import requests
+import math
+import os
+import wikipediaapi
+import time
 
-            for item in features:
-                props = item.get("properties", {})
-                geom = item.get("geometry", {})
+# Wikipedia API Setup
+wiki_wiki = wikipediaapi.Wikipedia(
+    user_agent='PassingBy_App/1.0 (kuba@example.com)',
+    language='en'
+)
 
-                # Only keep interesting features
-                if not is_interesting(props):
-                    continue
+IMAGE_CACHE_FILE = "landmark_images_cache.json"
 
-                # Prefer OSM 'name'; fall back to 'itemLabel' (Wikidata-style)
-                name = props.get("name") or props.get("itemLabel")
-                if not name:
-                    continue
-                file_named_interesting += 1
+# Define the Overpass API endpoint
+OVERPASS_URL = "http://overpass-api.de/api/interpreter"
 
-                wiki_tag = props.get("wikipedia")  # e.g. "en:Big Ben" or None
+# Define the query to fetch landmarks in London
+OVERPASS_QUERY = """
+[out:json];
+(
+  node["tourism"="attraction"](51.28,-0.51,51.69,0.33);
+  node["historic"="monument"](51.28,-0.51,51.69,0.33);
+  node["historic"="memorial"](51.28,-0.51,51.69,0.33);
+  node["amenity"="place_of_worship"](51.28,-0.51,51.69,0.33);
+  way["tourism"="attraction"](51.28,-0.51,51.69,0.33);
+  way["historic"="monument"](51.28,-0.51,51.69,0.33);
+  way["historic"="memorial"](51.28,-0.51,51.69,0.33);
+);
+out center;
+"""
 
-                if not geom:
-                    continue
+def load_image_cache():
+    if os.path.exists(IMAGE_CACHE_FILE):
+        with open(IMAGE_CACHE_FILE, 'r') as f:
+            try:
+                return json.load(f)
+            except json.JSONDecodeError:
+                return {}
+    return {}
 
-                gtype = geom.get("type")
+def save_image_cache(cache):
+    with open(IMAGE_CACHE_FILE, 'w') as f:
+        json.dump(cache, f, indent=2)
 
-                if gtype == "Point":
-                    coords = geom.get("coordinates", [None, None])
-                    if len(coords) != 2:
-                        continue
-                    lng, lat = coords
-                elif gtype == "Polygon":
-                    coords = geom.get("coordinates", [[[None, None]]])
-                    lng, lat = coords[0][0]
-                else:
-                    # Ignore LineStrings etc. for now
-                    continue
+image_cache = load_image_cache()
 
-                if lat is None or lng is None:
-                    continue
+def fetch_image_url(name):
+    """Fetch image URL from Wikipedia with caching"""
+    if name in image_cache:
+        return image_cache[name]
+    
+    print(f"Fetching image for: {name}...")
+    url = None
+    try:
+        # Try direct name
+        page = wiki_wiki.page(name)
+        if not page.exists():
+            # Try appending London
+            page = wiki_wiki.page(f"{name}, London")
+        
+        if page.exists():
+            # Get main image using MediaWiki API for PageImages
+            response = requests.get(
+                "https://en.wikipedia.org/w/api.php",
+                params={
+                    "action": "query",
+                    "format": "json",
+                    "titles": page.title,
+                    "prop": "pageimages",
+                    "pithumbsize": 600
+                },
+                timeout=5
+            ).json()
+            
+            pages = response.get("query", {}).get("pages", {})
+            for _, pdata in pages.items():
+                if "thumbnail" in pdata:
+                    url = pdata["thumbnail"]["source"]
+                    break
+        else:
+            print(f"  Page not found for {name}")
 
-                raw_items.append({
-                    "name": name,
-                    "lat": lat,
-                    "lng": lng,
-                    "wiki_tag": wiki_tag
-                })
-                file_used += 1
+    except Exception as e:
+        print(f"  Error fetching {name}: {e}")
+    
+    image_cache[name] = url
+    return url
 
-            print(f"   ➜ {path}: {file_total} features, {file_named_interesting} interesting & named, {file_used} passed geometry filters.")
-
-    if not raw_items:
-        print("❌ No usable features found in any input files.")
+def main():
+    print("Fetching data from Overpass API...")
+    try:
+        response = requests.get(OVERPASS_URL, params={'data': OVERPASS_QUERY})
+        response.raise_for_status()
+        data = response.json()
+    except Exception as e:
+        print(f"Error fetching data: {e}")
         return
 
-    total = len(raw_items)
     print(f"📊 Found {total} raw map features across all files after interest + geometry filters.")
     print("🕵️ Filtering and enriching with Wikipedia + Alfie V6...")
 

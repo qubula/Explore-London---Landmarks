@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Alfie Tour Guide</title>
+    <link rel="stylesheet" href="/static/mobile/css/style.css?v=7">
+</head>
+
+<body>
+    <div class="screen landing-screen">
+        <!-- Map Preview Background -->
+        <div class="map-preview"></div>
+
+        <!-- Top Branding -->
+        <div class="top-brand">
+            <h1>PassingBy</h1>
+            <p class="tagline">Your London tour guide</p>
+        </div>
+
+        <!-- Bottom CTA Card -->
+        <div class="cta-card">
+            <div class="glass-card">
+                <button class="btn btn-primary btn-large" onclick="startTour()">
+                    Personalise ride
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        function startTour() {
+            window.location.href = '/mobile/destination';
+        }
+
+        // Haptic feedback (iOS)
+        const btn = document.querySelector('.btn-primary');
+        if (btn) {
+            btn.addEventListener('touchstart', function () {
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

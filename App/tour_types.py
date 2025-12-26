@@ -24,7 +24,7 @@ TOUR_TYPES = {
         "min_score": 30,  # Large pool (1327 landmarks) - high selectivity for quality
         "boost_keywords": {},
         "max_detour_factor": 1.4,  # 40% slower max (abundant landmarks - prioritize speed)
-        "max_detour_minutes": 3,   # Cap at 3 minutes additional time
+        "max_detour_minutes": 5,   # Cap at 5 minutes additional time
         "color": "#6B7280"
     },
 
@@ -239,7 +239,7 @@ TOUR_TYPES = {
         "max_detour_factor": 2.2,  # 120% slower max (scarce - 41 landmarks)
         "max_detour_minutes": 8,   # Cap at 8 minutes additional time
         "era_range": (2000, 2100),
-        "strict_dates": True,
+        "strict_dates": False,  # Disabled - keywords filter correctly without excluding good landmarks
         "color": "#3B82F6"
     },
 

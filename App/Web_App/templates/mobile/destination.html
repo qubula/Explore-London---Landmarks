@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Where to? - PassingBy</title>
+    <link rel="stylesheet" href="/static/mobile/css/style.css?v=7">
+</head>
+
+<body>
+    <div class="screen">
+        <!-- Header -->
+        <header class="screen-header">
+            <button class="btn-icon" onclick="history.back()" aria-label="Go back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 19L8 12L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+            <h1>Where to?</h1>
+            <div class="w-24"></div> <!-- Spacer for alignment -->
+        </header>
+
+        <!-- Main Content -->
+        <main class="container destination-container">
+
+            <!-- Start Location (For Testing) -->
+            <div class="glass-card search-section">
+                <label class="input-label">Starting Point</label>
+                <div class="input-wrapper">
+                    <input type="text" id="start-input" placeholder="Charing Cross, London" autocomplete="off"
+                        class="glass-input">
+                </div>
+            </div>
+
+            <!-- Destination Input -->
+            <div class="glass-card search-section">
+                <label class="input-label">Destination</label>
+                <div class="input-wrapper">
+                    <input type="text" id="destination-input" placeholder="Search destination..." autocomplete="off"
+                        class="glass-input">
+                    <button id="clear-input" class="btn-icon hidden" aria-label="Clear">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Current Location -->
+            <button id="use-location" class="glass-card action-row btn">
+                <div class="icon-circle bg-blue">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                </div>
+                <span>Use my current location</span>
+            </button>
+
+        </main>
+    </div>
+
+    <!-- Pass API Key to JS -->
+    <script>
+        const GOOGLE_MAPS_KEY = "{{ google_maps_key }}";
+    </script>
+    <!-- Load Google Maps API -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&libraries=places&callback=initAutocomplete"
+        async defer></script>
+    <script src="/static/mobile/js/location.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Select Tour - PassingBy</title>
+    <link rel="stylesheet" href="/static/mobile/css/style.css?v=7">
+</head>
+<body>
+    <div class="screen">
+        <!-- Header -->
+        <header class="screen-header">
+            <button class="btn-icon" onclick="history.back()" aria-label="Go back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 19L8 12L15 5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <h1>Choose Theme</h1>
+            <div class="w-24"></div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container tour-container">
+            <p class="section-desc">What interests you today?</p>
+            
+            <div class="tour-grid">
+                <!-- Architecture -->
+                <div class="glass-card tour-card" onclick="selectTourType('architecture')">
+                    <div class="tour-bg" style="background: radial-gradient(circle at top right, rgba(239, 68, 68, 0.2), transparent);"></div>
+                    <h3 class="tour-name">Architecture</h3>
+                    <p class="tour-meta">Buildings & Design</p>
+                </div>
+
+                <!-- History -->
+                <div class="glass-card tour-card" onclick="selectTourType('historical')">
+                    <div class="tour-bg" style="background: radial-gradient(circle at top right, rgba(139, 69, 19, 0.2), transparent);"></div>
+                    <h3 class="tour-name">History</h3>
+                    <p class="tour-meta">London's Past</p>
+                </div>
+
+                <!-- Royal -->
+                <div class="glass-card tour-card" onclick="selectTourType('royal')">
+                    <div class="tour-bg" style="background: radial-gradient(circle at top right, rgba(147, 51, 234, 0.2), transparent);"></div>
+                    <h3 class="tour-name">Royal</h3>
+                    <p class="tour-meta">Kings & Queens</p>
+                </div>
+
+                <!-- Modern -->
+                <div class="glass-card tour-card" onclick="selectTourType('modern')">
+                    <div class="tour-bg" style="background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.2), transparent);"></div>
+                    <h3 class="tour-name">Modern</h3>
+                    <p class="tour-meta">Skyscrapers & City</p>
+                </div>
+
+                <!-- Museums & Galleries -->
+                <div class="glass-card tour-card" onclick="selectTourType('museums_galleries')">
+                    <div class="tour-bg" style="background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.2), transparent);"></div>
+                    <h3 class="tour-name">Museums & Galleries</h3>
+                    <p class="tour-meta">Art & Culture</p>
+                </div>
+
+                <!-- Parks & Gardens -->
+                <div class="glass-card tour-card" onclick="selectTourType('parks_gardens')">
+                    <div class="tour-bg" style="background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.2), transparent);"></div>
+                    <h3 class="tour-name">Parks & Gardens</h3>
+                    <p class="tour-meta">Green Spaces</p>
+                </div>
+
+                <!-- Religious -->
+                <div class="glass-card tour-card" onclick="selectTourType('religious')">
+                    <div class="tour-bg" style="background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.2), transparent);"></div>
+                    <h3 class="tour-name">Religious</h3>
+                    <p class="tour-meta">Churches & Abbeys</p>
+                </div>
+
+                <!-- Victorian -->
+                <div class="glass-card tour-card" onclick="selectTourType('victorian')">
+                    <div class="tour-bg" style="background: radial-gradient(circle at top right, rgba(236, 72, 153, 0.2), transparent);"></div>
+                    <h3 class="tour-name">Victorian</h3>
+                    <p class="tour-meta">19th Century</p>
+                </div>
+
+                <!-- Anything (All) -->
+                <div class="glass-card tour-card full-width featured-tour" onclick="selectTourType('all')">
+                    <div class="tour-bg" style="background: radial-gradient(circle at top right, rgba(245, 226, 54, 0.3), transparent);"></div>
+                    <div class="tour-content-row">
+                        <div class="tour-text">
+                            <h3 class="tour-name">Surprise Me</h3>
+                            <p class="tour-meta">Best of everything along the way</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Confirm Selection Sheet (Hidden by default) -->
+             <div id="tour-sheet" class="bottom-sheet">
+                <div class="sheet-handle"></div>
+                <div class="sheet-content">
+                    <h2 id="sheet-title" class="sheet-title">Selected Tour</h2>
+                    <p id="sheet-desc" class="sheet-desc">Description of the tour goes here.</p>
+                    <button class="btn btn-primary btn-large mt-md" onclick="confirmTour()">
+                        Start Tour
+                    </button>
+                </div>
+             </div>
+
+        </main>
+    </div>
+
+    <script src="/static/mobile/js/tour_selection.js?v=4"></script>
+</body>
+</html>

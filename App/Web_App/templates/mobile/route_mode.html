@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Choose Route - PassingBy</title>
+    <link rel="stylesheet" href="/static/mobile/css/style.css?v=7">
+</head>
+<body>
+    <div class="screen">
+        <!-- Header -->
+        <header class="screen-header">
+            <button class="btn-icon" onclick="history.back()" aria-label="Go back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 19L8 12L15 5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <h1>Choose Route</h1>
+            <div class="w-24"></div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container route-mode-container">
+            
+            <p class="section-desc">How would you like to get there?</p>
+
+            <!-- Mode Selection Cards -->
+            <div class="mode-selection">
+                <!-- Fastest Mode -->
+                <div class="glass-card mode-card" onclick="selectMode('fastest')">
+                    <div class="mode-content">
+                        <div class="mode-header">
+                            <h2 class="mode-title">Fastest</h2>
+                            <span class="mode-tag tag-blue">Efficient</span>
+                        </div>
+                        <p class="mode-desc">The quickest way to your destination. No detours, just speed.</p>
+                        <div class="mode-meta">
+                            <span class="meta-item">~25 min</span>
+                        </div>
+                    </div>
+                    <div class="selection-indicator">
+                        <div class="radio-circle"></div>
+                    </div>
+                </div>
+
+                <!-- Scenic Mode (PassingBy) -->
+                <div class="glass-card mode-card featured" onclick="selectMode('scenic')">
+                    <div class="mode-content">
+                        <div class="mode-header">
+                            <h2 class="mode-title">PassingBy</h2>
+                            <span class="mode-tag tag-yellow">Recommended</span>
+                        </div>
+                        <p class="mode-desc">See the sights along the way. Smart detours to iconic landmarks.</p>
+                        <div class="mode-meta">
+                            <span class="meta-item">Curated Route</span>
+                            <span class="meta-item">Multiple Stops</span>
+                        </div>
+                    </div>
+                    <div class="selection-indicator">
+                        <div class="radio-circle"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue Button -->
+            <div class="bottom-action-area">
+                <button id="continue-btn" class="btn btn-primary btn-large disabled" disabled onclick="proceedToNext()">
+                    Continue
+                </button>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="/static/mobile/js/route_selection.js"></script>
+</body>
+</html>
