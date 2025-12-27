@@ -562,8 +562,8 @@ p {
 
 /* Active Tour Screen */
 .tour-screen {
-  overflow: visible;  /* Allow 3D card transforms to extend beyond viewport */
-  /* Note: Changed from hidden to visible to fix card flip clipping */
+  overflow: hidden;
+  /* Prevent scrolling */
 }
 
 .tour-header {

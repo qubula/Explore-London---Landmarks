@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfie - Voice Visualizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        #canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #controls {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .label-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .label-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        #info {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        #title {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        #title.hidden {
+            opacity: 0;
+        }
+
+        #progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 50;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 10px;
+        }
+
+        #progress-container:hover {
+            opacity: 1;
+        }
+
+        #progress-bar {
+            position: relative;
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            margin: 0 20px;
+            transition: height 0.2s ease;
+        }
+
+        #progress-container:hover #progress-bar {
+            height: 12px;
+        }
+
+        #progress-filled {
+            height: 100%;
+            background: linear-gradient(90deg,
+                hsla(200, 70%, 60%, 0.8),
+                hsla(230, 60%, 50%, 0.8));
+            width: 0%;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px rgba(100, 150, 255, 0.5);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        #progress-filled::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(100, 150, 255, 0.8);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        #progress-container:hover #progress-filled::after {
+            opacity: 1;
+        }
+
+        #progress-time {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 12px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <div id="title">ALFIE</div>
+
+    <div id="controls">
+        <input type="file" id="file-input" accept="audio/*">
+        <label for="file-input" class="label-button">Load Audio File</label>
+        <button id="play-btn" disabled>Play</button>
+        <button id="pause-btn" disabled>Pause</button>
+    </div>
+
+    <div id="info">
+        Load exhibition_loop_compatible.mp3 to begin
+    </div>
+
+    <div id="progress-container">
+        <div id="progress-time">0:00 / 0:00</div>
+        <div id="progress-bar">
+            <div id="progress-filled"></div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const fileInput = document.getElementById('file-input');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const titleEl = document.getElementById('title');
+        const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar');
+        const progressFilled = document.getElementById('progress-filled');
+        const progressTime = document.getElementById('progress-time');
+
+        let audio = null;
+        let audioContext = null;
+        let analyser = null;
+        let dataArray = null;
+        let animationId = null;
+
+        // Canvas setup
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Sphere parameters
+        let baseRadius = 120;
+        let currentRadius = baseRadius;
+        let targetRadius = baseRadius;
+        let hue = 200; // Blue-ish starting color
+        let rotation = 0;
+
+        // Organic blob vertices (more points for smoother shape)
+        const numPoints = 12;
+        let vertices = [];
+        for (let i = 0; i < numPoints; i++) {
+            vertices.push({
+                angle: (Math.PI * 2 * i) / numPoints,
+                offset: 0,
+                speed: 0.015 + Math.random() * 0.02,
+                amplitude: 10 + Math.random() * 8
+            });
+        }
+
+        // Load audio file
+        fileInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Clean up previous audio
+            if (audio) {
+                audio.pause();
+                audio = null;
+            }
+
+            // Create new audio element
+            audio = new Audio();
+            audio.src = URL.createObjectURL(file);
+            audio.loop = true;
+
+            // Setup Web Audio API
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 512; // Higher resolution for better word detection
+                analyser.smoothingTimeConstant = 0.2; // Less smoothing for snappier response
+
+                const source = audioContext.createMediaElementSource(audio);
+                source.connect(analyser);
+                analyser.connect(audioContext.destination);
+            }
+
+            const bufferLength = analyser.frequencyBinCount;
+            dataArray = new Uint8Array(bufferLength);
+
+            playBtn.disabled = false;
+            pauseBtn.disabled = false;
+
+            // Hide title after file is loaded
+            setTimeout(() => {
+                titleEl.classList.add('hidden');
+            }, 1000);
+        });
+
+        // Play button
+        playBtn.addEventListener('click', () => {
+            if (audio) {
+                audio.play();
+                if (!animationId) {
+                    animate();
+                }
+            }
+        });
+
+        // Pause button
+        pauseBtn.addEventListener('click', () => {
+            if (audio) {
+                audio.pause();
+            }
+        });
+
+        // Draw organic blob
+        function drawBlob(x, y, radius, audioLevel) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+
+            // Create gradient
+            const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, radius * 1.2);
+            const alpha = 0.3 + audioLevel * 0.5;
+
+            gradient.addColorStop(0, `hsla(${hue}, 70%, 60%, ${alpha})`);
+            gradient.addColorStop(0.5, `hsla(${hue + 30}, 60%, 50%, ${alpha * 0.6})`);
+            gradient.addColorStop(1, `hsla(${hue + 60}, 50%, 40%, 0)`);
+
+            // Draw blob shape with smooth curves
+            ctx.beginPath();
+
+            // Calculate all points first
+            const points = [];
+            for (let i = 0; i < numPoints; i++) {
+                const vertex = vertices[i];
+
+                // Update vertex offset for organic movement
+                vertex.offset += vertex.speed;
+                const r = radius + Math.sin(vertex.offset) * vertex.amplitude * (1 + audioLevel * 0.8);
+
+                points.push({
+                    x: Math.cos(vertex.angle) * r,
+                    y: Math.sin(vertex.angle) * r
+                });
+            }
+
+            // Draw with smooth catmull-rom-like curves
+            for (let i = 0; i < numPoints; i++) {
+                const p0 = points[(i - 1 + numPoints) % numPoints];
+                const p1 = points[i];
+                const p2 = points[(i + 1) % numPoints];
+                const p3 = points[(i + 2) % numPoints];
+
+                if (i === 0) {
+                    ctx.moveTo(p1.x, p1.y);
+                }
+
+                // Control points for smooth curve
+                const cp1x = p1.x + (p2.x - p0.x) / 6;
+                const cp1y = p1.y + (p2.y - p0.y) / 6;
+                const cp2x = p2.x - (p3.x - p1.x) / 6;
+                const cp2y = p2.y - (p3.y - p1.y) / 6;
+
+                ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+            }
+
+            ctx.closePath();
+
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            // Add glow effect
+            ctx.shadowBlur = 30 + audioLevel * 60;
+            ctx.shadowColor = `hsla(${hue}, 80%, 60%, ${audioLevel * 0.8})`;
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        // Animation loop
+        function animate() {
+            animationId = requestAnimationFrame(animate);
+
+            // Clear canvas with fade effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            let audioLevel = 0;
+
+            if (analyser && dataArray) {
+                analyser.getByteFrequencyData(dataArray);
+
+                // Calculate average audio level (focus on mid-range frequencies for voice)
+                const midStart = Math.floor(dataArray.length * 0.1);
+                const midEnd = Math.floor(dataArray.length * 0.6);
+                let sum = 0;
+                for (let i = midStart; i < midEnd; i++) {
+                    sum += dataArray[i];
+                }
+                audioLevel = sum / ((midEnd - midStart) * 255);
+
+                // More aggressive response for mouth-like movement
+                // Snap open quickly, close slower (like speaking)
+                targetRadius = baseRadius + audioLevel * 120;
+
+                if (targetRadius > currentRadius) {
+                    // Opening - fast response (like mouth opening to speak)
+                    currentRadius += (targetRadius - currentRadius) * 0.35;
+                } else {
+                    // Closing - slower (like mouth closing after word)
+                    currentRadius += (targetRadius - currentRadius) * 0.15;
+                }
+
+                // Change hue based on audio intensity
+                hue = (hue + audioLevel * 0.8) % 360;
+            }
+
+            // Slow rotation
+            rotation += 0.002;
+
+            // Draw the blob
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            drawBlob(centerX, centerY, currentRadius, audioLevel);
+
+            // Add subtle particle effects during high audio
+            if (audioLevel > 0.3) {
+                const numParticles = Math.floor(audioLevel * 5);
+                for (let i = 0; i < numParticles; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = currentRadius + Math.random() * 50;
+                    const x = centerX + Math.cos(angle) * distance;
+                    const y = centerY + Math.sin(angle) * distance;
+                    const size = Math.random() * 3;
+
+                    ctx.fillStyle = `hsla(${hue}, 70%, 70%, ${audioLevel * 0.6})`;
+                    ctx.beginPath();
+                    ctx.arc(x, y, size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+
+        // Start with initial animation even without audio
+        animate();
+
+        // Progress bar functionality
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function updateProgress() {
+            if (audio && audio.duration) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressFilled.style.width = percent + '%';
+                progressTime.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+            }
+        }
+
+        // Click on progress bar to seek
+        progressBar.addEventListener('click', (e) => {
+            if (!audio || !audio.duration) return;
+
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
+        });
+
+        // Update progress continuously
+        setInterval(() => {
+            if (audio && !audio.paused) {
+                updateProgress();
+            }
+        }, 100);
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && audio) {
+                e.preventDefault();
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            }
+            // Arrow keys for seeking
+            if (audio && audio.duration) {
+                if (e.code === 'ArrowLeft') {
+                    e.preventDefault();
+                    audio.currentTime = Math.max(0, audio.currentTime - 10);
+                }
+                if (e.code === 'ArrowRight') {
+                    e.preventDefault();
+                    audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

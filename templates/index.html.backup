@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Alfie – Text UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body style="font-family: monospace; background: #ffffff; color: #000000;">
+
+    <pre>
+=======================================
+        ALFIE SCENIC ROUTE TESTER
+=======================================
+</pre>
+
+    {% if error_message %}
+    <pre>
+!!! ROUTE ERROR !!!
+{{ error_message }}
+Try another start / end location (e.g. station names
+like "Pimlico Station" or "Green Park Station").
+</pre>
+    {% endif %}
+
+    <form method="post">
+        <pre>
+START LOCATION:
+[ <input type="text" name="start" value="{{ start }}" size="30" /> ]
+
+END LOCATION:
+[ <input type="text" name="end" value="{{ end }}" size="30" /> ]
+</pre>
+
+        {% if fastest %}
+        <pre>
+---------------------------------------
+ROUTE TIMES (based on these locations)
+---------------------------------------
+Fastest:     {{ "%.1f" % fastest["fastest_eta"] }} min
+{% if scenic_eta is not none %}
+Scenic Auto: {{ "%.1f" % scenic_eta }} min ({{ "%+.1f" % scenic_diff }} min vs fastest)
+{% else %}
+Scenic Auto: (unavailable)
+{% endif %}
+
+---------------------------------------
+TOUR TYPE:
+---------------------------------------
+Select a theme (or choose "All Landmarks"):
+
+<select name="tour_type" size="9" style="width: 300px; font-family: monospace;">
+<option value="all" selected>🗺️  All Landmarks (Classic Alfie)</option>
+<option value="architecture">🏛️  Architecture Tour</option>
+<option value="historical">📜 Historical Tour</option>
+<option value="royal">👑 Royal Tour</option>
+<option value="museums_galleries">🎨 Museums & Galleries</option>
+<option value="parks_gardens">🌳 Parks & Gardens</option>
+<option value="religious">⛪ Religious Heritage</option>
+<option value="modern">🏙️  Modern London</option>
+<option value="victorian">🎩 Victorian Era</option>
+</select>
+
+Choose a mode:
+
+(1) Fastest
+(2) Scenic Auto
+(3) Scenic Select
+</pre>
+
+        {% if mode == "3" and result is none %}
+        <pre>
+---------------------------------------
+SCENIC SELECT – GRAND LANDMARKS
+(You chose mode 3. Now pick up to {{ max_choices }}
+numbers from the list below, comma-separated)
+---------------------------------------
+{% for lm in grand_list %}
+{{ loop.index }}. {{ lm["name"] }}
+{% endfor %}
+</pre>
+        <pre>
+Your Scenic Select choices (e.g. 1,3,5):
+[ <input type="text" name="scenic_choices" value="" size="15" /> ]
+</pre>
+        {% else %}
+        <input type="hidden" name="scenic_choices" value="" />
+        {% endif %}
+
+        <pre>
+MODE:
+[ <input type="text" name="mode" value="{{ mode }}" size="1" /> ]
+</pre>
+
+        {% else %}
+        <pre>
+---------------------------------------
+STEP 1:
+Enter START and END, then press SUBMIT
+to see route times.
+Later, if you pick mode 3, you'll see
+a list of grand landmarks to choose from.
+---------------------------------------
+</pre>
+        <input type="hidden" name="tour_type" value="all" />
+        {% endif %}
+
+        <button type="submit">[ SUBMIT ]</button>
+    </form>
+
+    {% if result %}
+    <pre>
+=======================================
+            ROUTE SUMMARY
+=======================================
+Mode:       {{ result["mode"] }}
+{% if result.get("tour_type") and result["tour_type"] != "all" %}
+Tour Type:  {{ result["tour_type"] | replace("_", " ") | title }}
+{% endif %}
+Fastest:    {{ "%.1f" % fastest["fastest_eta"] }} min
+Chosen:     {{ "%.1f" % result["chosen_eta"] }} min
+Difference: {{ "%+.1f" % result["difference"] }} min
+</pre>
+
+    <pre>
+=======================================
+          LANDMARKS ON ROUTE
+=======================================
+</pre>
+
+    <ul>
+        {% for lm in result["landmarks"] %}
+        <li>
+            {{ lm["name"] }} ({{ lm["side"] }} side, {{ "%.1f" % lm["distance_m"] }}m)
+        </li>
+        {% endfor %}
+    </ul>
+
+    <pre>
+=======================================
+      OPEN IN GOOGLE MAPS (APP)
+=======================================
+</pre>
+
+    <p>
+        <a href="{{ maps_url }}">[ OPEN SCENIC ROUTE IN GOOGLE MAPS ]</a>
+    </p>
+    =======================================
+    LIVE AUDIO TOUR (BETA)
+    =======================================
+    </pre>
+
+    <p>
+        <a href="/track?start={{ start | urlencode }}&end={{ end | urlencode }}&mode={{ mode }}&tour_type={{ result.get('tour_type', 'all') }}">[ START LIVE TOUR ]</a>
+    </p>
+
+    {% endif %}
+</body>
+<pre>
+
+
+
+</html>
