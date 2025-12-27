@@ -266,13 +266,14 @@ function updateUserMarker(pos) {
             map: map,
             icon: {
                 path: google.maps.SymbolPath.CIRCLE,
-                scale: 8,
-                fillColor: "#3b82f6",
+                scale: 10,  // Slightly larger for visibility
+                fillColor: "#2196F3",  // Bright blue
                 fillOpacity: 1,
-                strokeColor: "white",
-                strokeWeight: 2,
+                strokeColor: "#ffffff",
+                strokeWeight: 3,  // Thicker white border
             },
-            title: "You"
+            title: "Your Location",
+            zIndex: 1000  // Ensure it's on top
         });
     } else {
         userMarker.setPosition(pos);
@@ -337,6 +338,36 @@ async function calculateRoute() {
                     strokeOpacity: 0.9,
                     strokeWeight: 5,
                     map: map
+                });
+
+                // Add start marker (green)
+                new google.maps.Marker({
+                    position: path[0],
+                    map: map,
+                    title: 'Start',
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 8,
+                        fillColor: '#4CAF50',
+                        fillOpacity: 1,
+                        strokeColor: '#ffffff',
+                        strokeWeight: 2
+                    }
+                });
+
+                // Add end marker (red)
+                new google.maps.Marker({
+                    position: path[path.length - 1],
+                    map: map,
+                    title: 'Destination',
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 8,
+                        fillColor: '#F44336',
+                        fillOpacity: 1,
+                        strokeColor: '#ffffff',
+                        strokeWeight: 2
+                    }
                 });
 
                 // Fit map to route bounds with padding for breathing room

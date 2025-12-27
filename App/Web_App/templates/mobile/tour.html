@@ -36,11 +36,13 @@
             background: #2a2a2a;  /* Match charcoal background */
         }
         .route-info {
-            background: rgba(42, 42, 42, 0.95);  /* Dark with transparency */
+            background: rgba(255, 255, 255, 0.85);  /* White glass opaque */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 15px;
             display: flex;
-            border-bottom: 1px solid #444;  /* Darker border */
-            color: #e8e8e8;  /* Light text */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            color: #1a1a1a;  /* Black text for readability */
         }
         .route-info-row {
             display: flex;
@@ -72,7 +74,7 @@
 
         .swiper-wrapper {
             align-items: center;
-            padding-bottom: 0;
+            padding: 40px 0;  /* Vertical padding to prevent clipping during rotation */
         }
 
         /* Individual Card */
