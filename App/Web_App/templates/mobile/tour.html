@@ -83,12 +83,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: 0px !important;  /* Override Swiper CSS */
+        }
+
+        /* Force sharp corners on all Swiper and card elements */
+        .swiper-slide,
+        .swiper-slide *,
+        .landmark-card,
+        .landmark-card *,
+        .card-front,
+        .card-back {
+            border-radius: 0px !important;
         }
 
         .landmark-card {
             width: 100%;
             height: 380px;
-            border-radius: 0px !important;
             overflow: visible;
             position: relative;
             background: transparent;
