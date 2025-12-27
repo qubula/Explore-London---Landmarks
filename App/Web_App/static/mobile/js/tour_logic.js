@@ -340,34 +340,30 @@ async function calculateRoute() {
                     map: map
                 });
 
-                // Add start marker (green)
+                // Add start marker with default pin and label
                 new google.maps.Marker({
                     position: path[0],
                     map: map,
                     title: 'Start',
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 8,
-                        fillColor: '#4CAF50',
-                        fillOpacity: 1,
-                        strokeColor: '#ffffff',
-                        strokeWeight: 2
-                    }
+                    label: {
+                        text: 'A',
+                        color: 'white',
+                        fontWeight: 'bold'
+                    },
+                    zIndex: 100
                 });
 
-                // Add end marker (red)
+                // Add end marker with default pin and label
                 new google.maps.Marker({
                     position: path[path.length - 1],
                     map: map,
                     title: 'Destination',
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 8,
-                        fillColor: '#F44336',
-                        fillOpacity: 1,
-                        strokeColor: '#ffffff',
-                        strokeWeight: 2
-                    }
+                    label: {
+                        text: 'B',
+                        color: 'white',
+                        fontWeight: 'bold'
+                    },
+                    zIndex: 100
                 });
 
                 // Fit map to route bounds with padding for breathing room
