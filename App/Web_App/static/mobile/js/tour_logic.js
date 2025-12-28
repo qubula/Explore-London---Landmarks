@@ -152,6 +152,12 @@ function initMap() {
                     { "visibility": "off" }
                 ]
             },
+            // Hide highway shields and route icons
+            {
+                "featureType": "road",
+                "elementType": "labels.icon",
+                "stylers": [{ "visibility": "off" }]
+            },
             // Hide minor road labels
             {
                 "featureType": "road.local",
@@ -340,28 +346,30 @@ async function calculateRoute() {
                     map: map
                 });
 
-                // Add start marker with default pin and label
+                // Add start marker with play/forward icon
                 new google.maps.Marker({
                     position: path[0],
                     map: map,
                     title: 'Start',
                     label: {
-                        text: 'A',
+                        text: '▶',  // Play/start icon
                         color: 'white',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
+                        fontSize: '16px'
                     },
                     zIndex: 100
                 });
 
-                // Add end marker with default pin and label
+                // Add end marker with stop icon
                 new google.maps.Marker({
                     position: path[path.length - 1],
                     map: map,
                     title: 'Destination',
                     label: {
-                        text: 'B',
+                        text: '■',  // Stop/end icon
                         color: 'white',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
+                        fontSize: '16px'
                     },
                     zIndex: 100
                 });
