@@ -41,14 +41,22 @@ let selectedTour = null;
 
 // Check tour availability on page load
 async function checkTourAvailability() {
-    const start = localStorage.getItem('alfie_start_location');
-    const end = localStorage.getItem('alfie_end_location');
+    const startData = localStorage.getItem('alfie_start');
+    const endData = localStorage.getItem('alfie_destination');
     const mode = localStorage.getItem('alfie_route_mode');
 
-    if (!start || !end) {
+    if (!startData || !endData) {
         console.warn('No route information found');
         return;
     }
+
+    // Parse JSON stored location data
+    const startLocation = JSON.parse(startData);
+    const endLocation = JSON.parse(endData);
+
+    // Extract address or name for API
+    const start = startLocation.address || startLocation.name;
+    const end = endLocation.address || endLocation.name;
 
     try {
         const response = await fetch('/api/check-tour-availability', {
