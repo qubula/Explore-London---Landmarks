@@ -82,8 +82,8 @@ async function checkTourAvailability() {
 
             console.log('[Tour Availability] Filtering cards based on:', availability);
 
-            // Hide tour cards that have no landmarks
-            let hiddenCount = 0;
+            // Gray out tour cards that have no landmarks
+            let disabledCount = 0;
             document.querySelectorAll('.tour-card').forEach(card => {
                 const onclickAttr = card.getAttribute('onclick');
                 const match = onclickAttr.match(/selectTourType\('([^']+)'\)/);
@@ -91,14 +91,25 @@ async function checkTourAvailability() {
                 if (match && match[1]) {
                     const tourType = match[1];
                     if (availability[tourType] === false) {
-                        card.style.display = 'none';
-                        hiddenCount++;
-                        console.log(`[Tour Availability] Hiding ${tourType} - no landmarks available`);
+                        // Disable the card visually and functionally
+                        card.style.opacity = '0.4';
+                        card.style.pointerEvents = 'none';
+                        card.style.filter = 'grayscale(0.8)';
+                        card.classList.add('disabled');
+
+                        // Add "No landmarks available" message
+                        const tourMeta = card.querySelector('.tour-meta');
+                        if (tourMeta && !tourMeta.querySelector('.unavailable-tag')) {
+                            tourMeta.innerHTML = '<span class="unavailable-tag">No landmarks on this route</span>';
+                        }
+
+                        disabledCount++;
+                        console.log(`[Tour Availability] Disabling ${tourType} - no landmarks available`);
                     }
                 }
             });
 
-            console.log(`[Tour Availability] Hidden ${hiddenCount} tour types`);
+            console.log(`[Tour Availability] Disabled ${disabledCount} tour types`);
         }
     } catch (error) {
         console.error('[Tour Availability] Error:', error);
