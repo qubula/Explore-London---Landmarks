@@ -346,30 +346,28 @@ async function calculateRoute() {
                     map: map
                 });
 
-                // Add start marker with play/forward icon
+                // Add start marker with custom white pin SVG
                 new google.maps.Marker({
                     position: path[0],
                     map: map,
                     title: 'Start',
-                    label: {
-                        text: '▶',  // Play/start icon
-                        color: 'white',
-                        fontWeight: 'bold',
-                        fontSize: '16px'
+                    icon: {
+                        url: '/static/mobile/images/markers/start-pin.svg',
+                        scaledSize: new google.maps.Size(32, 57),  // Scaled down from 155.94x278.18
+                        anchor: new google.maps.Point(16, 57)  // Anchor at bottom center of pin
                     },
                     zIndex: 100
                 });
 
-                // Add end marker with stop icon
+                // Add end marker with custom gray pin SVG
                 new google.maps.Marker({
                     position: path[path.length - 1],
                     map: map,
                     title: 'Destination',
-                    label: {
-                        text: '■',  // Stop/end icon
-                        color: 'white',
-                        fontWeight: 'bold',
-                        fontSize: '16px'
+                    icon: {
+                        url: '/static/mobile/images/markers/end-pin.svg',
+                        scaledSize: new google.maps.Size(32, 57),  // Scaled down from 155.94x278.18
+                        anchor: new google.maps.Point(16, 57)  // Anchor at bottom center of pin
                     },
                     zIndex: 100
                 });
