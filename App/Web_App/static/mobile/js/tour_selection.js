@@ -45,8 +45,14 @@ async function checkTourAvailability() {
     const endData = localStorage.getItem('alfie_destination');
     const mode = localStorage.getItem('alfie_route_mode');
 
+    console.log('[Tour Availability Check]', {
+        startData: startData ? 'exists' : 'missing',
+        endData: endData ? 'exists' : 'missing',
+        mode: mode
+    });
+
     if (!startData || !endData) {
-        console.warn('No route information found');
+        console.warn('No route information found - cannot check availability');
         return;
     }
 
@@ -58,6 +64,8 @@ async function checkTourAvailability() {
     const start = startLocation.address || startLocation.name;
     const end = endLocation.address || endLocation.name;
 
+    console.log('[Tour Availability] Checking:', { start, end, mode });
+
     try {
         const response = await fetch('/api/check-tour-availability', {
             method: 'POST',
@@ -67,10 +75,15 @@ async function checkTourAvailability() {
 
         const data = await response.json();
 
+        console.log('[Tour Availability] Response:', data);
+
         if (data.status === 'success') {
             const availability = data.availability;
 
+            console.log('[Tour Availability] Filtering cards based on:', availability);
+
             // Hide tour cards that have no landmarks
+            let hiddenCount = 0;
             document.querySelectorAll('.tour-card').forEach(card => {
                 const onclickAttr = card.getAttribute('onclick');
                 const match = onclickAttr.match(/selectTourType\('([^']+)'\)/);
@@ -79,12 +92,16 @@ async function checkTourAvailability() {
                     const tourType = match[1];
                     if (availability[tourType] === false) {
                         card.style.display = 'none';
+                        hiddenCount++;
+                        console.log(`[Tour Availability] Hiding ${tourType} - no landmarks available`);
                     }
                 }
             });
+
+            console.log(`[Tour Availability] Hidden ${hiddenCount} tour types`);
         }
     } catch (error) {
-        console.error('Error checking tour availability:', error);
+        console.error('[Tour Availability] Error:', error);
         // If there's an error, show all tours (fail gracefully)
     }
 }
