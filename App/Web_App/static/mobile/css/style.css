@@ -880,6 +880,10 @@ p {
   border: 2px solid transparent;
 }
 
+.tour-card.glass-card {
+  border: 2px solid transparent;
+}
+
 .tour-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
