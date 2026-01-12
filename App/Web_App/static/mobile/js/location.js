@@ -46,11 +46,62 @@ function initAutocomplete() {
         localStorage.setItem('alfie_start', JSON.stringify(startLocation));
     });
 
-    // Load saved start location if exists
+    // Load saved start location if exists, otherwise get current location
     const savedStart = localStorage.getItem('alfie_start');
     if (savedStart) {
         const start = JSON.parse(savedStart);
         startInput.value = start.name || start.address;
+    } else {
+        // Automatically get current location as start point
+        getCurrentLocationAsStart();
+    }
+}
+
+function getCurrentLocationAsStart() {
+    const startInput = document.getElementById('start-input');
+
+    if (navigator.geolocation) {
+        startInput.placeholder = "Getting your location...";
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                // Reverse geocode to get address
+                const geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ location: pos }, (results, status) => {
+                    if (status === 'OK' && results[0]) {
+                        const startLocation = {
+                            name: "Current Location",
+                            address: results[0].formatted_address,
+                            lat: pos.lat,
+                            lng: pos.lng
+                        };
+                        localStorage.setItem('alfie_start', JSON.stringify(startLocation));
+                        startInput.value = results[0].formatted_address;
+                    } else {
+                        // Fallback to coordinates if geocoding fails
+                        const startLocation = {
+                            name: "Current Location",
+                            address: "Lat: " + pos.lat.toFixed(4) + ", Lng: " + pos.lng.toFixed(4),
+                            lat: pos.lat,
+                            lng: pos.lng
+                        };
+                        localStorage.setItem('alfie_start', JSON.stringify(startLocation));
+                        startInput.value = startLocation.address;
+                    }
+                });
+            },
+            (error) => {
+                console.error("Error getting location:", error);
+                startInput.placeholder = "Enter start location";
+            }
+        );
+    } else {
+        startInput.placeholder = "Enter start location";
     }
 }
 
@@ -76,40 +127,7 @@ function selectDestination(place) {
     }, 400);
 }
 
-// Current Location Handler
-document.getElementById('use-location').addEventListener('click', () => {
-    const btn = document.getElementById('use-location');
-    btn.classList.add('pulse');
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-
-                const destination = {
-                    name: "Current Location",
-                    address: "Lat: " + pos.lat.toFixed(4) + ", Lng: " + pos.lng.toFixed(4),
-                    lat: pos.lat,
-                    lng: pos.lng
-                };
-                localStorage.setItem('alfie_destination', JSON.stringify(destination));
-
-                setTimeout(() => {
-                    window.location.href = '/mobile/route-mode';
-                }, 400);
-            },
-            (error) => {
-                console.error("Error getting location:", error);
-                alert("Error getting location. Please search manually.");
-            }
-        );
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
-});
+// Current Location Button removed - start location now automatically uses current location
 
 // Popular Suggestions Handler
 document.querySelectorAll('.suggestion-item').forEach(item => {
