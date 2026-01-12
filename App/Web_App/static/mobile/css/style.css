@@ -880,8 +880,12 @@ p {
   border: 2px solid transparent;
 }
 
-.tour-card.glass-card {
+.tour-grid .tour-card.glass-card {
   border: 2px solid transparent !important;
+}
+
+.tour-grid .tour-card.glass-card.selected {
+  border: 2px solid var(--accent-yellow) !important;
 }
 
 .tour-card:hover {

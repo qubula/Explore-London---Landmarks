@@ -1,6 +1,26 @@
+// Google Maps API Error Detection
+window.gm_authFailure = function() {
+    alert('❌ GOOGLE MAPS ERROR: Invalid API key or billing issue.\n\nPlease check:\n1. Google Cloud Console billing\n2. API key restrictions\n3. Maps JavaScript API is enabled');
+    console.error('Google Maps authentication failed - likely billing or API key issue');
+};
+
+// Detect other Google Maps errors
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+            alert('❌ GOOGLE MAPS ERROR: Failed to load Google Maps API.\n\nPossible causes:\n1. Network issue\n2. API key invalid\n3. Billing not active');
+            console.error('Google Maps API failed to load');
+        }
+    }, 5000);
+});
+
 // Prevent reload loops by catching errors
 window.addEventListener('error', function(e) {
     console.error('Global error caught:', e.error || e.message);
+    // Show error to user if it's related to Google Maps
+    if (e.message && e.message.includes('google')) {
+        alert('Error loading Google Maps: ' + e.message);
+    }
     // Don't reload - just log the error
     e.preventDefault();
     return true;
@@ -501,17 +521,24 @@ function renderLandmarkCards(landmarks) {
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: 'auto',
+        speed: 400,
         cardsEffect: {
             perSlideOffset: 8,
             perSlideRotate: 2,
             rotate: true,
-            slideShadows: true,
+            slideShadows: false,
         },
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
             type: 'bullets',
         },
+        // Performance optimizations
+        preventInteractionOnTransition: true,
+        touchRatio: 1,
+        touchAngle: 45,
+        longSwipesRatio: 0.5,
+        longSwipesMs: 300,
     });
 }
 
