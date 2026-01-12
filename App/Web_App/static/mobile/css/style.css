@@ -262,6 +262,13 @@ p {
   letter-spacing: -0.02em;
 }
 
+.top-brand .logo {
+  width: 280px;
+  max-width: 80vw;
+  height: auto;
+  margin-bottom: 16px;
+}
+
 .top-brand p.tagline {
   font-size: 15px;
   color: var(--text-secondary);
