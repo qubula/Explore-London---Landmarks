@@ -881,7 +881,7 @@ p {
 }
 
 .tour-card.glass-card {
-  border: 2px solid transparent;
+  border: 2px solid transparent !important;
 }
 
 .tour-card:hover {
