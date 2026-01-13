@@ -1,6 +1,10 @@
 let autocomplete;
 let startAutocomplete;
 
+// Clear saved locations on page load for fresh start
+localStorage.removeItem('alfie_start');
+localStorage.removeItem('alfie_destination');
+
 function initAutocomplete() {
     // Setup destination input autocomplete
     const input = document.getElementById('destination-input');
@@ -46,15 +50,8 @@ function initAutocomplete() {
         localStorage.setItem('alfie_start', JSON.stringify(startLocation));
     });
 
-    // Load saved start location if exists, otherwise get current location
-    const savedStart = localStorage.getItem('alfie_start');
-    if (savedStart) {
-        const start = JSON.parse(savedStart);
-        startInput.value = start.name || start.address;
-    } else {
-        // Automatically get current location as start point
-        getCurrentLocationAsStart();
-    }
+    // Always get fresh current location on page load
+    getCurrentLocationAsStart();
 }
 
 function getCurrentLocationAsStart() {
