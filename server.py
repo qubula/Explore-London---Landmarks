@@ -149,6 +149,16 @@ async def api_check_tour_availability(request: Request):
                 content={"status": "error", "message": "Start and end locations are required"}
             )
 
+        # Convert mode from frontend format to backend format
+        # Frontend: "fastest" or "scenic"
+        # Backend: "1" (fastest), "2" (scenic auto), "3" (scenic select)
+        if mode == "fastest":
+            route_mode = "1"
+        elif mode == "scenic":
+            route_mode = "2"
+        else:
+            route_mode = mode  # Already in correct format (1, 2, or 3)
+
         # Define all tour types to check
         tour_types = [
             'architecture', 'historical', 'royal', 'modern',
@@ -158,7 +168,7 @@ async def api_check_tour_availability(request: Request):
         # Check each tour type for landmarks
         availability = {}
         for tour_type in tour_types:
-            result = plan_route(start, end, mode, tour_type=tour_type)
+            result = plan_route(start, end, route_mode, tour_type=tour_type)
             # Filter out tour types with only 1 landmark (need at least 2)
             landmark_count = len(result.get('landmarks', []))
             availability[tour_type] = landmark_count > 1
