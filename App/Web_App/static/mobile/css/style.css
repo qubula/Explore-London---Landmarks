@@ -880,12 +880,17 @@ p {
   border: 2px solid transparent;
 }
 
+.tour-grid .glass-card.tour-card,
 .tour-grid .tour-card.glass-card {
-  border: 2px solid transparent !important;
+  border: none !important;
   box-shadow: none !important;
   outline: none !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
 }
 
+.tour-grid .glass-card.tour-card.selected,
 .tour-grid .tour-card.glass-card.selected {
   border: 2px solid var(--accent-yellow) !important;
   box-shadow: none !important;
