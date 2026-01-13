@@ -41,6 +41,8 @@ let selectedTour = null;
 
 // Check tour availability on page load
 async function checkTourAvailability() {
+    console.log('[Tour Availability] Starting check...');
+
     const startData = localStorage.getItem('alfie_start');
     const endData = localStorage.getItem('alfie_destination');
     const mode = localStorage.getItem('alfie_route_mode');
@@ -53,6 +55,7 @@ async function checkTourAvailability() {
 
     if (!startData || !endData) {
         console.warn('No route information found - cannot check availability');
+        console.log('[Tour Availability] Skipping - showing all themes');
         return;
     }
 
@@ -82,26 +85,46 @@ async function checkTourAvailability() {
 
             console.log('[Tour Availability] Filtering cards based on:', availability);
 
-            // Gray out tour cards that have no landmarks
-            let disabledCount = 0;
+            // Hide tour cards that have no landmarks
+            let hiddenCount = 0;
+            let totalCards = 0;
+
             document.querySelectorAll('.tour-card').forEach(card => {
+                totalCards++;
                 const onclickAttr = card.getAttribute('onclick');
+                if (!onclickAttr) {
+                    console.warn('[Tour Availability] Card has no onclick attribute', card);
+                    return;
+                }
+
                 const match = onclickAttr.match(/selectTourType\('([^']+)'\)/);
 
                 if (match && match[1]) {
                     const tourType = match[1];
+                    console.log(`[Tour Availability] Checking ${tourType}:`, availability[tourType]);
+
                     if (availability[tourType] === false) {
                         // Hide the card completely
                         card.style.display = 'none';
                         card.classList.add('hidden-unavailable');
 
-                        disabledCount++;
-                        console.log(`[Tour Availability] Hiding ${tourType} - no landmarks available`);
+                        hiddenCount++;
+                        console.log(`[Tour Availability] ✓ HIDING ${tourType} - no landmarks available`);
+                    } else {
+                        console.log(`[Tour Availability] ✓ SHOWING ${tourType} - has landmarks`);
                     }
                 }
             });
 
-            console.log(`[Tour Availability] Disabled ${disabledCount} tour types`);
+            console.log(`[Tour Availability] Summary: Hidden ${hiddenCount} of ${totalCards} tour types`);
+
+            // Update page description to show filtering happened
+            if (hiddenCount > 0) {
+                const descElem = document.getElementById('tour-desc');
+                if (descElem) {
+                    descElem.textContent = `Showing themes available on your route (${totalCards - hiddenCount} available)`;
+                }
+            }
         }
     } catch (error) {
         console.error('[Tour Availability] Error:', error);
