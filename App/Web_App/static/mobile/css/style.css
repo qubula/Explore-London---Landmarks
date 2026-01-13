@@ -882,10 +882,13 @@ p {
 
 .tour-grid .tour-card.glass-card {
   border: 2px solid transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .tour-grid .tour-card.glass-card.selected {
   border: 2px solid var(--accent-yellow) !important;
+  box-shadow: none !important;
 }
 
 .tour-card:hover {
