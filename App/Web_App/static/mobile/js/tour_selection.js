@@ -91,20 +91,12 @@ async function checkTourAvailability() {
                 if (match && match[1]) {
                     const tourType = match[1];
                     if (availability[tourType] === false) {
-                        // Disable the card visually and functionally
-                        card.style.opacity = '0.4';
-                        card.style.pointerEvents = 'none';
-                        card.style.filter = 'grayscale(0.8)';
-                        card.classList.add('disabled');
-
-                        // Add "No landmarks available" message
-                        const tourMeta = card.querySelector('.tour-meta');
-                        if (tourMeta && !tourMeta.querySelector('.unavailable-tag')) {
-                            tourMeta.innerHTML = '<span class="unavailable-tag">No landmarks on this route</span>';
-                        }
+                        // Hide the card completely
+                        card.style.display = 'none';
+                        card.classList.add('hidden-unavailable');
 
                         disabledCount++;
-                        console.log(`[Tour Availability] Disabling ${tourType} - no landmarks available`);
+                        console.log(`[Tour Availability] Hiding ${tourType} - no landmarks available`);
                     }
                 }
             });

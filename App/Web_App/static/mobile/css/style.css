@@ -896,6 +896,10 @@ p {
   box-shadow: none !important;
 }
 
+.tour-card.hidden-unavailable {
+  display: none !important;
+}
+
 .tour-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
