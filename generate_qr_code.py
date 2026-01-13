@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 import os
 
 # Your app URL - replace with your custom domain when ready
-APP_URL = "https://explore-london-landmarks-production.up.railway.app/mobile"
+APP_URL = "https://www.passingby.uk/mobile"
 
 def generate_qr_code(url, filename="passingby_qr_code.png", with_logo=False):
     """
