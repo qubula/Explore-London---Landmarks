@@ -43,6 +43,9 @@ let selectedTour = null;
 async function checkTourAvailability() {
     console.log('[Tour Availability] Starting check...');
 
+    // Show loading overlay
+    const loadingOverlay = document.getElementById('loading-overlay');
+
     const startData = localStorage.getItem('alfie_start');
     const endData = localStorage.getItem('alfie_destination');
     const mode = localStorage.getItem('alfie_route_mode');
@@ -56,6 +59,11 @@ async function checkTourAvailability() {
     if (!startData || !endData) {
         console.warn('No route information found - cannot check availability');
         console.log('[Tour Availability] Skipping - showing all themes');
+
+        // Hide loading overlay
+        if (loadingOverlay) {
+            loadingOverlay.classList.add('hidden');
+        }
 
         // Temporary debug message for user
         const descElem = document.getElementById('tour-desc');
@@ -75,13 +83,6 @@ async function checkTourAvailability() {
     const end = endLocation.address || endLocation.name;
 
     console.log('[Tour Availability] Checking:', { start, end, mode });
-
-    // Temporary debug message showing we're checking
-    const descElem = document.getElementById('tour-desc');
-    if (descElem) {
-        descElem.textContent = '🔄 Checking available themes...';
-        descElem.style.color = 'blue';
-    }
 
     try {
         const response = await fetch('/api/check-tour-availability', {
@@ -143,9 +144,19 @@ async function checkTourAvailability() {
                     descElem.textContent = `Showing themes available on your route (${totalCards - hiddenCount} available)`;
                 }
             }
+
+            // Hide loading overlay after successful check
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('hidden');
+            }
         }
     } catch (error) {
         console.error('[Tour Availability] Error:', error);
+
+        // Hide loading overlay on error
+        if (loadingOverlay) {
+            loadingOverlay.classList.add('hidden');
+        }
 
         // Temporary debug message for user
         const descElem = document.getElementById('tour-desc');
