@@ -56,6 +56,13 @@ async function checkTourAvailability() {
     if (!startData || !endData) {
         console.warn('No route information found - cannot check availability');
         console.log('[Tour Availability] Skipping - showing all themes');
+
+        // Temporary debug message for user
+        const descElem = document.getElementById('tour-desc');
+        if (descElem) {
+            descElem.textContent = '⚠️ Debug: No route data found in storage';
+            descElem.style.color = 'red';
+        }
         return;
     }
 
@@ -69,12 +76,23 @@ async function checkTourAvailability() {
 
     console.log('[Tour Availability] Checking:', { start, end, mode });
 
+    // Temporary debug message showing we're checking
+    const descElem = document.getElementById('tour-desc');
+    if (descElem) {
+        descElem.textContent = '🔄 Checking available themes...';
+        descElem.style.color = 'blue';
+    }
+
     try {
         const response = await fetch('/api/check-tour-availability', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ start, end, mode })
         });
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
 
         const data = await response.json();
 
@@ -128,6 +146,13 @@ async function checkTourAvailability() {
         }
     } catch (error) {
         console.error('[Tour Availability] Error:', error);
+
+        // Temporary debug message for user
+        const descElem = document.getElementById('tour-desc');
+        if (descElem) {
+            descElem.textContent = `⚠️ Debug: API error - ${error.message}`;
+            descElem.style.color = 'orange';
+        }
         // If there's an error, show all tours (fail gracefully)
     }
 }
