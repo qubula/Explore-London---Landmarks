@@ -935,7 +935,7 @@ p {
 }
 
 .tour-card:active .tour-bg {
-  filter: brightness(0.8);
+  filter: brightness(0.5) !important;
 }
 
 .tour-icon {
