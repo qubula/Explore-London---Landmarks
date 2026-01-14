@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 155.94 155.94">
+  <defs>
+    <style>
+      .user-location-stroke {
+        fill: none;
+        stroke: #ffffff;
+        stroke-width: 10;
+        stroke-linejoin: round;
+      }
+      .user-location-fill {
+        fill: #e5383b;
+      }
+    </style>
+  </defs>
+  <!-- White border triangle -->
+  <polygon class="user-location-stroke" points="77.97,20 135,135 20,135"/>
+  <!-- Red fill triangle -->
+  <polygon class="user-location-fill" points="77.97,20 135,135 20,135"/>
+</svg>

@@ -291,12 +291,9 @@ function updateUserMarker(pos) {
             position: pos,
             map: map,
             icon: {
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: 10,  // Slightly larger for visibility
-                fillColor: "#2196F3",  // Bright blue
-                fillOpacity: 1,
-                strokeColor: "#ffffff",
-                strokeWeight: 3,  // Thicker white border
+                url: '/static/mobile/images/markers/user-location.svg',
+                scaledSize: new google.maps.Size(20, 20),  // Match start/end marker size
+                anchor: new google.maps.Point(10, 10)  // Center anchor point
             },
             title: "Your Location",
             zIndex: 1000  // Ensure it's on top
