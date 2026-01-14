@@ -934,6 +934,10 @@ p {
   opacity: 1;
 }
 
+.tour-card:active .tour-bg {
+  filter: brightness(0.8);
+}
+
 .tour-icon {
   font-size: 2rem;
   position: relative;
