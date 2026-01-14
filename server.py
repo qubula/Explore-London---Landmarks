@@ -167,13 +167,19 @@ async def api_check_tour_availability(request: Request):
 
         # Check each tour type for landmarks
         availability = {}
+        landmark_counts = {}
         for tour_type in tour_types:
             result = plan_route(start, end, route_mode, tour_type=tour_type)
-            # Show theme if it has at least 1 landmark
+            # Count landmarks for each theme
             landmark_count = len(result.get('landmarks', []))
             availability[tour_type] = landmark_count >= 1
+            landmark_counts[tour_type] = landmark_count
 
-        return JSONResponse(content={"status": "success", "availability": availability})
+        return JSONResponse(content={
+            "status": "success",
+            "availability": availability,
+            "landmark_counts": landmark_counts
+        })
 
     except Exception as e:
         return JSONResponse(

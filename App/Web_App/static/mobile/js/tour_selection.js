@@ -101,12 +101,15 @@ async function checkTourAvailability() {
 
         if (data.status === 'success') {
             const availability = data.availability;
+            const landmarkCounts = data.landmark_counts || {};
 
             console.log('[Tour Availability] Filtering cards based on:', availability);
+            console.log('[Tour Availability] Landmark counts:', landmarkCounts);
 
             // Hide tour cards that have no landmarks
             let hiddenCount = 0;
             let totalCards = 0;
+            let visibleThemeCards = []; // Track visible theme cards (excluding "all")
 
             document.querySelectorAll('.tour-card').forEach(card => {
                 totalCards++;
@@ -131,11 +134,32 @@ async function checkTourAvailability() {
                         console.log(`[Tour Availability] ✓ HIDING ${tourType} - no landmarks available`);
                     } else {
                         console.log(`[Tour Availability] ✓ SHOWING ${tourType} - has landmarks`);
+
+                        // Track visible theme cards (not "all")
+                        if (tourType !== 'all') {
+                            visibleThemeCards.push({
+                                element: card,
+                                type: tourType,
+                                count: landmarkCounts[tourType] || 0
+                            });
+                        }
                     }
                 }
             });
 
             console.log(`[Tour Availability] Summary: Hidden ${hiddenCount} of ${totalCards} tour types`);
+
+            // If odd number of visible theme cards, make the one with most landmarks full-width
+            if (visibleThemeCards.length % 2 === 1) {
+                // Sort by landmark count descending
+                visibleThemeCards.sort((a, b) => b.count - a.count);
+                const topTheme = visibleThemeCards[0];
+
+                if (topTheme) {
+                    topTheme.element.classList.add('full-width');
+                    console.log(`[Tour Availability] ✓ Making ${topTheme.type} full-width (${topTheme.count} landmarks)`);
+                }
+            }
 
             // Update page description to show filtering happened
             if (hiddenCount > 0) {
