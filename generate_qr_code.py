@@ -70,6 +70,100 @@ def generate_qr_code(url, filename="passingby_qr_code.png", with_logo=False):
     return filename
 
 
+def generate_circular_qr_code(url, filename="passingby_qr_circular.png", with_logo=False):
+    """
+    Generate a circular QR code for the PassingBy app
+
+    Args:
+        url: The URL to encode in the QR code
+        filename: Output filename for the QR code
+        with_logo: Whether to add the PassingBy logo in the center
+    """
+
+    # Create QR code instance with high error correction for circular masking
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=10,
+        border=4,
+    )
+
+    # Add data
+    qr.add_data(url)
+    qr.make(fit=True)
+
+    # Create QR code image
+    qr_img = qr.make_image(fill_color="black", back_color="white")
+    qr_img = qr_img.convert('RGBA')
+
+    # Get QR code dimensions
+    qr_width, qr_height = qr_img.size
+
+    # Create circular mask
+    mask = Image.new('L', (qr_width, qr_height), 0)
+    mask_draw = ImageDraw.Draw(mask)
+
+    # Draw circle (ellipse with equal width and height)
+    mask_draw.ellipse((0, 0, qr_width, qr_height), fill=255)
+
+    # Create a white background
+    circular_qr = Image.new('RGBA', (qr_width, qr_height), (255, 255, 255, 255))
+
+    # Apply circular mask to QR code
+    qr_img.putalpha(mask)
+
+    # Composite the QR code onto white background
+    circular_qr.paste(qr_img, (0, 0), qr_img)
+
+    # Add logo in center if requested
+    if with_logo:
+        logo_path = "App/Logo/LogoPassingBy.png"
+        if os.path.exists(logo_path):
+            logo = Image.open(logo_path).convert('RGBA')
+
+            # Calculate logo size (about 20% of QR code)
+            logo_size = qr_width // 5
+
+            # Resize logo
+            logo = logo.resize((logo_size, logo_size), Image.Resampling.LANCZOS)
+
+            # Create circular mask for logo
+            logo_mask = Image.new('L', (logo_size, logo_size), 0)
+            logo_mask_draw = ImageDraw.Draw(logo_mask)
+            logo_mask_draw.ellipse((0, 0, logo_size, logo_size), fill=255)
+
+            # Add white circular background behind logo
+            bg_size = logo_size + 20
+            logo_bg = Image.new('RGBA', (bg_size, bg_size), (255, 255, 255, 255))
+            logo_bg_mask = Image.new('L', (bg_size, bg_size), 0)
+            logo_bg_mask_draw = ImageDraw.Draw(logo_bg_mask)
+            logo_bg_mask_draw.ellipse((0, 0, bg_size, bg_size), fill=255)
+            logo_bg.putalpha(logo_bg_mask)
+
+            # Paste white background
+            bg_pos = ((qr_width - bg_size) // 2, (qr_height - bg_size) // 2)
+            circular_qr.paste(logo_bg, bg_pos, logo_bg)
+
+            # Apply circular mask to logo
+            logo.putalpha(logo_mask)
+
+            # Paste logo
+            logo_pos = ((qr_width - logo_size) // 2, (qr_height - logo_size) // 2)
+            circular_qr.paste(logo, logo_pos, logo)
+
+    # Convert to RGB for saving as PNG
+    final_img = Image.new('RGB', (qr_width, qr_height), (255, 255, 255))
+    final_img.paste(circular_qr, (0, 0), circular_qr)
+
+    # Save
+    final_img.save(filename)
+    print(f"✓ Circular QR code saved to: {filename}")
+    print(f"  URL: {url}")
+    print(f"  Size: {final_img.size[0]}x{final_img.size[1]} pixels")
+
+    return filename
+
+
 def generate_printable_qr(url, filename="passingby_qr_printable.png"):
     """
     Generate a printable QR code with instructions for taxi passengers
@@ -159,6 +253,13 @@ if __name__ == "__main__":
     # Generate printable version
     print("\n3. Generating printable QR code with instructions...")
     generate_printable_qr(APP_URL, "passingby_qr_printable.png")
+
+    # Generate circular QR codes
+    print("\n4. Generating circular QR code...")
+    generate_circular_qr_code(APP_URL, "passingby_qr_circular.png", with_logo=False)
+
+    print("\n5. Generating circular QR code with logo...")
+    generate_circular_qr_code(APP_URL, "passingby_qr_circular_logo.png", with_logo=True)
 
     print("\n" + "=" * 50)
     print("✓ All QR codes generated successfully!")
