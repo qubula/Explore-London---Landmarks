@@ -366,28 +366,28 @@ async function calculateRoute() {
                     map: map
                 });
 
-                // Add start marker with custom white pin SVG
+                // Add start marker with rounded rectangle
                 new google.maps.Marker({
                     position: path[0],
                     map: map,
                     title: 'Start',
                     icon: {
                         url: '/static/mobile/images/markers/start-pin.svg',
-                        scaledSize: new google.maps.Size(16, 28.5),  // Half size: 16x28.5
-                        anchor: new google.maps.Point(8, 28.5)  // Anchor at bottom center of pin
+                        scaledSize: new google.maps.Size(20, 20),  // Square shape
+                        anchor: new google.maps.Point(10, 10)  // Anchor at center
                     },
                     zIndex: 100
                 });
 
-                // Add end marker with custom gray pin SVG
+                // Add end marker with circle
                 new google.maps.Marker({
                     position: path[path.length - 1],
                     map: map,
                     title: 'Destination',
                     icon: {
                         url: '/static/mobile/images/markers/end-pin.svg',
-                        scaledSize: new google.maps.Size(16, 28.5),  // Half size: 16x28.5
-                        anchor: new google.maps.Point(8, 28.5)  // Anchor at bottom center of pin
+                        scaledSize: new google.maps.Size(20, 20),  // Circle shape
+                        anchor: new google.maps.Point(10, 10)  // Anchor at center
                     },
                     zIndex: 100
                 });
