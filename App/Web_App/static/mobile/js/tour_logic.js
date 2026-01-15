@@ -370,8 +370,8 @@ async function calculateRoute() {
                     title: 'Start',
                     icon: {
                         url: '/static/mobile/images/markers/start-pin.svg',
-                        scaledSize: new google.maps.Size(20, 20),  // Square shape
-                        anchor: new google.maps.Point(10, 10)  // Anchor at center
+                        scaledSize: new google.maps.Size(10, 10),  // Square shape (50% smaller)
+                        anchor: new google.maps.Point(5, 5)  // Anchor at center
                     },
                     zIndex: 100
                 });
@@ -383,8 +383,8 @@ async function calculateRoute() {
                     title: 'Destination',
                     icon: {
                         url: '/static/mobile/images/markers/end-pin.svg',
-                        scaledSize: new google.maps.Size(20, 20),  // Circle shape
-                        anchor: new google.maps.Point(10, 10)  // Anchor at center
+                        scaledSize: new google.maps.Size(10, 10),  // Circle shape (50% smaller)
+                        anchor: new google.maps.Point(5, 5)  // Anchor at center
                     },
                     zIndex: 100
                 });
