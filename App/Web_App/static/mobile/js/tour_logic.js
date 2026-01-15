@@ -291,7 +291,7 @@ function updateUserMarker(pos) {
             position: pos,
             map: map,
             icon: {
-                url: '/static/mobile/images/markers/user-location.svg',
+                url: '/static/mobile/images/markers/user-location.svg?v=2',
                 scaledSize: new google.maps.Size(20, 20),  // Match start/end marker size
                 anchor: new google.maps.Point(10, 10)  // Center anchor point
             },
@@ -369,7 +369,7 @@ async function calculateRoute() {
                     map: map,
                     title: 'Start',
                     icon: {
-                        url: '/static/mobile/images/markers/start-pin.svg',
+                        url: '/static/mobile/images/markers/start-pin.svg?v=2',
                         scaledSize: new google.maps.Size(10, 10),  // Square shape (50% smaller)
                         anchor: new google.maps.Point(5, 5)  // Anchor at center
                     },
@@ -382,7 +382,7 @@ async function calculateRoute() {
                     map: map,
                     title: 'Destination',
                     icon: {
-                        url: '/static/mobile/images/markers/end-pin.svg',
+                        url: '/static/mobile/images/markers/end-pin.svg?v=2',
                         scaledSize: new google.maps.Size(10, 10),  // Circle shape (50% smaller)
                         anchor: new google.maps.Point(5, 5)  // Anchor at center
                     },
