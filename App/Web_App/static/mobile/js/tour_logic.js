@@ -359,7 +359,7 @@ async function calculateRoute() {
                     geodesic: true,
                     strokeColor: '#FAF8F3',
                     strokeOpacity: 0.9,
-                    strokeWeight: 5,
+                    strokeWeight: 2.5,
                     map: map
                 });
 
