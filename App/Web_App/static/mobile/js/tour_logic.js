@@ -291,7 +291,7 @@ function updateUserMarker(pos) {
             position: pos,
             map: map,
             icon: {
-                url: '/static/mobile/images/markers/user-location.svg?v=2',
+                url: '/static/mobile/images/markers/user-location.svg?v=3',
                 scaledSize: new google.maps.Size(20, 20),  // Match start/end marker size
                 anchor: new google.maps.Point(10, 10)  // Center anchor point
             },

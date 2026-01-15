@@ -6,15 +6,14 @@
         fill: none;
         stroke: #ffffff;
         stroke-width: 10;
-        stroke-linejoin: round;
       }
       .user-location-fill {
         fill: #e5383b;
       }
     </style>
   </defs>
-  <!-- White border hexagon -->
-  <polygon class="user-location-stroke" points="77.97,20 125,48.98 125,106.96 77.97,135.94 30.94,106.96 30.94,48.98"/>
-  <!-- Red fill hexagon -->
-  <polygon class="user-location-fill" points="77.97,20 125,48.98 125,106.96 77.97,135.94 30.94,106.96 30.94,48.98"/>
+  <!-- White border circle -->
+  <circle class="user-location-stroke" cx="77.97" cy="77.97" r="72.97"/>
+  <!-- Red fill circle -->
+  <circle class="user-location-fill" cx="77.97" cy="77.97" r="72.97"/>
 </svg>
