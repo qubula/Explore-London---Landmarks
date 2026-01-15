@@ -111,7 +111,13 @@ async function checkTourAvailability() {
             let totalCards = 0;
             let visibleThemeCards = []; // Track visible theme cards (excluding "all")
 
+            // First pass: remove any existing full-width classes and collect visible cards
             document.querySelectorAll('.tour-card').forEach(card => {
+                // Remove full-width from all theme cards (not Surprise Me)
+                if (!card.classList.contains('featured-tour')) {
+                    card.classList.remove('full-width');
+                }
+
                 totalCards++;
                 const onclickAttr = card.getAttribute('onclick');
                 if (!onclickAttr) {
@@ -148,10 +154,11 @@ async function checkTourAvailability() {
             });
 
             console.log(`[Tour Availability] Summary: Hidden ${hiddenCount} of ${totalCards} tour types`);
+            console.log(`[Tour Availability] Visible theme cards: ${visibleThemeCards.length}`);
 
             // If odd number of visible theme cards, make the one with most landmarks full-width
             if (visibleThemeCards.length % 2 === 1) {
-                // Sort by landmark count descending
+                // Sort by landmark count descending to find the best one
                 visibleThemeCards.sort((a, b) => b.count - a.count);
                 const topTheme = visibleThemeCards[0];
 
@@ -159,6 +166,8 @@ async function checkTourAvailability() {
                     topTheme.element.classList.add('full-width');
                     console.log(`[Tour Availability] ✓ Making ${topTheme.type} full-width (${topTheme.count} landmarks)`);
                 }
+            } else {
+                console.log(`[Tour Availability] ✓ Even number of cards (${visibleThemeCards.length}), no full-width needed`);
             }
 
             // Update page description to show filtering happened
