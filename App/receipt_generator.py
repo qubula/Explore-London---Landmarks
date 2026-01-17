@@ -490,7 +490,7 @@ def generate_visual_receipt(
 
     # ==================== LANDMARKS LIST ====================
     # Centered header
-    header = "LANDMARKS VISITED"
+    header = "LANDMARKS PASSED BY"
     bbox = draw.textbbox((0, 0), header, font=font_header)
     h_w = bbox[2] - bbox[0]
     draw.text(((PRINTER_WIDTH_PX - h_w) / 2, cursor_y + 15), header, font=font_header, fill="black")
