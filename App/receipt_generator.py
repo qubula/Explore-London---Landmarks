@@ -233,6 +233,7 @@ def generate_visual_receipt(
     font_tiny = get_font(FONT_SIZE_TINY, bold=False)
 
     cursor_y = PADDING
+    header_start_y = cursor_y  # Remember where header starts for building decoration
 
     # ==================== HEADER ====================
     # Try to load and use the actual PassingBy logo
@@ -253,15 +254,15 @@ def generate_visual_receipt(
                 # Convert to grayscale
                 logo = logo.convert('L')
 
-                # Resize logo to fit width (leaving margins)
-                max_logo_width = PRINTER_WIDTH_PX - (PADDING * 4)
+                # Resize logo to fit width (leaving margins for building decoration)
+                max_logo_width = PRINTER_WIDTH_PX - (PADDING * 4) - 60  # Leave space for building
                 aspect = logo.height / logo.width
-                new_width = min(max_logo_width, 200)  # Cap at 200px for thermal receipt
+                new_width = min(max_logo_width, 160)  # Reduced from 200 to leave space
                 new_height = int(new_width * aspect)
                 logo = logo.resize((new_width, new_height), Image.Resampling.LANCZOS)
 
-                # Center and paste logo
-                logo_x = (PRINTER_WIDTH_PX - new_width) // 2
+                # Center and paste logo (slightly left to balance with building)
+                logo_x = (PRINTER_WIDTH_PX - new_width) // 2 - 30
                 img.paste(logo, (logo_x, cursor_y))
                 cursor_y += new_height + 15
 
@@ -276,8 +277,47 @@ def generate_visual_receipt(
         title_text = "PASSINGBY"
         bbox = draw.textbbox((0, 0), title_text, font=font_title)
         title_w = bbox[2] - bbox[0]
-        draw.text(((PRINTER_WIDTH_PX - title_w) / 2, cursor_y), title_text, font=font_title, fill="black")
+        draw.text(((PRINTER_WIDTH_PX - title_w) / 2 - 30, cursor_y), title_text, font=font_title, fill="black")
         cursor_y += 48
+
+    # Draw decorative building icon on the right side
+    building_right = PRINTER_WIDTH_PX - PADDING - 5
+    building_width = 45
+    building_height = 65
+    building_left = building_right - building_width
+    building_top = header_start_y + 10
+    building_bottom = building_top + building_height
+
+    # Main building body (tall rectangle)
+    draw.rectangle(
+        [(building_left, building_top), (building_right, building_bottom)],
+        outline="black",
+        width=2
+    )
+
+    # Windows (3x4 grid)
+    window_size = 6
+    window_gap = 4
+    window_start_x = building_left + 8
+    window_start_y = building_top + 8
+
+    for row in range(4):
+        for col in range(3):
+            wx = window_start_x + col * (window_size + window_gap)
+            wy = window_start_y + row * (window_size + window_gap + 2)
+            draw.rectangle(
+                [(wx, wy), (wx + window_size, wy + window_size)],
+                fill="black"
+            )
+
+    # Rooftop decoration (small triangle/peaked roof)
+    roof_peak_x = (building_left + building_right) // 2
+    roof_peak_y = building_top - 8
+    draw.polygon(
+        [(building_left, building_top), (roof_peak_x, roof_peak_y), (building_right, building_top)],
+        outline="black",
+        fill="black"
+    )
 
     # Subtitle
     subtitle = "London Tour Guide"

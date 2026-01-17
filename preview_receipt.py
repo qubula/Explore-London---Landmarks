@@ -46,8 +46,9 @@ def create_thermal_preview(receipt_path: str) -> str:
     dims = f"Actual size: {receipt.width}px × {receipt.height}px (58mm × {receipt.height * 0.125:.1f}mm)"
     draw.text((20, preview_height + 50), dims, font=font, fill="gray")
 
-    # Save preview
-    preview_path = receipt_path.replace('.png', '_preview.png')
+    # Save preview to iterations folder
+    preview_filename = os.path.basename(receipt_path).replace('.png', '_preview.png')
+    preview_path = os.path.join('Receipt_Iterations', preview_filename)
     preview.save(preview_path)
 
     return preview_path
@@ -93,6 +94,9 @@ if __name__ == "__main__":
         (51.5045, -0.0865),  # The Shard
     ]
 
+    # Ensure iterations folder exists
+    os.makedirs('Receipt_Iterations', exist_ok=True)
+
     print("Generating visual receipt...")
     receipt_path = generate_visual_receipt(
         landmarks=sample_landmarks,
@@ -104,6 +108,12 @@ if __name__ == "__main__":
         route_points=sample_route
     )
 
+    # Move receipt to iterations folder
+    receipt_filename = os.path.basename(receipt_path)
+    new_receipt_path = os.path.join('Receipt_Iterations', receipt_filename)
+    os.rename(receipt_path, new_receipt_path)
+    receipt_path = new_receipt_path
+
     print(f"✓ Receipt generated: {receipt_path}")
     print()
 
@@ -112,7 +122,7 @@ if __name__ == "__main__":
     print(f"✓ Preview created: {preview_path}")
     print()
 
-    # Open both files
+    # Open preview in default image viewer (not HTML)
     print("Opening preview in default image viewer...")
     os.system(f'open "{preview_path}"')
 
