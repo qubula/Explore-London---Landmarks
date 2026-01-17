@@ -1,20 +1,18 @@
 """
 receipt_generator.py
 
-Generates thermal printer receipts for PassingBy tours.
-Creates a formatted text receipt with all landmarks visited during the tour,
-plus a static map image showing the route.
+Generates highly visual, aesthetically curated thermal printer receipts for PassingBy tours.
+Creates a beautiful graphical receipt with embedded map, typography, and design elements.
 
 Thermal printer specifications:
-- Width: 80mm (302 dots) or 58mm (203 dots)
-- Character width: 32-48 characters per line
-- Supports text alignment and basic formatting
-- Can print images (384x384px recommended for map snapshots)
+- Width: 58mm (384 pixels at 203 DPI)
+- Outputs monochrome 1-bit dithered PNG images
+- Optimized for ESC/POS thermal printers
 
 INTEGRATION EXAMPLE:
 -------------------
 from App.planner import plan_route
-from App.receipt_generator import generate_tour_receipt, generate_route_map
+from App.receipt_generator import generate_visual_receipt
 
 # Plan the route
 result = plan_route(
@@ -24,25 +22,18 @@ result = plan_route(
     tour_type="historical"
 )
 
-# Generate text receipt
-receipt_text = generate_tour_receipt(
+# Generate visual receipt
+receipt_path = generate_visual_receipt(
     landmarks=result["landmarks"],
     tour_type=result["tour_type"],
     route_mode=result["mode"],
     start_location="King's Cross Station",
     end_location="Waterloo Station",
-    journey_time=f"{int(result['chosen_eta'])} min"
+    journey_time=f"{int(result['chosen_eta'])} min",
+    route_points=result["route_points"]
 )
 
-# Generate map image
-map_path = generate_route_map(
-    route_points=result["route_points"],
-    start_coords=result["route_points"][0],  # First point
-    end_coords=result["route_points"][-1]    # Last point
-)
-
-# Print both to thermal printer
-# (printer-specific code here)
+# Send receipt_path to thermal printer
 """
 
 from datetime import datetime
@@ -50,41 +41,169 @@ from typing import List, Dict, Tuple
 import os
 import requests
 import polyline
+from PIL import Image, ImageDraw, ImageFont
 
 
-def format_receipt_line(text: str, width: int = 32, align: str = 'left') -> str:
+# Configuration
+PRINTER_WIDTH_PX = 384  # Standard width for 58mm thermal printers (203 DPI)
+PADDING = 20
+FONT_SIZE_TITLE = 38
+FONT_SIZE_HEADER = 24
+FONT_SIZE_BODY = 18
+FONT_SIZE_SMALL = 14
+FONT_SIZE_TINY = 12
+
+
+def get_font(size: int, bold: bool = False):
     """
-    Format a line of text for thermal printer.
+    Load system fonts with fallback to PIL default.
+    Tries to use Helvetica/Arial for clean, modern aesthetics.
+    """
+    font_names = []
+
+    if bold:
+        font_names = [
+            "/System/Library/Fonts/Helvetica.ttc",
+            "/System/Library/Fonts/SFNSDisplay.ttf",
+            "Arial Bold",
+            "Helvetica Bold"
+        ]
+    else:
+        font_names = [
+            "/System/Library/Fonts/Helvetica.ttc",
+            "/System/Library/Fonts/SFNSDisplay.ttf",
+            "Arial",
+            "Helvetica"
+        ]
+
+    for font_name in font_names:
+        try:
+            return ImageFont.truetype(font_name, size)
+        except:
+            continue
+
+    # Ultimate fallback
+    return ImageFont.load_default()
+
+
+def draw_separator(draw, y, width, thickness=2, style="solid"):
+    """
+    Draw stylistic horizontal lines.
 
     Args:
-        text: Text to format
-        width: Character width (default 32 for 58mm paper)
-        align: Alignment ('left', 'center', 'right')
-
-    Returns:
-        Formatted line with proper padding
+        style: "solid", "double", or "dashed"
     """
-    if len(text) > width:
-        text = text[:width-3] + '...'
+    if style == "solid":
+        draw.line([(0, y), (width, y)], fill="black", width=thickness)
+        return y + thickness + 10
+    elif style == "double":
+        draw.line([(0, y), (width, y)], fill="black", width=1)
+        draw.line([(0, y + 3), (width, y + 3)], fill="black", width=1)
+        return y + 13
+    elif style == "dashed":
+        dash_length = 10
+        gap_length = 5
+        x = 0
+        while x < width:
+            draw.line([(x, y), (min(x + dash_length, width), y)], fill="black", width=thickness)
+            x += dash_length + gap_length
+        return y + thickness + 10
 
-    if align == 'center':
-        return text.center(width)
-    elif align == 'right':
-        return text.rjust(width)
-    else:
-        return text.ljust(width)
+
+def wrap_text_pixels(text: str, font, max_width: int, draw_obj) -> List[str]:
+    """
+    Intelligently wrap text to fit pixel width using specific font metrics.
+    """
+    lines = []
+    words = text.split()
+    current_line = []
+
+    for word in words:
+        test_line = ' '.join(current_line + [word])
+        bbox = draw_obj.textbbox((0, 0), test_line, font=font)
+        w = bbox[2] - bbox[0]
+
+        if w <= max_width:
+            current_line.append(word)
+        else:
+            if current_line:
+                lines.append(' '.join(current_line))
+            current_line = [word]
+
+    if current_line:
+        lines.append(' '.join(current_line))
+
+    return lines if lines else [text]
 
 
-def generate_tour_receipt(
+def fetch_route_map(
+    route_points: List[Tuple[float, float]],
+    start_coords: Tuple[float, float] = None,
+    end_coords: Tuple[float, float] = None,
+    width: int = 384,
+    height: int = 250
+) -> Image.Image:
+    """
+    Fetch map from Google Static Maps API and return as PIL Image.
+    Converts to grayscale and applies high contrast for thermal printing.
+    """
+    api_key = os.getenv("GOOGLE_DIRECTIONS_KEY")
+    if not api_key:
+        print("Warning: GOOGLE_DIRECTIONS_KEY not set, skipping map")
+        return None
+
+    encoded_polyline = polyline.encode(route_points)
+    base_url = "https://maps.googleapis.com/maps/api/staticmap"
+
+    # Build markers list properly
+    markers_list = []
+    if start_coords:
+        markers_list.append(f"color:0x000000|label:S|{start_coords[0]},{start_coords[1]}")
+    if end_coords:
+        markers_list.append(f"color:0x000000|label:E|{end_coords[0]},{end_coords[1]}")
+
+    params = {
+        "size": f"{width}x{height}",
+        "key": api_key,
+        "format": "png",
+        "maptype": "roadmap",
+        "style": [
+            "feature:all|element:all|saturation:-100",  # Black and white
+            "feature:all|element:geometry|lightness:20",  # Lighter background
+            "feature:road|element:geometry|lightness:40",  # Even lighter roads
+        ],
+        "path": f"enc:{encoded_polyline}|color:0x000000ff|weight:4"  # Black route line
+    }
+
+    # Add markers as list
+    if markers_list:
+        params["markers"] = markers_list
+
+    try:
+        response = requests.get(base_url, params=params)
+        if response.status_code == 200:
+            from io import BytesIO
+            map_img = Image.open(BytesIO(response.content))
+            # Convert to grayscale and increase contrast
+            map_img = map_img.convert('L')
+            return map_img
+    except Exception as e:
+        print(f"Error fetching map: {e}")
+
+    return None
+
+
+def generate_visual_receipt(
     landmarks: List[Dict],
     tour_type: str = "all",
     route_mode: str = "Fastest",
     start_location: str = "",
     end_location: str = "",
-    journey_time: str = ""
+    journey_time: str = "",
+    route_points: List[Tuple[float, float]] = None
 ) -> str:
     """
-    Generate a thermal printer receipt for a completed tour.
+    Generate a highly visual, aesthetically curated receipt image for thermal printing.
 
     Args:
         landmarks: List of landmark dicts with 'name' and location info
@@ -92,34 +211,91 @@ def generate_tour_receipt(
         route_mode: Route mode used (e.g., "Fastest", "Scenic Auto")
         start_location: Starting address
         end_location: Ending address
-        journey_time: Total journey time
+        journey_time: Total journey time (e.g., "25 min")
+        route_points: List of (lat, lng) tuples for the route (optional, for map)
 
     Returns:
-        Formatted receipt string ready for thermal printer
+        Path to saved receipt PNG file
     """
-    WIDTH = 32  # Characters per line for 58mm paper
-    receipt = []
 
-    # Header
-    receipt.append("=" * WIDTH)
-    receipt.append(format_receipt_line("PASSINGBY", WIDTH, 'center'))
-    receipt.append(format_receipt_line("London Tour Guide", WIDTH, 'center'))
-    receipt.append("=" * WIDTH)
-    receipt.append("")
+    # Setup canvas (start tall, crop to content later)
+    MAX_HEIGHT = 4000
+    content_width = PRINTER_WIDTH_PX - (PADDING * 2)
 
-    # Tour date and time
+    img = Image.new('RGB', (PRINTER_WIDTH_PX, MAX_HEIGHT), 'white')
+    draw = ImageDraw.Draw(img)
+
+    # Define fonts
+    font_title = get_font(FONT_SIZE_TITLE, bold=True)
+    font_header = get_font(FONT_SIZE_HEADER, bold=True)
+    font_body = get_font(FONT_SIZE_BODY, bold=False)
+    font_small = get_font(FONT_SIZE_SMALL, bold=False)
+    font_tiny = get_font(FONT_SIZE_TINY, bold=False)
+
+    cursor_y = PADDING
+
+    # ==================== HEADER ====================
+    # Large centered title
+    title_text = "PASSINGBY"
+    bbox = draw.textbbox((0, 0), title_text, font=font_title)
+    title_w = bbox[2] - bbox[0]
+    draw.text(((PRINTER_WIDTH_PX - title_w) / 2, cursor_y), title_text, font=font_title, fill="black")
+    cursor_y += 48
+
+    # Subtitle
+    subtitle = "London Tour Guide"
+    bbox = draw.textbbox((0, 0), subtitle, font=font_small)
+    sub_w = bbox[2] - bbox[0]
+    draw.text(((PRINTER_WIDTH_PX - sub_w) / 2, cursor_y), subtitle, font=font_small, fill="black")
+    cursor_y += 28
+
+    # Heavy separator
+    cursor_y = draw_separator(draw, cursor_y, PRINTER_WIDTH_PX, thickness=3, style="solid")
+
+    # ==================== MAP SECTION ====================
+    if route_points:
+        start_coords = route_points[0] if route_points else None
+        end_coords = route_points[-1] if route_points else None
+        map_img = fetch_route_map(route_points, start_coords, end_coords)
+
+        if map_img:
+            # Resize to full width maintaining aspect ratio
+            aspect = map_img.height / map_img.width
+            new_height = int(PRINTER_WIDTH_PX * aspect)
+            map_img = map_img.resize((PRINTER_WIDTH_PX, new_height), Image.Resampling.LANCZOS)
+            img.paste(map_img, (0, cursor_y))
+            cursor_y += new_height + 20
+
+    # ==================== METADATA GRID ====================
     now = datetime.now()
-    date_str = now.strftime("%d %B %Y")
+    date_str = now.strftime("%d.%m.%y")
     time_str = now.strftime("%H:%M")
-    receipt.append(format_receipt_line(f"Date: {date_str}", WIDTH))
-    receipt.append(format_receipt_line(f"Time: {time_str}", WIDTH))
-    receipt.append("")
 
-    # Tour details
-    receipt.append(format_receipt_line("TOUR DETAILS", WIDTH, 'center'))
-    receipt.append("-" * WIDTH)
+    # Left: Date/Time
+    draw.text((PADDING, cursor_y), f"DATE", font=font_tiny, fill="black")
+    draw.text((PADDING, cursor_y + 16), date_str, font=font_body, fill="black")
 
-    # Format tour type name
+    draw.text((PADDING, cursor_y + 40), f"TIME", font=font_tiny, fill="black")
+    draw.text((PADDING, cursor_y + 56), time_str, font=font_body, fill="black")
+
+    # Right: Duration (large, right-aligned)
+    if journey_time:
+        bbox = draw.textbbox((0, 0), journey_time, font=font_header)
+        dur_w = bbox[2] - bbox[0]
+        draw.text((PRINTER_WIDTH_PX - PADDING - dur_w, cursor_y), journey_time, font=font_header, fill="black")
+
+        lbl_text = "DURATION"
+        bbox = draw.textbbox((0, 0), lbl_text, font=font_tiny)
+        lbl_w = bbox[2] - bbox[0]
+        draw.text((PRINTER_WIDTH_PX - PADDING - lbl_w, cursor_y + 28), lbl_text, font=font_tiny, fill="black")
+
+    cursor_y += 90
+    cursor_y = draw_separator(draw, cursor_y, PRINTER_WIDTH_PX, thickness=1, style="solid")
+
+    # ==================== ROUTE DETAILS ====================
+    cursor_y += 5
+
+    # Tour type mapping
     tour_name_map = {
         "architecture": "Architecture",
         "historical": "History",
@@ -133,214 +309,113 @@ def generate_tour_receipt(
     }
     tour_display = tour_name_map.get(tour_type, tour_type.title())
 
-    receipt.append(format_receipt_line(f"Theme: {tour_display}", WIDTH))
-    receipt.append(format_receipt_line(f"Route: {route_mode}", WIDTH))
+    # Mode and Theme
+    draw.text((PADDING, cursor_y), f"MODE", font=font_tiny, fill="black")
+    draw.text((PADDING, cursor_y + 16), route_mode.upper(), font=font_body, fill="black")
+    cursor_y += 40
 
-    if journey_time:
-        receipt.append(format_receipt_line(f"Duration: {journey_time}", WIDTH))
+    draw.text((PADDING, cursor_y), f"THEME", font=font_tiny, fill="black")
+    draw.text((PADDING, cursor_y + 16), tour_display.upper(), font=font_body, fill="black")
+    cursor_y += 45
 
-    receipt.append("")
+    # From / To
+    if start_location:
+        draw.text((PADDING, cursor_y), "FROM", font=font_tiny, fill="black")
+        cursor_y += 16
+        wrapped_start = wrap_text_pixels(start_location, font_small, content_width, draw)
+        for line in wrapped_start:
+            draw.text((PADDING, cursor_y), line, font=font_small, fill="black")
+            cursor_y += 18
+        cursor_y += 10
 
-    # Route summary (if available)
-    if start_location or end_location:
-        receipt.append(format_receipt_line("ROUTE", WIDTH, 'center'))
-        receipt.append("-" * WIDTH)
+    if end_location:
+        draw.text((PADDING, cursor_y), "TO", font=font_tiny, fill="black")
+        cursor_y += 16
+        wrapped_end = wrap_text_pixels(end_location, font_small, content_width, draw)
+        for line in wrapped_end:
+            draw.text((PADDING, cursor_y), line, font=font_small, fill="black")
+            cursor_y += 18
 
-        if start_location:
-            # Wrap long addresses
-            start_parts = wrap_text(f"From: {start_location}", WIDTH - 6)
-            receipt.append(format_receipt_line(start_parts[0], WIDTH))
-            for part in start_parts[1:]:
-                receipt.append(format_receipt_line(f"      {part}", WIDTH))
+    cursor_y += 25
+    cursor_y = draw_separator(draw, cursor_y, PRINTER_WIDTH_PX, thickness=3, style="solid")
 
-        if end_location:
-            end_parts = wrap_text(f"To: {end_location}", WIDTH - 4)
-            receipt.append(format_receipt_line(end_parts[0], WIDTH))
-            for part in end_parts[1:]:
-                receipt.append(format_receipt_line(f"    {part}", WIDTH))
-
-        receipt.append("")
-
-    # Landmarks section
-    receipt.append(format_receipt_line("LANDMARKS VISITED", WIDTH, 'center'))
-    receipt.append("=" * WIDTH)
-    receipt.append("")
+    # ==================== LANDMARKS LIST ====================
+    # Centered header
+    header = "LANDMARKS VISITED"
+    bbox = draw.textbbox((0, 0), header, font=font_header)
+    h_w = bbox[2] - bbox[0]
+    draw.text(((PRINTER_WIDTH_PX - h_w) / 2, cursor_y + 15), header, font=font_header, fill="black")
+    cursor_y += 55
 
     if landmarks:
-        for i, landmark in enumerate(landmarks, 1):
-            name = landmark.get('name', 'Unknown')
+        for i, lm in enumerate(landmarks, 1):
+            name = lm.get('name', 'Unknown')
+            loc = lm.get('location', '')
 
-            # Landmark number and name
-            receipt.append(format_receipt_line(f"{i}. {name}", WIDTH))
+            # Number circle (left)
+            num_str = f"{i:02d}"
+            draw.text((PADDING, cursor_y), num_str, font=font_body, fill="black")
 
-            # Location/postcode (if available in landmark data)
-            location = landmark.get('location', '')
-            postcode = landmark.get('postcode', '')
+            # Name (indented, bold)
+            name_lines = wrap_text_pixels(name, font_body, content_width - 45, draw)
+            for line in name_lines:
+                draw.text((PADDING + 40, cursor_y), line, font=font_body, fill="black")
+                cursor_y += 22
 
-            if postcode:
-                receipt.append(format_receipt_line(f"   {postcode}", WIDTH))
-            elif location:
-                receipt.append(format_receipt_line(f"   {location}", WIDTH))
+            # Location (small, uppercase)
+            if loc:
+                draw.text((PADDING + 40, cursor_y), loc.upper(), font=font_tiny, fill="black")
+                cursor_y += 18
 
-            # Add small gap between landmarks
-            if i < len(landmarks):
-                receipt.append("")
-
-        receipt.append("")
-        receipt.append("-" * WIDTH)
-        receipt.append(format_receipt_line(f"Total: {len(landmarks)} landmarks", WIDTH, 'center'))
+            cursor_y += 18  # Gap between items
     else:
-        receipt.append(format_receipt_line("No landmarks on route", WIDTH, 'center'))
+        no_text = "No landmarks recorded"
+        bbox = draw.textbbox((0, 0), no_text, font=font_small)
+        w = bbox[2] - bbox[0]
+        draw.text(((PRINTER_WIDTH_PX - w) / 2, cursor_y), no_text, font=font_small, fill="black")
+        cursor_y += 35
 
-    receipt.append("")
+    cursor_y += 15
+    cursor_y = draw_separator(draw, cursor_y, PRINTER_WIDTH_PX, thickness=1, style="dashed")
 
-    # Footer
-    receipt.append("=" * WIDTH)
-    receipt.append(format_receipt_line("Thank you for using", WIDTH, 'center'))
-    receipt.append(format_receipt_line("PASSINGBY", WIDTH, 'center'))
-    receipt.append("")
-    receipt.append(format_receipt_line("www.passingby.uk", WIDTH, 'center'))
-    receipt.append("=" * WIDTH)
+    # ==================== FOOTER ====================
+    cursor_y += 20
 
-    # Add extra lines for paper tear-off
-    receipt.append("")
-    receipt.append("")
-    receipt.append("")
+    # Total count badge
+    if landmarks:
+        total_text = f"{len(landmarks)} LANDMARKS"
+        bbox = draw.textbbox((0, 0), total_text, font=font_small)
+        t_w = bbox[2] - bbox[0]
+        # Draw rounded rectangle background (simulate with rectangle)
+        padding = 8
+        draw.rectangle(
+            [(PRINTER_WIDTH_PX - t_w) / 2 - padding, cursor_y - 4,
+             (PRINTER_WIDTH_PX + t_w) / 2 + padding, cursor_y + 18],
+            outline="black", width=2
+        )
+        draw.text(((PRINTER_WIDTH_PX - t_w) / 2, cursor_y), total_text, font=font_small, fill="black")
+        cursor_y += 35
 
-    return "\n".join(receipt)
+    # Website
+    footer_text = "www.passingby.uk"
+    bbox = draw.textbbox((0, 0), footer_text, font=font_body)
+    f_w = bbox[2] - bbox[0]
+    draw.text(((PRINTER_WIDTH_PX - f_w) / 2, cursor_y), footer_text, font=font_body, fill="black")
+    cursor_y += 40
 
+    # ==================== FINALIZE IMAGE ====================
+    # Crop to actual content + padding for tear-off
+    final_height = cursor_y + 80
+    final_img = img.crop((0, 0, PRINTER_WIDTH_PX, final_height))
 
-def wrap_text(text: str, max_width: int) -> List[str]:
-    """
-    Wrap text to fit within max_width, breaking at word boundaries.
+    # Convert to 1-bit monochrome with Floyd-Steinberg dithering
+    # This is CRITICAL for thermal printers to achieve proper contrast
+    final_img = final_img.convert('1')
 
-    Args:
-        text: Text to wrap
-        max_width: Maximum characters per line
-
-    Returns:
-        List of wrapped lines
-    """
-    if len(text) <= max_width:
-        return [text]
-
-    words = text.split()
-    lines = []
-    current_line = []
-    current_length = 0
-
-    for word in words:
-        word_length = len(word)
-        # +1 for space
-        if current_length + word_length + len(current_line) <= max_width:
-            current_line.append(word)
-            current_length += word_length
-        else:
-            if current_line:
-                lines.append(' '.join(current_line))
-            current_line = [word]
-            current_length = word_length
-
-    if current_line:
-        lines.append(' '.join(current_line))
-
-    return lines
-
-
-def generate_route_map(
-    route_points: List[Tuple[float, float]],
-    start_coords: Tuple[float, float] = None,
-    end_coords: Tuple[float, float] = None,
-    output_path: str = None,
-    width: int = 384,
-    height: int = 384
-) -> str:
-    """
-    Generate a static map image with the route line using Google Static Maps API.
-
-    NOTE: Requires Google Static Maps API to be enabled in Google Cloud Console.
-    Uses the GOOGLE_DIRECTIONS_KEY environment variable for authentication.
-
-    Args:
-        route_points: List of (lat, lng) tuples defining the route polyline
-        start_coords: Optional (lat, lng) tuple for start marker
-        end_coords: Optional (lat, lng) tuple for end marker
-        output_path: Path to save the image (auto-generated if not provided)
-        width: Map width in pixels (default 384 for thermal printers)
-        height: Map height in pixels (default 384)
-
-    Returns:
-        Path to saved map image file
-
-    Raises:
-        ValueError: If GOOGLE_DIRECTIONS_KEY environment variable is not set
-        RuntimeError: If Google Static Maps API request fails
-    """
-    api_key = os.getenv("GOOGLE_DIRECTIONS_KEY")
-    if not api_key:
-        raise ValueError("GOOGLE_DIRECTIONS_KEY environment variable not set")
-
-    # Encode route points as polyline for Google Static Maps
-    encoded_polyline = polyline.encode(route_points)
-
-    # Build Static Maps API URL
-    base_url = "https://maps.googleapis.com/maps/api/staticmap"
-
-    params = {
-        "size": f"{width}x{height}",
-        "key": api_key,
-        "format": "png",
-        "maptype": "roadmap",
-    }
-
-    # Add route polyline
-    params["path"] = f"enc:{encoded_polyline}|color:0xFAF8F3|weight:3"
-
-    # Add start marker (white rounded rectangle - approximated with white marker)
-    if start_coords:
-        params["markers"] = f"color:white|label:S|{start_coords[0]},{start_coords[1]}"
-
-    # Add end marker (gray circle - approximated with gray marker)
-    if end_coords:
-        if "markers" in params:
-            params["markers"] += f"&markers=color:gray|label:E|{end_coords[0]},{end_coords[1]}"
-        else:
-            params["markers"] = f"color:gray|label:E|{end_coords[0]},{end_coords[1]}"
-
-    # Make request to Google Static Maps API
-    response = requests.get(base_url, params=params)
-
-    if response.status_code != 200:
-        raise RuntimeError(f"Google Static Maps API error: {response.status_code}")
-
-    # Save image
-    if output_path is None:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_path = f"route_map_{timestamp}.png"
-
-    with open(output_path, 'wb') as f:
-        f.write(response.content)
-
-    return output_path
-
-
-def save_receipt_to_file(receipt_text: str, filename: str = None) -> str:
-    """
-    Save receipt to a text file.
-
-    Args:
-        receipt_text: Formatted receipt string
-        filename: Optional filename (auto-generated if not provided)
-
-    Returns:
-        Path to saved file
-    """
-    if filename is None:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"receipt_{timestamp}.txt"
-
-    with open(filename, 'w', encoding='utf-8') as f:
-        f.write(receipt_text)
+    # Save with timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"receipt_visual_{timestamp}.png"
+    final_img.save(filename, dpi=(203, 203))  # Specify DPI for thermal printer
 
     return filename
 
@@ -348,52 +423,33 @@ def save_receipt_to_file(receipt_text: str, filename: str = None) -> str:
 # Example usage
 if __name__ == "__main__":
     # Load environment variables for testing
-    from dotenv import load_dotenv
-    load_dotenv()
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except:
+        pass
 
     # Sample landmark data
     sample_landmarks = [
         {
             "name": "Big Ben",
-            "postcode": "SW1A 0AA",
             "location": "Westminster"
         },
         {
             "name": "Tower Bridge",
-            "postcode": "SE1 2UP",
             "location": "Tower Hamlets"
         },
         {
             "name": "St Paul's Cathedral",
-            "postcode": "EC4M 8AD",
             "location": "City of London"
         },
         {
             "name": "British Museum",
-            "postcode": "WC1B 3DG",
             "location": "Bloomsbury"
         }
     ]
 
-    # Generate receipt
-    receipt = generate_tour_receipt(
-        landmarks=sample_landmarks,
-        tour_type="historical",
-        route_mode="Scenic Auto",
-        start_location="King's Cross Station",
-        end_location="Waterloo Station",
-        journey_time="25 min"
-    )
-
-    # Print to console
-    print(receipt)
-
-    # Save to file
-    filename = save_receipt_to_file(receipt)
-    print(f"\nReceipt saved to: {filename}")
-
-    # Generate route map (example route points)
-    # In real usage, these would come from the planner.py route_points
+    # Sample route points
     sample_route = [
         (51.5309, -0.1233),  # King's Cross
         (51.5074, -0.1278),  # British Museum area
@@ -403,12 +459,18 @@ if __name__ == "__main__":
         (51.5033, -0.1195),  # Waterloo
     ]
 
-    try:
-        map_path = generate_route_map(
-            route_points=sample_route,
-            start_coords=(51.5309, -0.1233),  # King's Cross
-            end_coords=(51.5033, -0.1195),    # Waterloo
-        )
-        print(f"Route map saved to: {map_path}")
-    except Exception as e:
-        print(f"Could not generate map: {e}")
+    # Generate visual receipt
+    print("Generating visual receipt...")
+    output_file = generate_visual_receipt(
+        landmarks=sample_landmarks,
+        tour_type="historical",
+        route_mode="Scenic Auto",
+        start_location="King's Cross Station, London",
+        end_location="Waterloo Station, London",
+        journey_time="25 min",
+        route_points=sample_route
+    )
+
+    print(f"✓ Receipt saved to: {output_file}")
+    print("  Ready for thermal printer")
+    print("  384px wide, 1-bit monochrome, 203 DPI")
