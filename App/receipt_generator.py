@@ -280,43 +280,115 @@ def generate_visual_receipt(
         draw.text(((PRINTER_WIDTH_PX - title_w) / 2 - 30, cursor_y), title_text, font=font_title, fill="black")
         cursor_y += 48
 
-    # Draw decorative building icon on the right side
-    building_right = PRINTER_WIDTH_PX - PADDING - 5
-    building_width = 45
-    building_height = 65
+    # Draw refined decorative building icon on the right side
+    # Positioned with proper margins and alignment with logo
+    building_right = PRINTER_WIDTH_PX - PADDING - 8
+    building_width = 55
+    building_height = 75
     building_left = building_right - building_width
-    building_top = header_start_y + 10
+
+    # Align vertically with logo center
+    if logo_loaded:
+        building_top = header_start_y + 5
+    else:
+        building_top = header_start_y + 8
     building_bottom = building_top + building_height
 
-    # Main building body (tall rectangle)
-    draw.rectangle(
-        [(building_left, building_top), (building_right, building_bottom)],
+    # Victorian-style peaked roof with dormer
+    roof_peak_x = (building_left + building_right) // 2
+    roof_peak_y = building_top
+    roof_base_y = building_top + 15
+
+    # Main roof triangle
+    draw.polygon(
+        [(building_left - 2, roof_base_y),
+         (roof_peak_x, roof_peak_y),
+         (building_right + 2, roof_base_y)],
         outline="black",
+        fill="white",
         width=2
     )
 
-    # Windows (3x4 grid)
-    window_size = 6
-    window_gap = 4
-    window_start_x = building_left + 8
-    window_start_y = building_top + 8
+    # Roof details (lines for texture)
+    for i in range(3):
+        offset = (i + 1) * 3
+        draw.line(
+            [(building_left + offset, roof_base_y - i * 2),
+             (roof_peak_x, roof_peak_y + offset)],
+            fill="black", width=1
+        )
+        draw.line(
+            [(roof_peak_x, roof_peak_y + offset),
+             (building_right - offset, roof_base_y - i * 2)],
+            fill="black", width=1
+        )
 
-    for row in range(4):
-        for col in range(3):
-            wx = window_start_x + col * (window_size + window_gap)
-            wy = window_start_y + row * (window_size + window_gap + 2)
+    # Main building body with thicker outline
+    body_top = roof_base_y
+    draw.rectangle(
+        [(building_left, body_top), (building_right, building_bottom)],
+        outline="black",
+        width=2,
+        fill="white"
+    )
+
+    # Windows arranged in elegant 3x5 grid
+    window_w = 7
+    window_h = 8
+    window_cols = 3
+    window_rows = 5
+
+    # Calculate spacing to center windows
+    total_window_width = (window_cols * window_w) + ((window_cols - 1) * 4)
+    window_start_x = building_left + (building_width - total_window_width) // 2
+    window_start_y = body_top + 8
+
+    for row in range(window_rows):
+        for col in range(window_cols):
+            wx = window_start_x + col * (window_w + 4)
+            wy = window_start_y + row * (window_h + 3)
+
+            # Window frame
             draw.rectangle(
-                [(wx, wy), (wx + window_size, wy + window_size)],
-                fill="black"
+                [(wx, wy), (wx + window_w, wy + window_h)],
+                outline="black",
+                fill="white",
+                width=1
             )
 
-    # Rooftop decoration (small triangle/peaked roof)
-    roof_peak_x = (building_left + building_right) // 2
-    roof_peak_y = building_top - 8
-    draw.polygon(
-        [(building_left, building_top), (roof_peak_x, roof_peak_y), (building_right, building_top)],
+            # Window panes (cross pattern)
+            draw.line([(wx, wy + window_h//2), (wx + window_w, wy + window_h//2)],
+                     fill="black", width=1)
+            draw.line([(wx + window_w//2, wy), (wx + window_w//2, wy + window_h)],
+                     fill="black", width=1)
+
+    # Entrance door at bottom center
+    door_width = 12
+    door_height = 16
+    door_x = (building_left + building_right - door_width) // 2
+    door_y = building_bottom - door_height - 3
+
+    # Door with arch top
+    draw.rectangle(
+        [(door_x, door_y + 4), (door_x + door_width, building_bottom - 3)],
         outline="black",
-        fill="black"
+        fill="black",
+        width=2
+    )
+
+    # Door arch
+    draw.arc(
+        [(door_x, door_y), (door_x + door_width, door_y + 8)],
+        start=0, end=180,
+        fill="black",
+        width=2
+    )
+
+    # Door panel details
+    draw.line(
+        [(door_x + door_width//2, door_y + 6),
+         (door_x + door_width//2, building_bottom - 3)],
+        fill="white", width=1
     )
 
     # Subtitle
