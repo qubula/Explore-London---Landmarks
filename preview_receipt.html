@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thermal Receipt Preview - PassingBy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #2a2a2a;
+            color: #e8e8e8;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .controls {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-group label {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .control-group input[type="range"] {
+            width: 150px;
+        }
+
+        .control-group span {
+            min-width: 40px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .preview-container {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .ruler {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            right: 40px;
+            height: 20px;
+            background: linear-gradient(90deg,
+                #333 0%, #333 1px, transparent 1px, transparent 10%,
+                #666 10%, #666 11px, transparent 11px, transparent 20%,
+                #333 20%, #333 21px, transparent 21px, transparent 30%,
+                #666 30%, #666 31px, transparent 31px, transparent 40%,
+                #333 40%, #333 41px, transparent 41px, transparent 50%,
+                #666 50%, #666 51px, transparent 51px, transparent 60%,
+                #333 60%, #333 61px, transparent 61px, transparent 70%,
+                #666 70%, #666 71px, transparent 71px, transparent 80%,
+                #333 80%, #333 81px, transparent 81px, transparent 90%,
+                #666 90%, #666 91px, transparent 91px, transparent 100%
+            );
+            background-size: 10% 100%;
+            border-top: 2px solid #333;
+            font-size: 9px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2px;
+        }
+
+        .ruler::before {
+            content: "0mm";
+        }
+
+        .ruler::after {
+            content: "58mm";
+        }
+
+        .receipt-wrapper {
+            display: inline-block;
+            position: relative;
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .receipt-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            transition: transform 0.2s ease;
+        }
+
+        .specs {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .specs h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #333;
+            font-size: 14px;
+        }
+
+        .spec-row:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            color: #999;
+        }
+
+        .spec-value {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .note {
+            background: #FFF3CD;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .note strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📄 Thermal Receipt Preview</h1>
+        <p>Interactive preview of PassingBy tour receipts</p>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label for="scale">Preview Scale:</label>
+            <input type="range" id="scale" min="100" max="400" value="200" step="50">
+            <span id="scale-value">2×</span>
+        </div>
+    </div>
+
+    <div class="preview-container">
+        <div class="ruler"></div>
+        <div class="receipt-wrapper">
+            <img src="receipt_visual_20260117_175042.png"
+                 alt="Thermal Receipt"
+                 class="receipt-image"
+                 id="receipt">
+        </div>
+    </div>
+
+    <div class="specs">
+        <h2>Receipt Specifications</h2>
+        <div class="spec-row">
+            <span class="spec-label">Width</span>
+            <span class="spec-value">384 pixels (58mm / 2.25")</span>
+        </div>
+        <div class="spec-row">
+            <span class="spec-label">Resolution</span>
+            <span class="spec-value">203 DPI</span>
+        </div>
+        <div class="spec-row">
+            <span class="spec-label">Color Mode</span>
+            <span class="spec-value">1-bit Monochrome (Dithered)</span>
+        </div>
+        <div class="spec-row">
+            <span class="spec-label">Format</span>
+            <span class="spec-value">PNG</span>
+        </div>
+        <div class="spec-row">
+            <span class="spec-label">Printer Type</span>
+            <span class="spec-value">ESC/POS Thermal (58mm roll)</span>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>💡 Preview Note:</strong>
+        This is a scaled preview for easier viewing on screen. The actual printed receipt will be 58mm (2.25 inches) wide. Use the scale slider above to adjust the preview size. The ruler at the top shows the actual 58mm width at 1:1 scale when set to 100%.
+    </div>
+
+    <script>
+        const scaleInput = document.getElementById('scale');
+        const scaleValue = document.getElementById('scale-value');
+        const receiptImg = document.getElementById('receipt');
+
+        scaleInput.addEventListener('input', (e) => {
+            const scale = e.target.value / 100;
+            scaleValue.textContent = `${scale}×`;
+            receiptImg.style.transform = `scale(${scale})`;
+            receiptImg.style.transformOrigin = 'top center';
+        });
+
+        // Set initial scale
+        receiptImg.style.transform = 'scale(2)';
+        receiptImg.style.transformOrigin = 'top center';
+    </script>
+</body>
+</html>

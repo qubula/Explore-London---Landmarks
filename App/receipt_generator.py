@@ -235,12 +235,49 @@ def generate_visual_receipt(
     cursor_y = PADDING
 
     # ==================== HEADER ====================
-    # Large centered title
-    title_text = "PASSINGBY"
-    bbox = draw.textbbox((0, 0), title_text, font=font_title)
-    title_w = bbox[2] - bbox[0]
-    draw.text(((PRINTER_WIDTH_PX - title_w) / 2, cursor_y), title_text, font=font_title, fill="black")
-    cursor_y += 48
+    # Try to load and use the actual PassingBy logo
+    logo_paths = [
+        os.path.join(os.path.dirname(__file__), "..", "App", "Logo", "LogoPassingBy.png"),
+        os.path.join(os.path.dirname(__file__), "Logo", "LogoPassingBy.png"),
+        "App/Logo/LogoPassingBy.png",
+        "Logo/LogoPassingBy.png"
+    ]
+
+    logo_loaded = False
+    for logo_path in logo_paths:
+        if os.path.exists(logo_path):
+            try:
+                # Load logo and convert to grayscale for thermal printing
+                logo = Image.open(logo_path)
+
+                # Convert to grayscale
+                logo = logo.convert('L')
+
+                # Resize logo to fit width (leaving margins)
+                max_logo_width = PRINTER_WIDTH_PX - (PADDING * 4)
+                aspect = logo.height / logo.width
+                new_width = min(max_logo_width, 200)  # Cap at 200px for thermal receipt
+                new_height = int(new_width * aspect)
+                logo = logo.resize((new_width, new_height), Image.Resampling.LANCZOS)
+
+                # Center and paste logo
+                logo_x = (PRINTER_WIDTH_PX - new_width) // 2
+                img.paste(logo, (logo_x, cursor_y))
+                cursor_y += new_height + 15
+
+                logo_loaded = True
+                break
+            except Exception as e:
+                print(f"Could not load logo from {logo_path}: {e}")
+                continue
+
+    # Fallback to text if logo not found
+    if not logo_loaded:
+        title_text = "PASSINGBY"
+        bbox = draw.textbbox((0, 0), title_text, font=font_title)
+        title_w = bbox[2] - bbox[0]
+        draw.text(((PRINTER_WIDTH_PX - title_w) / 2, cursor_y), title_text, font=font_title, fill="black")
+        cursor_y += 48
 
     # Subtitle
     subtitle = "London Tour Guide"
