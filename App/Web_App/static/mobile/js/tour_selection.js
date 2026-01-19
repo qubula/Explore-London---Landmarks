@@ -174,7 +174,7 @@ async function checkTourAvailability() {
             if (hiddenCount > 0) {
                 const descElem = document.getElementById('tour-desc');
                 if (descElem) {
-                    descElem.textContent = `Showing themes available on your route`;
+                    descElem.textContent = 'Themes available on your route';
                 }
             }
 
