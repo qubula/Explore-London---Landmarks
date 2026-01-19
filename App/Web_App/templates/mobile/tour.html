@@ -340,6 +340,27 @@
             width: 24px;
             border-radius: 4px;
         }
+
+        /* Font Toggle Button Active State */
+        #font-toggle.active {
+            background: rgba(26, 26, 26, 0.9);
+        }
+
+        #font-toggle.active svg {
+            stroke: #ffffff;
+        }
+
+        /* Font Preference: Satoshi Override */
+        body.font-satoshi .card-title,
+        body.font-satoshi .card-subtitle,
+        body.font-satoshi .message-area p {
+            font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+        }
+
+        /* Ensure direction label always stays Satoshi */
+        body .direction-label {
+            font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+        }
     </style>
 </head>
 
@@ -358,6 +379,13 @@
                         <path d="M9 18V5l12-2v13"/>
                         <circle cx="6" cy="18" r="3"/>
                         <circle cx="18" cy="16" r="3"/>
+                    </svg>
+                </button>
+                <button class="btn-icon-sm" id="font-toggle" aria-label="Toggle Font Style">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                        <line x1="9" y1="20" x2="15" y2="20"></line>
+                        <line x1="12" y1="4" x2="12" y2="20"></line>
                     </svg>
                 </button>
                 <button class="btn-icon-sm" onclick="endTour()" aria-label="End Tour">
@@ -414,7 +442,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- App Logic -->
-    <script src="/static/mobile/js/tour_logic.js?v=11"></script>
+    <script src="/static/mobile/js/tour_logic.js?v=12"></script>
 </body>
 
 </html>

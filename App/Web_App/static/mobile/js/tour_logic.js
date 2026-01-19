@@ -42,6 +42,9 @@ let visited = [];
 
 // Init
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize font toggle first (before map/cards load)
+    initFontToggle();
+
     // Load state from localStorage
     try {
         selectedDetails.destination = JSON.parse(localStorage.getItem('alfie_destination'));
@@ -599,6 +602,34 @@ function endTour() {
     }
 }
 
+// Font Toggle Functionality
+function initFontToggle() {
+    const fontToggle = document.getElementById('font-toggle');
+    if (!fontToggle) return;
+
+    // Load saved preference (default: Special Elite)
+    const savedFont = localStorage.getItem('alfie_font_preference') || 'special-elite';
+
+    // Apply saved preference on page load
+    if (savedFont === 'satoshi') {
+        document.body.classList.add('font-satoshi');
+        fontToggle.classList.add('active');
+    }
+
+    // Toggle on click
+    fontToggle.addEventListener('click', function() {
+        const isSatoshi = document.body.classList.toggle('font-satoshi');
+        this.classList.toggle('active');
+
+        // Save preference to localStorage
+        const newFont = isSatoshi ? 'satoshi' : 'special-elite';
+        localStorage.setItem('alfie_font_preference', newFont);
+
+        console.log('Font toggled to:', newFont);
+    });
+}
+
 // Make initMap global for callback
 window.initMap = initMap;
+window.initFontToggle = initFontToggle;
 window.initAutocomplete = () => { }; // Stub if needed
