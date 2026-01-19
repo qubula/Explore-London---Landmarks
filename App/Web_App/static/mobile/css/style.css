@@ -419,7 +419,7 @@ p {
 .section-desc {
   color: var(--text-secondary);
   margin-bottom: var(--spacing-md);
-  padding-left: var(--spacing-xs);
+  text-align: center;
 }
 
 .mode-selection {
