@@ -476,8 +476,7 @@ function renderLandmarkCards(landmarks) {
                         </div>
                     </div>
                     <div class="flip-hint">
-                        <span>✉️</span>
-                        <span>Tap to read message</span>
+                        <span>Tap to learn more</span>
                     </div>
                 </div>
 

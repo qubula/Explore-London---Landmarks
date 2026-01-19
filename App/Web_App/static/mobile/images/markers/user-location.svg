@@ -2,18 +2,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 155.94 155.94">
   <defs>
     <style>
-      .user-location-stroke {
-        fill: none;
-        stroke: #ffffff;
-        stroke-width: 10;
-      }
       .user-location-fill {
         fill: #e5383b;
       }
     </style>
   </defs>
-  <!-- White border circle -->
-  <circle class="user-location-stroke" cx="77.97" cy="77.97" r="72.97"/>
-  <!-- Red fill circle -->
-  <circle class="user-location-fill" cx="77.97" cy="77.97" r="72.97"/>
+  <!-- Red circle -->
+  <circle class="user-location-fill" cx="77.97" cy="77.97" r="77.97"/>
 </svg>
