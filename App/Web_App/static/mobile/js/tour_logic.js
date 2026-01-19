@@ -451,6 +451,7 @@ function renderLandmarkCards(landmarks) {
         const triggerRadius = lm.radius_m ?? 120;
         const imageUrl = lm.image_url;
         const script = lm.script || "No description available.";
+        const side = lm.side || null;  // 'left', 'right', or null
 
         // Create swiper slide
         const slide = document.createElement('div');
@@ -501,6 +502,7 @@ function renderLandmarkCards(landmarks) {
                 <div class="card-back">
                     <div class="card-back-content">
                         <div class="message-area">
+                            ${side ? `<p class="direction-label">On your ${side}</p>` : ''}
                             <p>${script}</p>
                         </div>
 
