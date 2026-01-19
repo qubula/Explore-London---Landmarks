@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 155.94 155.94">
+  <defs>
+    <style>
+      .landmark-pin-fill {
+        fill: #1e3a8a;
+      }
+    </style>
+  </defs>
+  <!-- Dark blue circle -->
+  <circle class="landmark-pin-fill" cx="77.97" cy="77.97" r="77.97"/>
+</svg>

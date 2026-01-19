@@ -291,9 +291,9 @@ function updateUserMarker(pos) {
             position: pos,
             map: map,
             icon: {
-                url: '/static/mobile/images/markers/user-location.svg?v=3',
-                scaledSize: new google.maps.Size(20, 20),  // Match start/end marker size
-                anchor: new google.maps.Point(10, 10)  // Center anchor point
+                url: '/static/mobile/images/markers/user-location.svg?v=4',
+                scaledSize: new google.maps.Size(10, 10),  // Match end marker size
+                anchor: new google.maps.Point(5, 5)  // Center anchor point
             },
             title: "Your Location",
             zIndex: 1000  // Ensure it's on top
@@ -387,6 +387,23 @@ async function calculateRoute() {
                         anchor: new google.maps.Point(5, 5)  // Anchor at center
                     },
                     zIndex: 100
+                });
+
+                // Add landmark markers along the route
+                landmarks.forEach(landmark => {
+                    if (landmark.lat && landmark.lng) {
+                        new google.maps.Marker({
+                            position: { lat: landmark.lat, lng: landmark.lng },
+                            map: map,
+                            title: landmark.name,
+                            icon: {
+                                url: '/static/mobile/images/markers/landmark-pin.svg?v=1',
+                                scaledSize: new google.maps.Size(10, 10),  // Same size as end marker
+                                anchor: new google.maps.Point(5, 5)  // Anchor at center
+                            },
+                            zIndex: 99  // Below start/end markers but above route
+                        });
+                    }
                 });
 
                 // Fit map to route bounds with padding for breathing room
