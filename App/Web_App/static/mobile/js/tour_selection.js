@@ -156,10 +156,24 @@ async function checkTourAvailability() {
             console.log(`[Tour Availability] Summary: Hidden ${hiddenCount} of ${totalCards} tour types`);
             console.log(`[Tour Availability] Visible theme cards: ${visibleThemeCards.length}`);
 
+            // Sort visible theme cards by landmark count (descending) for symmetrical layout
+            // This groups similar-sized themes together in the grid
+            visibleThemeCards.sort((a, b) => b.count - a.count);
+
+            // Reorder cards in the DOM for symmetrical appearance
+            const tourGrid = document.querySelector('.tour-grid');
+            const surpriseMeCard = document.querySelector('.featured-tour');
+
+            if (tourGrid && visibleThemeCards.length > 0) {
+                // Remove and re-add theme cards in sorted order (before Surprise Me)
+                visibleThemeCards.forEach(cardData => {
+                    tourGrid.insertBefore(cardData.element, surpriseMeCard);
+                });
+                console.log(`[Tour Availability] ✓ Reordered cards by landmark count for symmetry`);
+            }
+
             // If odd number of visible theme cards, make the one with most landmarks full-width
             if (visibleThemeCards.length % 2 === 1) {
-                // Sort by landmark count descending to find the best one
-                visibleThemeCards.sort((a, b) => b.count - a.count);
                 const topTheme = visibleThemeCards[0];
 
                 if (topTheme) {
