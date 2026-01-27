@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize font toggle first (before map/cards load)
     initFontToggle();
 
+    // Initialize hidden Google Maps shortcut (double-tap route info widget)
+    initGoogleMapsShortcut();
+
     // Load state from localStorage
     try {
         selectedDetails.destination = JSON.parse(localStorage.getItem('alfie_destination'));
@@ -629,7 +632,72 @@ function initFontToggle() {
     });
 }
 
+// Double-tap to open Google Maps (hidden feature for showcase)
+function initGoogleMapsShortcut() {
+    const routeInfo = document.querySelector('.route-info');
+    if (!routeInfo) return;
+
+    let lastTap = 0;
+    const doubleTapDelay = 300; // ms
+
+    routeInfo.addEventListener('touchend', function(e) {
+        const now = Date.now();
+        if (now - lastTap < doubleTapDelay) {
+            // Double tap detected - open Google Maps
+            e.preventDefault();
+            openInGoogleMaps();
+        }
+        lastTap = now;
+    });
+
+    // Also support double-click for desktop testing
+    routeInfo.addEventListener('dblclick', function(e) {
+        e.preventDefault();
+        openInGoogleMaps();
+    });
+}
+
+function openInGoogleMaps() {
+    // Get start location
+    const savedStart = localStorage.getItem('alfie_start');
+    let origin = 'Current Location';
+    if (savedStart) {
+        try {
+            const startLocation = JSON.parse(savedStart);
+            origin = startLocation.address || startLocation.name || 'Current Location';
+        } catch (e) {}
+    }
+
+    // Get destination
+    const destination = selectedDetails.destination;
+    if (!destination) {
+        console.log('No destination available');
+        return;
+    }
+    const dest = destination.address || destination.name;
+
+    // Build waypoints from landmarks (max 5 for Google Maps URL)
+    let waypointsParam = '';
+    if (landmarks && landmarks.length > 0) {
+        const waypointNames = landmarks.slice(0, 5).map(lm => lm.name + ', London');
+        waypointsParam = '&waypoints=' + waypointNames.map(n => encodeURIComponent(n)).join('|');
+    }
+
+    // Determine travel mode
+    const mode = selectedDetails.mode || 'Scenic Auto';
+    const travelMode = mode.toLowerCase().includes('walk') ? 'walking' : 'driving';
+
+    // Build Google Maps URL
+    const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(dest)}&travelmode=${travelMode}${waypointsParam}`;
+
+    console.log('Opening Google Maps:', mapsUrl);
+
+    // Open in Google Maps app (works on iOS/Android)
+    window.location.href = mapsUrl;
+}
+
 // Make initMap global for callback
 window.initMap = initMap;
 window.initFontToggle = initFontToggle;
+window.initGoogleMapsShortcut = initGoogleMapsShortcut;
 window.initAutocomplete = () => { }; // Stub if needed
