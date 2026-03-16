@@ -470,7 +470,7 @@ function renderLandmarkCards(landmarks) {
 
         // Build card HTML
         slide.innerHTML = `
-            <div class="landmark-card" onclick="flipCard(this)">
+            <div class="landmark-card">
                 <!-- FRONT -->
                 <div class="card-front">
                     <div class="postcard-label">POST CARD</div>
@@ -560,6 +560,12 @@ function renderLandmarkCards(landmarks) {
         touchAngle: 45,
         longSwipesRatio: 0.5,
         longSwipesMs: 300,
+        on: {
+            click: function(swiper) {
+                const card = swiper.clickedSlide?.querySelector('.landmark-card');
+                if (card) card.classList.toggle('flipped');
+            }
+        }
     });
 }
 
