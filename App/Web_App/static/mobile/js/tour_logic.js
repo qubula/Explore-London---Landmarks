@@ -529,6 +529,12 @@ function renderLandmarkCards(landmarks) {
             </div>
         `;
 
+        // Add click listener directly to card (bypasses Swiper + iOS image click issues)
+        const cardEl = slide.querySelector('.landmark-card');
+        cardEl.addEventListener('click', function() {
+            this.classList.toggle('flipped');
+        });
+
         cardsContainer.appendChild(slide);
     });
 
@@ -560,12 +566,6 @@ function renderLandmarkCards(landmarks) {
         touchAngle: 45,
         longSwipesRatio: 0.5,
         longSwipesMs: 300,
-        on: {
-            click: function(swiper) {
-                const card = swiper.clickedSlide?.querySelector('.landmark-card');
-                if (card) card.classList.toggle('flipped');
-            }
-        }
     });
 }
 
