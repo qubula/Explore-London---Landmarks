@@ -481,7 +481,7 @@ function renderLandmarkCards(landmarks) {
 
                     <div class="card-image-container">
                         ${imageUrl
-                            ? `<img src="${imageUrl.replace('500px', '800px')}" alt="${lm.name}" class="card-image" onerror="this.outerHTML='<div class=\\'card-placeholder\\'>🏛️</div>'">`
+                            ? `<img src="${imageUrl}" alt="${lm.name}" class="card-image" onerror="this.outerHTML='<div class=\\'card-placeholder\\'>🏛️</div>'">`
                             : `<div class="card-placeholder">🏛️</div>`
                         }
                     </div>
