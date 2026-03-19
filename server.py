@@ -150,27 +150,28 @@ async def api_check_tour_availability(request: Request):
             )
 
         # Convert mode from frontend format to backend format
-        # Frontend: "fastest" or "scenic"
-        # Backend: "1" (fastest), "2" (scenic auto), "3" (scenic select)
         if mode == "fastest":
             route_mode = "1"
         elif mode == "scenic":
             route_mode = "2"
         else:
-            route_mode = mode  # Already in correct format (1, 2, or 3)
+            route_mode = mode
 
-        # Define all tour types to check
         tour_types = [
             'architecture', 'historical', 'royal', 'modern',
             'museums_galleries', 'parks_gardens', 'religious', 'victorian', 'all'
         ]
 
-        # Check each tour type for landmarks
+        # Run all 9 tour type checks in parallel instead of sequentially
+        import asyncio
+        results = await asyncio.gather(*[
+            asyncio.to_thread(plan_route, start, end, route_mode, None, tour_type)
+            for tour_type in tour_types
+        ])
+
         availability = {}
         landmark_counts = {}
-        for tour_type in tour_types:
-            result = plan_route(start, end, route_mode, tour_type=tour_type)
-            # Count landmarks for each theme
+        for tour_type, result in zip(tour_types, results):
             landmark_count = len(result.get('landmarks', []))
             availability[tour_type] = landmark_count >= 1
             landmark_counts[tour_type] = landmark_count
