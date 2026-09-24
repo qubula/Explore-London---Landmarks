@@ -91,8 +91,9 @@ async def mobile_home(request: Request):
     """Mobile app landing page"""
     google_maps_key = os.getenv("GOOGLE_MAPS_BROWSER_KEY", "")
     return mobile_templates.TemplateResponse(
+        request,
         "mobile/index.html",
-        {"request": request, "google_maps_key": google_maps_key}
+        {"google_maps_key": google_maps_key}
     )
 
 
@@ -101,8 +102,9 @@ async def mobile_destination(request: Request):
     """Mobile destination selection page"""
     google_maps_key = os.getenv("GOOGLE_MAPS_BROWSER_KEY", "")
     return mobile_templates.TemplateResponse(
+        request,
         "mobile/destination.html",
-        {"request": request, "google_maps_key": google_maps_key}
+        {"google_maps_key": google_maps_key}
     )
 
 
@@ -110,8 +112,8 @@ async def mobile_destination(request: Request):
 async def mobile_route_mode(request: Request):
     """Mobile route mode selection page"""
     return mobile_templates.TemplateResponse(
-        "mobile/route_mode.html",
-        {"request": request}
+        request,
+        "mobile/route_mode.html"
     )
 
 
@@ -119,8 +121,8 @@ async def mobile_route_mode(request: Request):
 async def mobile_tour_type(request: Request):
     """Mobile tour type selection page"""
     return mobile_templates.TemplateResponse(
-        "mobile/tour_type.html",
-        {"request": request}
+        request,
+        "mobile/tour_type.html"
     )
 
 
@@ -129,8 +131,9 @@ async def mobile_tour(request: Request):
     """Mobile active tour page"""
     google_maps_key = os.getenv("GOOGLE_MAPS_BROWSER_KEY", "")
     return mobile_templates.TemplateResponse(
+        request,
         "mobile/tour.html",
-        {"request": request, "google_maps_key": google_maps_key}
+        {"google_maps_key": google_maps_key}
     )
 
 
