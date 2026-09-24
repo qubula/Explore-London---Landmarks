@@ -24,9 +24,11 @@ PassingBy plans a scenic route between any two points in London and tells you th
 
 <br>
 
-<img src="docs/images/design/mockup-route.png" alt="Route view" width="260">
-&nbsp;&nbsp;&nbsp;
-<img src="docs/images/design/mockup-tour.png" alt="Tour view" width="260">
+<img src="docs/images/screenshots/01-home.png" alt="PassingBy home screen" width="230">
+&nbsp;&nbsp;
+<img src="docs/images/screenshots/05-tour-card.png" alt="Live tour with a landmark card" width="230">
+&nbsp;&nbsp;
+<img src="docs/images/screenshots/06-tour-story.png" alt="Landmark card flipped to its story" width="230">
 
 </div>
 
@@ -43,6 +45,23 @@ The same route and stories work on foot, so you can also use it as a self-guided
   <br>
   <sub>Landmark cards: tap to flip from the photo to the story.</sub>
 </div>
+
+## A ride, step by step
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="docs/images/screenshots/02-where-to.png" alt="Where to? screen" width="200"></td>
+    <td align="center" width="25%"><img src="docs/images/screenshots/03-choose-route.png" alt="Choose Route screen" width="200"></td>
+    <td align="center" width="25%"><img src="docs/images/screenshots/04-choose-theme.png" alt="Choose Theme screen" width="200"></td>
+    <td align="center" width="25%"><img src="docs/images/screenshots/05-tour-card.png" alt="Live tour screen" width="200"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>1. Where to?</b><br><sub>Your location fills in the start point. Search for a destination.</sub></td>
+    <td align="center"><b>2. Choose a route</b><br><sub><i>Fastest</i>, or <i>PassingBy</i> with detours past the sights.</sub></td>
+    <td align="center"><b>3. Pick a theme</b><br><sub>Only themes with landmarks on your route are shown.</sub></td>
+    <td align="center"><b>4. Ride</b><br><sub>Cards appear as you pass each landmark. Tap to read the story.</sub></td>
+  </tr>
+</table>
 
 ## Features
 

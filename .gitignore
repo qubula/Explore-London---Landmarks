@@ -43,3 +43,6 @@ receipt_visual_*.png
 *.old
 *.backup*
 *.ai
+
+# Full-size source mockups (web-sized copies live in docs/images/screenshots)
+/Images/
