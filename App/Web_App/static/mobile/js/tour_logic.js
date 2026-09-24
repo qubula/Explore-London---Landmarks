@@ -534,12 +534,6 @@ function renderLandmarkCards(landmarks) {
             </div>
         `;
 
-        // Add click listener directly to card (bypasses Swiper + iOS image click issues)
-        const cardEl = slide.querySelector('.landmark-card');
-        cardEl.addEventListener('click', function() {
-            this.classList.toggle('flipped');
-        });
-
         cardsContainer.appendChild(slide);
     });
 
@@ -571,6 +565,16 @@ function renderLandmarkCards(landmarks) {
         touchAngle: 45,
         longSwipesRatio: 0.5,
         longSwipesMs: 300,
+        on: {
+            // Flip the front card on a tap anywhere on it. Swiper's tap event
+            // comes from its own touch tracking (ignores swipes), so it works on
+            // iOS Safari, where taps on 3D-rotated card faces don't reliably
+            // produce click events.
+            tap: function(swiper) {
+                const card = swiper.slides[swiper.activeIndex]?.querySelector('.landmark-card');
+                if (card) card.classList.toggle('flipped');
+            }
+        }
     });
 }
 

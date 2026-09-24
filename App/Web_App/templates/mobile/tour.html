@@ -117,6 +117,17 @@
             transform: rotateY(0deg);
         }
 
+        /* Only the visible face receives taps; the hidden face would otherwise
+           sit on top and swallow them on iOS Safari */
+        .card-back,
+        .landmark-card.flipped .card-front {
+            pointer-events: none;
+        }
+
+        .landmark-card.flipped .card-back {
+            pointer-events: auto;
+        }
+
         /* Card Front */
         .card-front {
             position: absolute;
@@ -444,7 +455,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- App Logic -->
-    <script src="/static/mobile/js/tour_logic.js?v=16"></script>
+    <script src="/static/mobile/js/tour_logic.js?v=17"></script>
 </body>
 
 </html>
