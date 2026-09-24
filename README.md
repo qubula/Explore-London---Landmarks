@@ -21,7 +21,7 @@ PassingBy plans a scenic route between any two points in London and tells you th
 ![Railway](https://img.shields.io/badge/deployed%20on-Railway-000000?style=flat-square&logo=railway&logoColor=white)
 [![License](https://img.shields.io/badge/license-free%20for%20non--commercial%20use-000000?style=flat-square)](#license)
 
-[**Try it live**](https://www.passingby.uk/mobile) · [How it works](#how-it-works) · [Run it locally](#run-it-locally)
+[**Try it live**](https://www.passingby.uk/mobile) · [Watch the demo](https://www.youtube.com/watch?v=hFkSI2gQjCA) · [How it works](#how-it-works) · [Run it locally](#run-it-locally)
 
 <br>
 
@@ -40,6 +40,16 @@ PassingBy plans a scenic route between any two points in London and tells you th
 
 <br>
 
+## See it in action
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=hFkSI2gQjCA">
+    <img src="docs/images/video-thumbnail.jpg" alt="Watch the PassingBy demo on YouTube" width="720">
+  </a>
+  <br>
+  <sub>A walkthrough of a ride, from planning the route to the landmark cards. Opens on YouTube.</sub>
+</div>
+
 ## The idea
 
 Every day, people ride through London in black cabs, past centuries of history, and see very little of it. PassingBy turns that journey into a tour. You enter the trip you were already going to make, and it plans a route that bends a little to take in the city's best sights. As the cab moves, your phone's GPS triggers a card for each landmark you pass, with a short story told by Alfie, a friendly London cabbie.
@@ -47,9 +57,9 @@ Every day, people ride through London in black cabs, past centuries of history, 
 The same route and stories work on foot, so you can also use it as a self-guided walking tour.
 
 <div align="center">
-  <img src="docs/images/design/landmark-cards.png" alt="Landmark card, front and back" width="640">
+  <img src="docs/images/landmark-cards.png" alt="Landmark card for Elizabeth Tower, front and back" width="640">
   <br>
-  <sub>Landmark cards: tap to flip from the photo to the story.</sub>
+  <sub>Each landmark arrives as a postcard. Tap it to flip from the photo to the story.</sub>
 </div>
 
 ## A ride, step by step
@@ -134,7 +144,7 @@ flowchart LR
 | Backend | Python, FastAPI, Uvicorn, Jinja2 |
 | Frontend | Vanilla JavaScript, HTML/CSS, Swiper, Satoshi typeface |
 | Maps | Google Maps JavaScript API, Places API, Directions API |
-| Data pipeline | OpenStreetMap, Wikipedia API, OpenAI API, Pexels, Unsplash |
+| Data pipeline | OpenStreetMap, Wikipedia API, Wikimedia Commons, OpenAI API |
 | Hosting | Railway, custom domain |
 
 ## Project structure
@@ -208,13 +218,13 @@ PassingBy is **source-available** under the [PolyForm Noncommercial License 1.0.
 
 **Commercial licensing and collaboration.** If you want to monetise PassingBy, build something similar, or bring me in to help, I'd be glad to talk. Contact me through my [portfolio](https://kubajarzebski.xyz/) or on [LinkedIn](https://www.linkedin.com/in/jakub-jarzebski).
 
-Third-party data and assets (OpenStreetMap, Wikipedia, Pexels, Unsplash, Satoshi) keep their own licences; see [LICENSE](LICENSE) for details.
+Third-party data and assets (OpenStreetMap, Wikipedia, Wikimedia Commons photos, Satoshi) keep their own licences; see [LICENSE](LICENSE) for details.
 
 ## Credits
 
 - Landmark data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors (ODbL)
 - Landmark summaries from [Wikipedia](https://www.wikipedia.org/) (CC BY-SA)
-- Photos via [Pexels](https://www.pexels.com) and [Unsplash](https://unsplash.com)
+- Landmark photos from [Wikimedia Commons](https://commons.wikimedia.org/) (free licences; see each file's page for its author and terms)
 - Typeface: [Satoshi](https://www.fontshare.com/fonts/satoshi) by Indian Type Foundry
 
 <br>
