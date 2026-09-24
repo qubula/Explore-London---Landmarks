@@ -201,5 +201,7 @@ The repo includes a `Procfile` and `railway.json`, so it deploys to [Railway](ht
 <br>
 
 <div align="center">
-<sub>Designed and built by <a href="https://github.com/qubula">@qubula</a></sub>
+Designed and built by <b>Jakub Jarzebski</b>
+<br>
+<a href="https://kubajarzebski.xyz/">Portfolio</a> · <a href="https://www.linkedin.com/in/jakub-jarzebski">LinkedIn</a> · <a href="https://github.com/qubula">GitHub</a>
 </div>
