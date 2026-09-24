@@ -25,3 +25,6 @@ V4_backup_*.zip
 voice_samples/
 exhibition_audio/
 Data/exhibition_landmarks.json
+
+# Private keys / certificates
+*.pem

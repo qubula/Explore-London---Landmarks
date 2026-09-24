@@ -73,14 +73,14 @@ Railway will automatically:
 1. In Railway, click on your project
 2. Go to **Variables** tab
 3. Click **+ New Variable**
-4. Add these two variables:
+4. Add these two variables (see `.env.example`):
 
 ```
-GOOGLE_DIRECTIONS_KEY = REDACTED_GOOGLE_KEY
-OPENAI_API_KEY = REDACTED_OPENAI_KEY
+GOOGLE_MAPS_BROWSER_KEY = your_browser_key   # restricted to your website: Maps JavaScript + Places APIs
+GOOGLE_DIRECTIONS_KEY = your_server_key      # server-side only: Directions API
 ```
 
-**Important Security Note:** These are YOUR actual API keys from your `.env` file. Keep them private!
+**Important Security Note:** Never commit real keys to the repo. They belong only in `.env` (git-ignored) and Railway's Variables tab.
 
 5. Click **Deploy** to restart with the new variables
 
