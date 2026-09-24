@@ -19,6 +19,7 @@ PassingBy plans a scenic route between any two points in London and tells you th
 ![FastAPI](https://img.shields.io/badge/FastAPI-000000?style=flat-square&logo=fastapi&logoColor=white)
 ![Google Maps](https://img.shields.io/badge/Google%20Maps-000000?style=flat-square&logo=googlemaps&logoColor=white)
 ![Railway](https://img.shields.io/badge/deployed%20on-Railway-000000?style=flat-square&logo=railway&logoColor=white)
+[![License](https://img.shields.io/badge/license-free%20for%20non--commercial%20use-000000?style=flat-square)](#license)
 
 [**Try it live**](https://www.passingby.uk/mobile) · [How it works](#how-it-works) · [Run it locally](#run-it-locally)
 
@@ -31,6 +32,11 @@ PassingBy plans a scenic route between any two points in London and tells you th
 <img src="docs/images/screenshots/06-tour-story.png" alt="Landmark card flipped to its story" width="230">
 
 </div>
+
+> [!IMPORTANT]
+> **Free for non-commercial use. Commercial use requires a licence.**
+> You're welcome to use, study and adapt PassingBy for personal, educational and non-profit projects.
+> If you'd like to use it commercially, build a product on it, or work together on a similar idea, [get in touch](https://kubajarzebski.xyz/). See [License](#license).
 
 <br>
 
@@ -190,6 +196,19 @@ openssl req -x509 -newkey rsa:4096 -nodes -days 365 \
 ### Deploying
 
 The repo includes a `Procfile` and `railway.json`, so it deploys to [Railway](https://railway.app) as-is. Connect the repository and add the two Google keys as variables.
+
+## License
+
+PassingBy is **source-available** under the [PolyForm Noncommercial License 1.0.0](LICENSE).
+
+| Use | Cost |
+|---|---|
+| Personal projects, learning, teaching, research, portfolios, non-profit organisations | ✅ **Free** |
+| Anything that makes money: paid apps, client work, ad-supported products, use inside a business | 💼 **Commercial licence required** ([contact me](https://kubajarzebski.xyz/)) |
+
+**Commercial licensing and collaboration.** If you want to monetise PassingBy, build something similar, or bring me in to help, I'd be glad to talk. Contact me through my [portfolio](https://kubajarzebski.xyz/) or on [LinkedIn](https://www.linkedin.com/in/jakub-jarzebski).
+
+Third-party data and assets (OpenStreetMap, Wikipedia, Pexels, Unsplash, Satoshi) keep their own licences; see [LICENSE](LICENSE) for details.
 
 ## Credits
 
