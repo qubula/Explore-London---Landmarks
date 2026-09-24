@@ -8,9 +8,9 @@
 <br>
 <br>
 
-**Turn any cab ride across London into a city tour.**
+**Turn any London journey into a living history lesson.**
 <br>
-PassingBy plans a scenic route between any two points in London and tells you the story of each landmark as you pass it, whether you're riding or walking.
+Micro stories and fun facts, triggered in real time, about the exact place outside your window.
 
 <br>
 
@@ -52,9 +52,9 @@ PassingBy plans a scenic route between any two points in London and tells you th
 
 ## The idea
 
-Every day, people ride through London in black cabs, past centuries of history, and see very little of it. PassingBy turns that journey into a tour. You enter the trip you were already going to make, and it plans a route that bends a little to take in the city's best sights. As the cab moves, your phone's GPS triggers a card for each landmark you pass, with a short story told by Alfie, a friendly London cabbie.
+PassingBy transforms London journeys into living history lessons. Passengers get micro stories and fun facts triggered in real time, each one telling the story of the exact location visible from their window. From iconic sights like Big Ben and the London Eye to hidden gems like Little Dean's Yard that even lifelong Londoners rarely know about, PassingBy is designed for tourists, locals and everyone in between. It turns an ordinary commute into something memorable and makes the city's stories accessible to all.
 
-The same route and stories work on foot, so you can also use it as a self-guided walking tour.
+**How it plays out:** you enter the trip you were already going to make, and PassingBy plans a route that bends a little to take in the city's best sights. As the cab moves, your phone's GPS triggers a card for each landmark you pass, with a short story told by Alfie, a friendly London cabbie. The same route and stories work on foot, so you can also use it as a self-guided walking tour.
 
 <div align="center">
   <img src="docs/images/landmark-cards.png" alt="Landmark card for Elizabeth Tower, front and back" width="640">
