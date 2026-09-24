@@ -28,3 +28,18 @@ Data/exhibition_landmarks.json
 
 # Private keys / certificates
 *.pem
+
+# Local-only material (archive, old docs, backups) - kept on disk, not published
+_local/
+
+# Generated receipt output
+Receipt_Batch_30/
+Receipt_Iterations/
+receipt_*.txt
+receipt_visual_*.png
+
+# Backups and design source files
+*.bak
+*.old
+*.backup*
+*.ai

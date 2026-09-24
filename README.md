@@ -1,67 +1,183 @@
-# Alfie - London Walking Tour Guide
+<div align="center">
 
-A tour guide app that plans scenic walking routes through London and triggers landmark information based on GPS location.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/logo-dark.png">
+  <img src="docs/images/logo-light.png" alt="PassingBy" width="360">
+</picture>
+
+<br>
+<br>
+
+**A walking tour that follows you, not the other way round.**
+<br>
+PassingBy plans a scenic walk between any two points in London and tells you the story of each landmark as you pass it.
+
+<br>
+
+[![Live](https://img.shields.io/badge/live-passingby.uk-000000?style=flat-square)](https://www.passingby.uk/mobile)
+![Python](https://img.shields.io/badge/python-3.9+-000000?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-000000?style=flat-square&logo=fastapi&logoColor=white)
+![Google Maps](https://img.shields.io/badge/Google%20Maps-000000?style=flat-square&logo=googlemaps&logoColor=white)
+![Railway](https://img.shields.io/badge/deployed%20on-Railway-000000?style=flat-square&logo=railway&logoColor=white)
+
+[**Try it live**](https://www.passingby.uk/mobile) · [How it works](#how-it-works) · [Run it locally](#run-it-locally)
+
+<br>
+
+<img src="docs/images/design/mockup-route.png" alt="Route view" width="260">
+&nbsp;&nbsp;&nbsp;
+<img src="docs/images/design/mockup-tour.png" alt="Tour view" width="260">
+
+</div>
+
+<br>
+
+## The idea
+
+Most tour apps make you pick landmarks first and then walk between them. PassingBy works the other way round: you give it the trip you were already going to make, and it turns that trip into a tour. The route bends a little to take in London's best sights. As you walk, your phone's GPS triggers a card for each landmark you pass, with a short, conversational story about it.
+
+<div align="center">
+  <img src="docs/images/design/landmark-cards.png" alt="Landmark card, front and back" width="640">
+  <br>
+  <sub>Landmark cards: tap to flip from the photo to the story.</sub>
+</div>
 
 ## Features
 
-- **3 Route Modes:**
-  - Fastest: Direct route
-  - Scenic Auto: Automatically chooses scenic route
-  - Scenic Select: Choose up to 3 landmarks to visit
+- **Two ways to walk.** *Fastest* takes the direct route. *PassingBy* adds small detours through the most iconic landmarks near your path.
+- **Nine themed tours.** Architecture, Historical, Royal, Museums & Galleries, Parks & Gardens, Religious Heritage, Modern London, Victorian Era, or everything.
+- **Location-triggered stories.** Each landmark has its own trigger radius (larger for a palace, smaller for a statue), so its card appears as you pass it.
+- **1,327 curated landmarks.** Built from OpenStreetMap and Wikipedia, each with a photo and AI-written talking points for every tour theme.
+- **Ranked by popularity.** Google Places ratings boost the landmarks people actually care about, so a Scenic route passes Tower Bridge before an obscure plaque.
+- **Built for your phone.** A web app with nothing to install: open the link, allow location access, and walk.
 
-- **Live GPS Tracking:** Real-time landmark triggers as you walk
-- **2,500+ London Landmarks:** Curated from Wikipedia
-- **Google Places Integration:** Top 100 landmarks ranked by visitor ratings
-- **Smart Triggering:** Dynamic radius based on landmark size (30-120m)
+## Try it
 
-## Deployment
+<table>
+  <tr>
+    <td><img src="docs/images/qr/simple.png" alt="QR code for passingby.uk" width="160"></td>
+    <td>
+      Scan with your phone, or open <a href="https://www.passingby.uk/mobile"><b>passingby.uk</b></a>.<br><br>
+      Set a start and end point in central London, pick a tour theme and start walking.<br>
+      <sub>Works best outdoors with location access allowed.</sub>
+    </td>
+  </tr>
+</table>
 
-### Railway.app (Recommended)
+## How it works
 
-1. Push to GitHub
-2. Connect Railway to your repo
-3. Add environment variables:
-   - `GOOGLE_DIRECTIONS_KEY`
-   - `OPENAI_API_KEY`
-4. Deploy!
+The heavy work happens **offline**. A set of build scripts turns raw map data into a curated landmark database with images and pre-written stories. The **live** server only has to plan a route and pick which landmarks to show, so it stays fast and cheap to run: the live site makes no LLM calls.
 
-### Local Development
+```mermaid
+flowchart LR
+    subgraph offline["Offline data pipeline"]
+        direction TB
+        OSM[OpenStreetMap<br/>landmarks] --> BUILD[build_landmarks_v3.py<br/>merge + Wikipedia summaries]
+        BUILD --> TAG[llm_tagger.py<br/>themes + talking points]
+        BUILD --> IMG[scrape_landmark_images.py<br/>photos]
+        BUILD --> BIG[generate_big_names.py<br/>Google Places popularity]
+    end
+
+    subgraph data["Data/"]
+        DB[(landmarks<br/>tags · images)]
+    end
+
+    subgraph live["Live app"]
+        direction TB
+        UI[Mobile web app<br/>Google Maps JS · GPS] -->|start, end, theme| API[FastAPI server]
+        API --> PLAN[planner.py<br/>Directions API + scoring]
+        PLAN -->|route + landmarks| UI
+    end
+
+    TAG --> DB
+    IMG --> DB
+    BIG --> DB
+    DB --> PLAN
+```
+
+1. **Plan.** The server asks the Google Directions API for a walking route. In *PassingBy* mode it scores nearby landmarks by theme, popularity and detour cost, then re-routes through the best ones as waypoints.
+2. **Match.** It finds every landmark within reach of the final route and attaches the story written for the chosen theme.
+3. **Walk.** The browser follows your position with the Geolocation API. When you come within a landmark's trigger radius, its card slides in.
+
+## Tech stack
+
+| Layer | Tools |
+|---|---|
+| Backend | Python, FastAPI, Uvicorn, Jinja2 |
+| Frontend | Vanilla JavaScript, HTML/CSS, Swiper, Satoshi typeface |
+| Maps | Google Maps JavaScript API, Places API, Directions API |
+| Data pipeline | OpenStreetMap, Wikipedia API, OpenAI API, Pexels, Unsplash |
+| Hosting | Railway, custom domain |
+
+## Project structure
+
+```
+├── server.py                  FastAPI app: pages + JSON API
+├── App/
+│   ├── planner.py             Route planning (fastest / scenic)
+│   ├── landmarks.py           Landmark scoring and selection
+│   ├── route_landmark_finder.py  Geometry: landmarks near a route
+│   ├── tour_types.py          The nine tour themes
+│   ├── talking_points.py      Loads the pre-written stories
+│   ├── config.py              Tunable limits, weights and colours
+│   ├── build_landmarks_v3.py  ┐
+│   ├── llm_tagger.py          │ Offline data pipeline
+│   ├── scrape_landmark_images.py │
+│   ├── generate_big_names.py  ┘
+│   └── Web_App/               Mobile templates, JS, CSS, fonts, images
+├── Data/                      Landmark database, tags, images, categories
+├── scripts/                   QR code and exhibition receipt generators
+├── tests/                     Routing experiments
+└── docs/images/               Logo, designs, QR codes
+```
+
+## Run it locally
+
+**Requirements:** Python 3.9 or newer, and a Google Cloud project with the Maps JavaScript, Places and Directions APIs enabled.
 
 ```bash
-# Install dependencies
+git clone https://github.com/qubula/passingby-london.git
+cd passingby-london
+
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 
-# Run server
-python server.py
-
-# Open browser
-http://localhost:8000
+cp .env.example .env        # then add your own keys
+uvicorn server:app --reload
 ```
 
-## Tech Stack
+Open <http://localhost:8000/mobile>.
 
-- **Backend:** FastAPI, Python 3.9+
-- **APIs:** Google Directions, Google Places, OpenAI
-- **Frontend:** HTML, JavaScript (vanilla)
-- **Data:** GeoJSON, Wikipedia
+To test GPS on a real phone, the page must be served over HTTPS. Create a self-signed certificate once, then run `start_https.sh` to serve the app on your local network:
 
-## Project Structure
-
+```bash
+openssl req -x509 -newkey rsa:4096 -nodes -days 365 \
+  -keyout key.pem -out cert.pem -subj "/CN=localhost"
+./start_https.sh
 ```
-V4/
-├── App/                    # Core application logic
-│   ├── config.py          # Configuration constants
-│   ├── landmarks.py       # Landmark scoring
-│   ├── planner.py         # Route planning
-│   └── route_landmark_finder.py
-├── Data/                   # Landmark database
-├── templates/              # HTML templates
-│   ├── index.html         # Route planner
-│   └── track.html         # GPS tracking
-└── server.py              # FastAPI server
-```
+
+### Environment variables
+
+| Variable | Used by | Notes |
+|---|---|---|
+| `GOOGLE_MAPS_BROWSER_KEY` | Browser | Restrict it to your domain. Maps JavaScript + Places APIs only. |
+| `GOOGLE_DIRECTIONS_KEY` | Server | Directions API only. Never sent to the browser. |
+| `OPENAI_API_KEY`, `PEXELS_API_KEY`, `UNSPLASH_ACCESS_KEY` | Offline scripts | Only needed to rebuild the data in `Data/`. |
+
+### Deploying
+
+The repo includes a `Procfile` and `railway.json`, so it deploys to [Railway](https://railway.app) as-is. Connect the repository and add the two Google keys as variables.
 
 ## Credits
 
-Built for Unit 9 Personal Project
-Generated with Claude Code
+- Landmark data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors (ODbL)
+- Landmark summaries from [Wikipedia](https://www.wikipedia.org/) (CC BY-SA)
+- Photos via [Pexels](https://www.pexels.com) and [Unsplash](https://unsplash.com)
+- Typeface: [Satoshi](https://www.fontshare.com/fonts/satoshi) by Indian Type Foundry
+
+<br>
+
+<div align="center">
+<sub>Designed and built by <a href="https://github.com/qubula">@qubula</a></sub>
+</div>
