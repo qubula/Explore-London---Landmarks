@@ -8,9 +8,9 @@
 <br>
 <br>
 
-**A walking tour that follows you, not the other way round.**
+**Turn any cab ride across London into a city tour.**
 <br>
-PassingBy plans a scenic walk between any two points in London and tells you the story of each landmark as you pass it.
+PassingBy plans a scenic route between any two points in London and tells you the story of each landmark as you pass it, whether you're riding or walking.
 
 <br>
 
@@ -34,7 +34,9 @@ PassingBy plans a scenic walk between any two points in London and tells you the
 
 ## The idea
 
-Most tour apps make you pick landmarks first and then walk between them. PassingBy works the other way round: you give it the trip you were already going to make, and it turns that trip into a tour. The route bends a little to take in London's best sights. As you walk, your phone's GPS triggers a card for each landmark you pass, with a short, conversational story about it.
+Every day, people ride through London in black cabs, past centuries of history, and see very little of it. PassingBy turns that journey into a tour. You enter the trip you were already going to make, and it plans a route that bends a little to take in the city's best sights. As the cab moves, your phone's GPS triggers a card for each landmark you pass, with a short story told by Alfie, a friendly London cabbie.
+
+The same route and stories work on foot, so you can also use it as a self-guided walking tour.
 
 <div align="center">
   <img src="docs/images/design/landmark-cards.png" alt="Landmark card, front and back" width="640">
@@ -44,12 +46,13 @@ Most tour apps make you pick landmarks first and then walk between them. Passing
 
 ## Features
 
-- **Two ways to walk.** *Fastest* takes the direct route. *PassingBy* adds small detours through the most iconic landmarks near your path.
+- **Two ways to ride.** *Fastest* takes the direct route. *PassingBy* adds short detours through the most iconic landmarks near your path, capped so the trip only takes a few minutes longer.
 - **Nine themed tours.** Architecture, Historical, Royal, Museums & Galleries, Parks & Gardens, Religious Heritage, Modern London, Victorian Era, or everything.
-- **Location-triggered stories.** Each landmark has its own trigger radius (larger for a palace, smaller for a statue), so its card appears as you pass it.
+- **Location-triggered stories.** Each landmark has its own trigger radius (larger for a palace, smaller for a statue), so its card appears just as it comes into view.
 - **1,327 curated landmarks.** Built from OpenStreetMap and Wikipedia, each with a photo and AI-written talking points for every tour theme.
-- **Ranked by popularity.** Google Places ratings boost the landmarks people actually care about, so a Scenic route passes Tower Bridge before an obscure plaque.
-- **Built for your phone.** A web app with nothing to install: open the link, allow location access, and walk.
+- **Ranked by popularity.** Google Places ratings boost the landmarks people actually care about, so a PassingBy route passes Tower Bridge before an obscure plaque.
+- **Ride or walk.** Built for the back seat of a cab, and it works just as well on foot.
+- **Nothing to install.** It's a mobile web app: open the link, allow location access, and go.
 
 ## Try it
 
@@ -58,8 +61,8 @@ Most tour apps make you pick landmarks first and then walk between them. Passing
     <td><img src="docs/images/qr/simple.png" alt="QR code for passingby.uk" width="160"></td>
     <td>
       Scan with your phone, or open <a href="https://www.passingby.uk/mobile"><b>passingby.uk</b></a>.<br><br>
-      Set a start and end point in central London, pick a tour theme and start walking.<br>
-      <sub>Works best outdoors with location access allowed.</sub>
+      Set a start and end point in central London, pick a tour theme, and go.<br>
+      <sub>Works best with location access allowed.</sub>
     </td>
   </tr>
 </table>
@@ -95,9 +98,9 @@ flowchart LR
     DB --> PLAN
 ```
 
-1. **Plan.** The server asks the Google Directions API for a walking route. In *PassingBy* mode it scores nearby landmarks by theme, popularity and detour cost, then re-routes through the best ones as waypoints.
+1. **Plan.** The server asks the Google Directions API for a driving route. In *PassingBy* mode it scores nearby landmarks by theme, popularity and detour cost, then re-routes through the best ones as waypoints.
 2. **Match.** It finds every landmark within reach of the final route and attaches the story written for the chosen theme.
-3. **Walk.** The browser follows your position with the Geolocation API. When you come within a landmark's trigger radius, its card slides in.
+3. **Ride.** The browser follows your position with the Geolocation API. When you come within a landmark's trigger radius, its card slides in.
 
 ## Tech stack
 
@@ -136,8 +139,8 @@ flowchart LR
 **Requirements:** Python 3.9 or newer, and a Google Cloud project with the Maps JavaScript, Places and Directions APIs enabled.
 
 ```bash
-git clone https://github.com/qubula/passingby-london.git
-cd passingby-london
+git clone https://github.com/qubula/PassingBy-London.git
+cd PassingBy-London
 
 python3 -m venv venv
 source venv/bin/activate
