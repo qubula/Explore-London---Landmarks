@@ -318,7 +318,12 @@ async function calculateRoute() {
 
     if (savedStart) {
         const startLocation = JSON.parse(savedStart);
-        origin = startLocation.address || startLocation.name;
+        // Prefer lat,lng coords — always valid for Directions API regardless of address format
+        if (startLocation.lat && startLocation.lng) {
+            origin = `${startLocation.lat},${startLocation.lng}`;
+        } else {
+            origin = startLocation.address || startLocation.name;
+        }
     } else {
         origin = "Charing Cross, London";
     }

@@ -83,7 +83,7 @@ function getCurrentLocationAsStart() {
                         // Fallback to coordinates if geocoding fails
                         const startLocation = {
                             name: "Current Location",
-                            address: "Lat: " + pos.lat.toFixed(4) + ", Lng: " + pos.lng.toFixed(4),
+                            address: pos.lat.toFixed(6) + "," + pos.lng.toFixed(6),
                             lat: pos.lat,
                             lng: pos.lng
                         };
